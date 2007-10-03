@@ -1,0 +1,215 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{002E4164-CFAF-4923-BEBB-B3A11281AB48}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Csla.Test</RootNamespace>
+    <AssemblyName>Csla.Test</AssemblyName>
+    <PublishUrl>http://localhost/Csla.Test/</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Web</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\vb\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;csla20vb;NUNIT</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>1</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\vb\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Csla, Version=2.1.4.0, Culture=neutral, PublicKeyToken=93be5fdc093e4c30, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\cslavb\Csla\bin\Debug\Csla.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="nunit.framework, Version=2.2.0.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77" />
+    <Reference Include="PresentationCore, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=x86" />
+    <Reference Include="PresentationFramework, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization, Version=3.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AppContext\AppContextTests.cs" />
+    <Compile Include="AppContext\AppContextThread.cs" />
+    <Compile Include="AppContext\ExceptionRoot.cs" />
+    <Compile Include="AppContext\SimpleRoot.cs" />
+    <Compile Include="AppDomainTests\AppDomainTests.cs" />
+    <Compile Include="Authorization\AuthTests.cs" />
+    <Compile Include="Authorization\PermissionsRoot.cs" />
+    <Compile Include="Authorization\PerTypeAuthClasses.cs" />
+    <Compile Include="Authorization\PerTypeAuthorization.cs" />
+    <Compile Include="Authorization\TestIdentity.cs" />
+    <Compile Include="Authorization\TestPrincipal.cs" />
+    <Compile Include="Basic\BasicTests.cs" />
+    <Compile Include="Basic\Child.cs" />
+    <Compile Include="Basic\Children.cs" />
+    <Compile Include="Basic\CollectionTests.cs" />
+    <Compile Include="Basic\CommandObject.cs" />
+    <Compile Include="Basic\GenRoot.cs" />
+    <Compile Include="Basic\GenRootBase.cs" />
+    <Compile Include="Basic\GrandChild.cs" />
+    <Compile Include="Basic\GrandChildren.cs" />
+    <Compile Include="Basic\NameValueListObj.cs" />
+    <Compile Include="Basic\ReadOnlyList.cs" />
+    <Compile Include="Basic\Root.cs" />
+    <Compile Include="Basic\RootList.cs" />
+    <Compile Include="ChildrenByInterface\ChildInterfaceTests.cs" />
+    <Compile Include="DataMapper\DataMapperTests.cs" />
+    <Compile Include="DataPortalTestDatabaseDataSet.cs">
+      <DependentUpon>DataPortalTestDatabaseDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataPortalTestDatabaseDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataPortalTestDatabaseDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataPortal\ChildEntity.cs" />
+    <Compile Include="DataPortal\ChildEntityList.cs" />
+    <Compile Include="DataPortal\DataPortalTests.cs" />
+    <Compile Include="DataPortal\DpRoot.cs" />
+    <Compile Include="DataPortal\ESTransactionalRoot.cs" />
+    <Compile Include="DataPortal\Legacy.cs" />
+    <Compile Include="DataPortal\LegacySplit.cs" />
+    <Compile Include="DataPortal\LegacySplitBase.cs" />
+    <Compile Include="DataPortal\LegacySplitTest.cs" />
+    <Compile Include="DataPortal\LegacyTest.cs" />
+    <Compile Include="DataPortal\ParentEntity.cs" />
+    <Compile Include="DataPortal\Single.cs" />
+    <Compile Include="DataPortal\SingleOverload.cs" />
+    <Compile Include="DataPortal\SingleOverloadTest.cs" />
+    <Compile Include="DataPortal\SingleTest.cs" />
+    <Compile Include="DataPortal\Split.cs" />
+    <Compile Include="DataPortal\SplitBase.cs" />
+    <Compile Include="DataPortal\SplitOverload.cs" />
+    <Compile Include="DataPortal\SplitOverloadBase.cs" />
+    <Compile Include="DataPortal\SplitOverloadTest.cs" />
+    <Compile Include="DataPortal\SplitTest.cs" />
+    <Compile Include="DataPortal\StronglyTypedDP.cs" />
+    <Compile Include="DataPortal\TransactionalRoot.cs" />
+    <Compile Include="DPException\DataPortalExceptionTests.cs" />
+    <Compile Include="EditableRootList\EditableRootListTests.cs" />
+    <Compile Include="EditableRootList\ERitem.cs" />
+    <Compile Include="EditableRootList\ERlist.cs" />
+    <Compile Include="IdentityConverter\IdentityConverterTests.cs" />
+    <Compile Include="IO\DPMethodOverloadTests.cs" />
+    <Compile Include="IO\IOTests.cs" />
+    <Compile Include="LazyLoad\AChild.cs" />
+    <Compile Include="LazyLoad\AChildList.cs" />
+    <Compile Include="LazyLoad\AParent.cs" />
+    <Compile Include="LazyLoad\LazyLoadTests.cs" />
+    <Compile Include="Nullable\NullableObject.cs" />
+    <Compile Include="Nullable\NullableTests.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="RollBack\RollbackRoot.cs" />
+    <Compile Include="RollBack\RollBackTests.cs" />
+    <Compile Include="SafeDataReader\SafeDataReaderTests.cs" />
+    <Compile Include="Serialization\DCRoot.cs" />
+    <Compile Include="Serialization\nonSerializableEventHandler.cs" />
+    <Compile Include="Serialization\SerializationRoot.cs" />
+    <Compile Include="Serialization\SerializationTests.cs" />
+    <Compile Include="Serialization\TestEventSink.cs" />
+    <Compile Include="SmartDate\SmartDateTests.cs" />
+    <Compile Include="SortedBindingList\SortedBindingListTests.cs" />
+    <Compile Include="ValidationRules\HasBadSharedRule.cs" />
+    <Compile Include="ValidationRules\HasPerTypeClasses.cs" />
+    <Compile Include="ValidationRules\HasPerTypeRules.cs" />
+    <Compile Include="ValidationRules\HasRegEx.cs" />
+    <Compile Include="ValidationRules\HasRulesManager.cs" />
+    <Compile Include="ValidationRules\HasRulesManager2.cs" />
+    <Compile Include="ValidationRules\MaxLengthArgs.cs" />
+    <Compile Include="ValidationRules\SeverityClasses.cs" />
+    <Compile Include="ValidationRules\SeverityTests.cs" />
+    <Compile Include="ValidationRules\ShortCircuitClasses.cs" />
+    <Compile Include="ValidationRules\ShortCircuitTests.cs" />
+    <Compile Include="ValidationRules\ValidationTests.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="cslaTestvb.config">
+    </None>
+    <None Include="DataPortalTestDatabaseDataSet.xsc">
+      <DependentUpon>DataPortalTestDatabaseDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="DataPortalTestDatabaseDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataPortalTestDatabaseDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DataPortalTestDatabaseDataSet.xss">
+      <DependentUpon>DataPortalTestDatabaseDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DataPortalTestDatabase.mdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DataPortalTestDatabase_log.ldf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DependentUpon>DataPortalTestDatabase.mdf</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Sql.Server.Express.1.0">
+      <Visible>False</Visible>
+      <ProductName>SQL Server 2005 Express Edition</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
