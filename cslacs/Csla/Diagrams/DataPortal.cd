@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Font Name="Tahoma" Size="8.25" />
+  <Class Name="Csla.DataPortal" Collapsed="true">
+    <Position X="1.25" Y="2.25" Width="1.25" />
+    <TypeIdentifier>
+      <FileName>DataPortal\Client\DataPortal.cs</FileName>
+      <HashCode>AAQAAAAAABAAAAQAAAHAAgAAIAEAAEAIAAAIAAADAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Csla.DataPortalClient.EnterpriseServicesProxy" Collapsed="true">
+    <Position X="2.75" Y="0.75" Width="2" />
+    <TypeIdentifier>
+      <FileName>DataPortal\Client\EnterpriseServicesProxy.cs</FileName>
+      <HashCode>AAQAAAAAAAAAAAAAAAEIAAAAAAEAAEQAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Csla.DataPortalClient.LocalProxy" Collapsed="true">
+    <Position X="2.75" Y="1.75" Width="2" />
+    <TypeIdentifier>
+      <FileName>DataPortal\Client\LocalProxy.cs</FileName>
+      <HashCode>AAQAAAAAAAAAAAAAAAGIAAAAAAEAAEAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Csla.DataPortalClient.RemotingProxy" Collapsed="true">
+    <Position X="2.75" Y="2.75" Width="2" />
+    <TypeIdentifier>
+      <FileName>DataPortal\Client\RemotingProxy.cs</FileName>
+      <HashCode>AAQAAAAAAAAAAAAAAAGIAAAAAAEAAEAAAAAAAAABAIA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Csla.DataPortalClient.WebServicesProxy" Collapsed="true">
+    <Position X="2.75" Y="3.75" Width="2" />
+    <TypeIdentifier>
+      <FileName>DataPortal\Client\WebServicesProxy.cs</FileName>
+      <HashCode>AAQAAAAAAAAAABAAAAEIAAAAACFAAEAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Csla.Server.Hosts.EnterpriseServicesPortal" Collapsed="true">
+    <Position X="5" Y="0.75" Width="2" />
+    <TypeIdentifier>
+      <FileName>DataPortal\Hosts\EnterpriseServicesPortal.cs</FileName>
+      <HashCode>AAQAAAAAAAAAAAAIAAEAAAAAAAEAAEABAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Csla.Server.Hosts.RemotingPortal" Collapsed="true">
+    <Position X="5" Y="2.75" Width="2" />
+    <TypeIdentifier>
+      <FileName>DataPortal\Hosts\RemotingPortal.cs</FileName>
+      <HashCode>AAQAAAAAAAAAAAAAAAEAAAAAAAEAAEAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Csla.Server.Hosts.WebServicePortal" Collapsed="true">
+    <Position X="5" Y="3.75" Width="2" />
+    <TypeIdentifier>
+      <FileName>DataPortal\Hosts\WebServicePortal.cs</FileName>
+      <HashCode>AAQAAAAAAAAAAAAAAAEAAAAAACFAAEAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Csla.Server.TransactionalDataPortal" Collapsed="true">
+    <Position X="7.75" Y="3.25" Width="2" />
+    <TypeIdentifier>
+      <FileName>DataPortal\Server\TransactionalDataPortal.cs</FileName>
+      <HashCode>AAQAAAAAAAAAAAAAAAEAAAAAAAEAAEAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Csla.Server.SimpleDataPortal" Collapsed="true">
+    <Position X="8.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>DataPortal\Server\SimpleDataPortal.cs</FileName>
+      <HashCode>AAQAAAAAAAAAAAAAAAEAAAAAAAEAAEAAAAAAAIAAAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Csla.Server.ServicedDataPortal" Collapsed="true">
+    <Position X="7.75" Y="1.25" Width="2" />
+    <TypeIdentifier>
+      <FileName>DataPortal\Server\ServicedDataPortal.cs</FileName>
+      <HashCode>AAQAAAAAAAAAAAAAAAEAAAAAAAEAAEAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Csla.Server.DataPortal" Collapsed="true">
+    <Position X="7.25" Y="2.25" Width="1.25" />
+    <TypeIdentifier>
+      <FileName>DataPortal\Server\DataPortal.cs</FileName>
+      <HashCode>AEQAAAAAAAIAAAAAQAEAAAAAAAEAAEAAAAQAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+</ClassDiagram>

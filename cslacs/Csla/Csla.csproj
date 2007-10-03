@@ -1,0 +1,348 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{9DA591ED-C570-47AC-8E5D-35B039E07973}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Csla</RootNamespace>
+    <AssemblyName>Csla</AssemblyName>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>CslaKey.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <DocumentationFile>bin\Debug\Csla.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PresentationCore, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=x86">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="PresentationFramework, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Printing, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=x86">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Remoting" />
+    <Reference Include="System.Runtime.Serialization, Version=3.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL" />
+    <Reference Include="System.ServiceModel, Version=3.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Workflow.Runtime, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BusinessBase.cs" />
+    <Compile Include="BusinessListBase.cs" />
+    <Compile Include="CommandBase.cs" />
+    <Compile Include="Core\BindableBase.cs" />
+    <Compile Include="Core\BusinessBase.cs" />
+    <Compile Include="Core\ExtendedBindingList.cs" />
+    <Compile Include="Core\IEditableBusinessObject.cs" />
+    <Compile Include="Core\IExtendedBindingList.cs" />
+    <Compile Include="Core\IParent.cs" />
+    <Compile Include="Core\IReportTotalRowCount.cs" />
+    <Compile Include="Core\ISavable.cs" />
+    <Compile Include="Core\ISupportUndo.cs" />
+    <Compile Include="Core\IUndoableObject.cs" />
+    <Compile Include="Core\IBusinessObject.cs" />
+    <Compile Include="Core\ICommandObject.cs" />
+    <Compile Include="Core\IEditableCollection.cs" />
+    <Compile Include="Core\IReadOnlyCollection.cs" />
+    <Compile Include="Core\IReadOnlyObject.cs" />
+    <Compile Include="Core\ObjectCloner.cs" />
+    <Compile Include="Core\ReadOnlyBindingList.cs" />
+    <Compile Include="Core\RemovingItemEventArgs.cs" />
+    <Compile Include="Core\SavedEventArgs.cs" />
+    <Compile Include="Core\UndoableBase.cs" />
+    <Compile Include="Core\UndoException.cs" />
+    <Compile Include="DataPortal\ApplicationContext.cs" />
+    <Compile Include="DataPortal\Client\DataPortal.cs" />
+    <Compile Include="DataPortal\Client\EnterpriseServicesProxy.cs" />
+    <Compile Include="DataPortal\Client\IDataPortalProxy.cs" />
+    <Compile Include="DataPortal\Client\LocalProxy.cs" />
+    <Compile Include="DataPortal\Client\RemotingProxy.cs" />
+    <Compile Include="DataPortal\Client\WcfProxy.cs" />
+    <Compile Include="DataPortal\Client\WebServicesProxy.cs">
+    </Compile>
+    <Compile Include="DataPortal\CriteriaBase.cs" />
+    <Compile Include="DataPortal\DataPortalEventArgs.cs" />
+    <Compile Include="DataPortal\DataPortalException.cs" />
+    <Compile Include="DataPortal\Hosts\EnterpriseServicesPortal.cs" />
+    <Compile Include="DataPortal\Hosts\IWcfPortal.cs" />
+    <Compile Include="DataPortal\Hosts\RemotingPortal.cs" />
+    <Compile Include="DataPortal\Hosts\WcfChannel\CreateRequest.cs" />
+    <Compile Include="DataPortal\Hosts\WcfChannel\DeleteRequest.cs" />
+    <Compile Include="DataPortal\Hosts\WcfChannel\FetchRequest.cs" />
+    <Compile Include="DataPortal\Hosts\WcfChannel\NetDataContractOperationBehavior.cs" />
+    <Compile Include="DataPortal\Hosts\WcfChannel\UpdateRequest.cs" />
+    <Compile Include="DataPortal\Hosts\WcfChannel\UseNetDataContractAttribute.cs" />
+    <Compile Include="DataPortal\Hosts\WcfChannel\WcfResponse.cs" />
+    <Compile Include="DataPortal\Hosts\WcfPortal.cs" />
+    <Compile Include="DataPortal\Hosts\WebServicePortal.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DataPortal\MethodCaller.cs" />
+    <Compile Include="DataPortal\RunLocalAttribute.cs" />
+    <Compile Include="DataPortal\Server\CallMethodException.cs" />
+    <Compile Include="DataPortal\Server\DataPortal.cs" />
+    <Compile Include="DataPortal\Server\DataPortalContext.cs" />
+    <Compile Include="DataPortal\Server\DataPortalException.cs" />
+    <Compile Include="DataPortal\Server\DataPortalResult.cs" />
+    <Compile Include="DataPortal\Server\IDataPortalServer.cs" />
+    <Compile Include="DataPortal\Server\ServicedDataPortal.cs" />
+    <Compile Include="DataPortal\Server\SimpleDataPortal.cs" />
+    <Compile Include="DataPortal\Server\TransactionalDataPortal.cs" />
+    <Compile Include="DataPortal\TransactionalAttribute.cs" />
+    <Compile Include="DataPortal\TransactionalTypes.cs" />
+    <Compile Include="Data\DataMapper.cs" />
+    <Compile Include="Data\ObjectAdapter.cs" />
+    <Compile Include="Data\SafeDataReader.cs" />
+    <Compile Include="DefaultFilter.cs" />
+    <Compile Include="EditableRootListBase.cs" />
+    <Compile Include="EnterpriseServicesSettings.cs" />
+    <Compile Include="FilteredBindingList.cs" />
+    <Compile Include="FilterProvider.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="NameValueListBase.cs" />
+    <Compile Include="NotUndoableAttribute.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="ReadOnlyBase.cs" />
+    <Compile Include="ReadOnlyListBase.cs" />
+    <Compile Include="Security\AccessType.cs" />
+    <Compile Include="Security\AuthorizationRules.cs" />
+    <Compile Include="Security\AuthorizationRulesManager.cs" />
+    <Compile Include="Security\BusinessPrincipalBase.cs" />
+    <Compile Include="Security\IAuthorizeReadWrite.cs" />
+    <Compile Include="Security\PrincipalCache.cs" />
+    <Compile Include="Security\RolesForProperty.cs" />
+    <Compile Include="Security\SharedAuthorizationRules.cs" />
+    <Compile Include="Serialization\BinaryFormatterWrapper.cs" />
+    <Compile Include="Serialization\ISerializationFormatter.cs" />
+    <Compile Include="Serialization\NetDataContractSerializerWrapper.cs" />
+    <Compile Include="Serialization\SerializationFormatterFactory.cs" />
+    <Compile Include="SmartDate.cs" />
+    <Compile Include="SortedBindingList.cs" />
+    <Compile Include="Utilities.cs" />
+    <Compile Include="Validation\BrokenRule.cs" />
+    <Compile Include="Validation\BrokenRulesCollection.cs" />
+    <Compile Include="Validation\CommonRules.cs" />
+    <Compile Include="Validation\DecoratedRuleArgs.cs" />
+    <Compile Include="Validation\IRuleMethod.cs" />
+    <Compile Include="Validation\RuleArgs.cs" />
+    <Compile Include="Validation\RuleDescription.cs" />
+    <Compile Include="Validation\RuleHandler.cs" />
+    <Compile Include="Validation\RuleMethod.cs" />
+    <Compile Include="Validation\RuleSeverity.cs" />
+    <Compile Include="Validation\RulesList.cs" />
+    <Compile Include="Validation\SharedValidationRules.cs" />
+    <Compile Include="Validation\ValidationException.cs" />
+    <Compile Include="Validation\ValidationRules.cs" />
+    <Compile Include="Validation\ValidationRulesManager.cs" />
+    <Compile Include="Web References\WebServiceHost\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web\CslaDataSource.cs" />
+    <Compile Include="Web\CslaDataSourceView.cs" />
+    <Compile Include="Web\DeleteObjectArgs.cs" />
+    <Compile Include="Web\Design\CslaDataSourceConfiguration.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Web\Design\CslaDataSourceConfiguration.Designer.cs">
+      <DependentUpon>CslaDataSourceConfiguration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Web\Design\CslaDataSourceDesigner.cs" />
+    <Compile Include="Web\Design\CslaDesignerDataSourceView.cs" />
+    <Compile Include="Web\Design\ObjectFieldInfo.cs" />
+    <Compile Include="Web\Design\ObjectSchema.cs" />
+    <Compile Include="Web\Design\ObjectViewSchema.cs" />
+    <Compile Include="Web\InsertObjectArgs.cs" />
+    <Compile Include="Web\SelectObjectArgs.cs" />
+    <Compile Include="Web\UpdateObjectArgs.cs" />
+    <Compile Include="Windows\BindingSourceRefresh.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Windows\ReadWriteAuthorization.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Workflow\WorkflowManager.cs" />
+    <Compile Include="Workflow\WorkflowStatus.cs" />
+    <Compile Include="Wpf\Authorizer.cs" />
+    <Compile Include="Wpf\CslaDataProvider.cs" />
+    <Compile Include="Wpf\CslaDataProviderCommandManager.cs" />
+    <Compile Include="Wpf\DataDecoratorBase.cs" />
+    <Compile Include="Wpf\ObjectStatus.cs" />
+    <Compile Include="Wpf\Validator.cs" />
+    <Compile Include="Wpf\IdentityConverter.cs" />
+    <Compile Include="Wpf\VisibilityMode.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="CslaKey.snk" />
+    <None Include="Diagrams\BindableBaseClasses.cd" />
+    <None Include="Diagrams\Csla.cd" />
+    <None Include="Diagrams\CslaBaseClasses.cd" />
+    <None Include="Diagrams\DataPortal.cd" />
+    <None Include="Diagrams\FullCsla.cd" />
+    <None Include="Diagrams\UndoableBase.cd" />
+    <None Include="Diagrams\ValidationRules.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources-il.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.bs.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.ca-ES.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.de.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.es-ES.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.es.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.fr.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.hr.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.it.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.km-KH.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.nl.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.no.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.pt-br.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.pt.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <SubType>Designer</SubType>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.da.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.ro.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.ru.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.sr.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.sv.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.vi.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.zh-CHS.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Web\Design\CslaDataSourceConfiguration.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>CslaDataSourceConfiguration.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://localhost:4804/WSPortalcs/Service.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\WebServiceHost\</RelPath>
+      <UpdateFromURL>http://localhost:4804/WSPortalcs/Service.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Csla_WebServiceHost_WebServicePortal</CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Diagrams\AuthorizationRules.cd" />
+    <None Include="Diagrams\CslaDataSource.cd" />
+    <None Include="Diagrams\Interfaces.cd" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\WebServiceHost\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\WebServiceHost\Service.disco" />
+    <None Include="Web References\WebServiceHost\Service.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.zh-TW.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Web\CslaDataSource.bmp" />
+    <EmbeddedResource Include="Windows\BindingSourceRefresh.bmp" />
+    <EmbeddedResource Include="Windows\ReadWriteAuthorization.bmp" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Insert data access region</Title>
+      <Author>Rockford Lhotka</Author>
+      <Description>Insert CSLA .NET data access region.</Description>
+      <Shortcut>csladata</Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>IdType</ID>
+          <ToolTip>Replace with the Id variable type.</ToolTip>
+          <Default>int</Default>
+        </Literal>
+      </Declarations>
+      <Code Language="CSharp"><![CDATA[#region Data Access
+
+[Serializable()]
+private class Criteria
+{
+  private $IdType$ _id;
+  public $IdType$ Id
+  {
+    get
+    { return _id; }
+  }
+  public Criteria($IdType$ id)
+  { _id = id; }
+}
+
+protected override void DataPortal_Create()
+{
+  // TODO: load default values into object
+}
+
+private void DataPortal_Fetch(Criteria criteria)
+{
+  // TODO: load values into object
+}
+
+protected override void DataPortal_Insert()
+{
+  // TODO: insert object's data
+}
+
+protected override void DataPortal_Update()
+{
+  // TODO: update object's data
+}
+
+protected override void DataPortal_DeleteSelf()
+{
+  DataPortal_Delete(new Criteria($IdName$));
+}
+
+private void DataPortal_Delete(Criteria criteria)
+{
+  // TODO: delete object's data
+}
+
+#endregion]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>
