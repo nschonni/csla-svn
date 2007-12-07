@@ -187,6 +187,20 @@ namespace Csla.Data
 
     #endregion
 
+    #region GetValue
+
+    private static object GetValue(MemberInfo member, object source)
+    {
+      if (member.MemberType == MemberTypes.Property)
+        return ((PropertyInfo)member).GetValue(source, null);
+      else
+        return ((FieldInfo)member).GetValue(source);
+    }
+
+    #endregion
+
+    #region SetValue
+
     /// <summary>
     /// Sets an object's property with the specified value,
     /// coercing that value to the appropriate type if possible.
@@ -198,33 +212,79 @@ namespace Csla.Data
       object target, string propertyName, object value)
     {
       PropertyInfo propertyInfo =
-        target.GetType().GetProperty(propertyName);
-      if (value == null)
-        propertyInfo.SetValue(target, value, null);
-      else
+        target.GetType().GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance | BindingFlags.FlattenHierarchy);
+      SetValue(target, propertyInfo, value);
+    }
+
+    /// <summary>
+    /// Sets an object's property or field with the specified value,
+    /// coercing that value to the appropriate type if possible.
+    /// </summary>
+    /// <param name="target">Object containing the member to set.</param>
+    /// <param name="memberInfo">MemberInfo object for the member to set.</param>
+    /// <param name="value">Value to set into the member.</param>
+    public static void SetValue(
+      object target, MemberInfo memberInfo, object value)
+    {
+      if (value != null)
       {
-        Type pType =
-          Utilities.GetPropertyType(propertyInfo.PropertyType);
+        Type pType;
+        if (memberInfo.MemberType == MemberTypes.Property)
+          pType = ((PropertyInfo)memberInfo).PropertyType;
+        else
+          pType = ((FieldInfo)memberInfo).FieldType;
         Type vType =
           Utilities.GetPropertyType(value.GetType());
-        if (pType.Equals(vType))
+        value = CoerceValue(pType, vType, value);
+      }
+      if (memberInfo.MemberType == MemberTypes.Property)
+        ((PropertyInfo)memberInfo).SetValue(target, value, null);
+      else
+        ((FieldInfo)memberInfo).SetValue(target, value);
+    }
+
+    private static object CoerceValue(Type propertyType, Type valueType, object value)
+    {
+      if (propertyType.Equals(valueType))
+      {
+        // types match, just return value
+        return value;
+      }
+      else
+      {
+        if (propertyType.IsGenericType)
         {
-          // types match, just copy value
-          propertyInfo.SetValue(target, value, null);
+          if (propertyType.GetGenericTypeDefinition() == typeof(Nullable<>))
+          {
+            if (value == null) 
+              return null;
+            else if (valueType.Equals(typeof(string)) && (string)value == string.Empty)
+              return null;
+          }
+          propertyType = Utilities.GetPropertyType(propertyType);
         }
-        else
+
+        if (propertyType.IsEnum && valueType.Equals(typeof(string)))
+          return Enum.Parse(propertyType, value.ToString());
+
+        if (propertyType.IsPrimitive && valueType.Equals(typeof(string)) && string.IsNullOrEmpty((string)value))
+          value = 0;
+        
+        try
         {
-          // types don't match, try to coerce
-          if (pType.Equals(typeof(Guid)))
-            propertyInfo.SetValue(
-              target, new Guid(value.ToString()), null);
-          else if (pType.IsEnum && vType.Equals(typeof(string)))
-            propertyInfo.SetValue(target, Enum.Parse(pType, value.ToString()), null);
+          return Convert.ChangeType(value, Utilities.GetPropertyType(propertyType));
+        }
+        catch
+        {
+          TypeConverter cnv = TypeDescriptor.GetConverter(Utilities.GetPropertyType(propertyType));
+          if (cnv != null && cnv.CanConvertFrom(value.GetType()))
+            return cnv.ConvertFrom(value);
           else
-            propertyInfo.SetValue(
-              target, Convert.ChangeType(value, pType), null);
+            throw;
         }
       }
     }
+
+    #endregion
   }
 }
