@@ -190,6 +190,8 @@ Namespace Data
 
 #End Region
 
+#Region "SetValue"
+
     ''' <summary>
     ''' Sets an object's property with the specified value,
     ''' coercing that value to the appropriate type if possible.
@@ -197,39 +199,74 @@ Namespace Data
     ''' <param name="target">Object containing the property to set.</param>
     ''' <param name="propertyName">Name of the property to set.</param>
     ''' <param name="value">Value to set into the property.</param>
-    Public Sub SetPropertyValue( _
-      ByVal target As Object, ByVal propertyName As String, _
-      ByVal value As Object)
-
-      Dim propertyInfo As PropertyInfo = _
-        target.GetType.GetProperty(propertyName)
-      If value Is Nothing Then
-        propertyInfo.SetValue(target, value, Nothing)
-
-      Else
-        Dim pType As Type = Utilities.GetPropertyType(propertyInfo.PropertyType)
-        Dim vType As Type = Utilities.GetPropertyType(value.GetType)
-        If pType.Equals(vType) Then
-          ' types match, just copy value
-          propertyInfo.SetValue(target, value, Nothing)
-
-        Else
-          ' types don't match, try to coerce types
-          If pType.Equals(GetType(Guid)) Then
-            propertyInfo.SetValue(target, New Guid(value.ToString), Nothing)
-
-          ElseIf pType.IsEnum AndAlso vType.Equals(GetType(String)) Then
-            propertyInfo.SetValue( _
-              target, System.Enum.Parse(pType, value.ToString), Nothing)
-
-          Else
-            propertyInfo.SetValue(target, _
-              Convert.ChangeType(value, pType), Nothing)
-          End If
-        End If
-      End If
-
+    Public Sub SetPropertyValue(ByVal target As Object, ByVal propertyName As String, ByVal value As Object)
+      Dim propertyInfo As PropertyInfo = target.GetType().GetProperty(propertyName, BindingFlags.Public Or BindingFlags.Instance Or BindingFlags.FlattenHierarchy)
+      SetValue(target, propertyInfo, value)
     End Sub
+
+    ''' <summary>
+    ''' Sets an object's property or field with the specified value,
+    ''' coercing that value to the appropriate type if possible.
+    ''' </summary>
+    ''' <param name="target">Object containing the member to set.</param>
+    ''' <param name="memberInfo">MemberInfo object for the member to set.</param>
+    ''' <param name="value">Value to set into the member.</param>
+    Public Sub SetValue(ByVal target As Object, ByVal memberInfo As MemberInfo, ByVal value As Object)
+      If Not value Is Nothing Then
+        Dim pType As Type
+        If memberInfo.MemberType = MemberTypes.Property Then
+          pType = (CType(memberInfo, PropertyInfo)).PropertyType
+        Else
+          pType = (CType(memberInfo, FieldInfo)).FieldType
+        End If
+        Dim vType As Type = Utilities.GetPropertyType(value.GetType())
+        value = CoerceValue(pType, vType, value)
+      End If
+      If memberInfo.MemberType = MemberTypes.Property Then
+        CType(memberInfo, PropertyInfo).SetValue(target, value, Nothing)
+      Else
+        CType(memberInfo, FieldInfo).SetValue(target, value)
+      End If
+    End Sub
+
+    Private Function CoerceValue(ByVal propertyType As Type, ByVal valueType As Type, ByVal value As Object) As Object
+      If propertyType.Equals(valueType) Then
+        ' types match, just return value
+        Return value
+      Else
+        If propertyType.IsGenericType Then
+          If propertyType.GetGenericTypeDefinition() Is GetType(Nullable(Of )) Then
+            If value Is Nothing Then
+              Return Nothing
+            ElseIf valueType.Equals(GetType(String)) AndAlso CStr(value) = String.Empty Then
+              Return Nothing
+            End If
+          End If
+          propertyType = Utilities.GetPropertyType(propertyType)
+        End If
+
+        If propertyType.IsEnum AndAlso valueType.Equals(GetType(String)) Then
+          Return System.Enum.Parse(propertyType, value.ToString())
+        End If
+
+        If propertyType.IsPrimitive AndAlso valueType.Equals(GetType(String)) AndAlso String.IsNullOrEmpty(CStr(value)) Then
+          value = 0
+        End If
+
+        Try
+          Return Convert.ChangeType(value, Utilities.GetPropertyType(propertyType))
+        Catch
+          Dim cnv As TypeConverter = TypeDescriptor.GetConverter(Utilities.GetPropertyType(propertyType))
+          If Not cnv Is Nothing AndAlso cnv.CanConvertFrom(value.GetType()) Then
+            Return cnv.ConvertFrom(value)
+          Else
+            Throw
+          End If
+        End Try
+      End If
+    End Function
+
+#End Region
 
   End Module
 
