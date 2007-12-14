@@ -928,7 +928,10 @@ namespace Csla.Core
         lock (this.GetType())
         {
           if (!Validation.SharedValidationRules.RulesExistFor(this.GetType()))
+          {
+            Validation.SharedValidationRules.GetManager(this.GetType(), true);
             AddBusinessRules();
+          }
         }
       }
       OnUnknownPropertyChanged();
@@ -1323,7 +1326,10 @@ namespace Csla.Core
         lock (this.GetType())
         {
           if (!Validation.SharedValidationRules.RulesExistFor(this.GetType()))
+          {
+            Validation.SharedValidationRules.GetManager(this.GetType(), true);
             AddBusinessRules();
+          }
         }
       }
       AddInstanceAuthorizationRules();
@@ -1332,7 +1338,10 @@ namespace Csla.Core
         lock (this.GetType())
         {
           if (!Security.SharedAuthorizationRules.RulesExistFor(this.GetType()))
+          {
+            Security.SharedAuthorizationRules.GetManager(this.GetType(), true);
             AddAuthorizationRules();
+          }
         }
       }
     }

@@ -102,7 +102,10 @@ namespace Csla
         lock (this.GetType())
         {
           if (!Security.SharedAuthorizationRules.RulesExistFor(this.GetType()))
+          {
+            Security.SharedAuthorizationRules.GetManager(this.GetType(), true);
             AddAuthorizationRules();
+          }
         }
       }
     }
@@ -548,7 +551,10 @@ namespace Csla
         lock (this.GetType())
         {
           if (!Security.SharedAuthorizationRules.RulesExistFor(this.GetType()))
+          {
+            Security.SharedAuthorizationRules.GetManager(this.GetType(), true);
             AddAuthorizationRules();
+          }
         }
       }
     }
