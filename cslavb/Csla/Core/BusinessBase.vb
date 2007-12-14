@@ -927,6 +927,7 @@ Namespace Core
       If Not Validation.SharedValidationRules.RulesExistFor(Me.GetType) Then
         SyncLock Me.GetType
           If Not Validation.SharedValidationRules.RulesExistFor(Me.GetType) Then
+            Validation.SharedValidationRules.GetManager(Me.GetType, True)
             AddBusinessRules()
           End If
         End SyncLock
@@ -1320,6 +1321,7 @@ Namespace Core
       If Not Validation.SharedValidationRules.RulesExistFor(Me.GetType) Then
         SyncLock Me.GetType
           If Not Validation.SharedValidationRules.RulesExistFor(Me.GetType) Then
+            Validation.SharedValidationRules.GetManager(Me.GetType, True)
             AddBusinessRules()
           End If
         End SyncLock
@@ -1328,6 +1330,7 @@ Namespace Core
       If Not Csla.Security.SharedAuthorizationRules.RulesExistFor(Me.GetType) Then
         SyncLock Me.GetType
           If Not Csla.Security.SharedAuthorizationRules.RulesExistFor(Me.GetType) Then
+            Csla.Security.SharedAuthorizationRules.GetManager(Me.GetType, True)
             AddAuthorizationRules()
           End If
         End SyncLock
