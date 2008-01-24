@@ -1024,6 +1024,7 @@ Namespace Core
         Throw New NotSupportedException(My.Resources.NoDeleteRootException)
       End If
 
+      BindingEdit = False
       MarkDeleted()
 
     End Sub
