@@ -422,8 +422,8 @@ Public Class Project
       Using cn As New SqlConnection(Database.PTrackerConnection)
         cn.Open()
         Using cm As SqlCommand = cn.CreateCommand
-          cm.CommandType = CommandType.Text
-          cm.CommandText = "SELECT Id FROM Projects WHERE Id=@id"
+          cm.CommandType = CommandType.StoredProcedure
+          cm.CommandText = "existsProject"
           cm.Parameters.AddWithValue("@id", mId)
 
           Dim count As Integer = CInt(cm.ExecuteScalar)
