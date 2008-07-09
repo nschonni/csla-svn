@@ -335,7 +335,16 @@ namespace Csla.Validation
             first = false;
           else
             sb.Append("&");
-          sb.AppendFormat("{0}={1}", item.Key, item.Value.ToString());
+          if (item.Key != null)
+          {
+            string itemString = System.Uri.EscapeDataString(item.Key);
+            string valueString;
+            if (item.Value == null)
+              valueString = string.Empty;
+            else
+              valueString = System.Uri.EscapeDataString(item.Value.ToString());
+            sb.AppendFormat("{0}={1}", itemString, valueString);
+          }
         }
       }
       return sb.ToString();
