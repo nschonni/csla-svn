@@ -318,7 +318,16 @@ Namespace Validation
           Else
             sb.Append("&")
           End If
-          sb.AppendFormat("{0}={1}", item.Key, item.Value.ToString())
+          If item.Key IsNot Nothing Then
+            Dim itemString As String = System.Uri.EscapeDataString(item.Key)
+            Dim valueString As String
+            If item.Value Is Nothing Then
+              valueString = String.Empty
+            Else
+              valueString = System.Uri.EscapeDataString(item.Value.ToString)
+            End If
+            sb.AppendFormat("{0}={1}", itemString, valueString)
+          End If
         Next item
       End If
       Return sb.ToString()
