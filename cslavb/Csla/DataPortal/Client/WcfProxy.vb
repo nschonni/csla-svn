@@ -62,8 +62,15 @@ Namespace DataPortalClient
     Public Function Create(ByVal objectType As Type, ByVal criteria As Object, ByVal context As DataPortalContext) As DataPortalResult Implements IDataPortalProxy.Create
       Dim cf As ChannelFactory(Of IWcfPortal) = New ChannelFactory(Of IWcfPortal)(mEndPoint)
       Dim svr As IWcfPortal = cf.CreateChannel()
-      Dim response As WcfResponse = svr.Create(New CreateRequest(objectType, criteria, context))
-      cf.Close()
+      Dim response As WcfResponse
+      Try
+        response = svr.Create(New CreateRequest(objectType, criteria, context))
+        cf.Close()
+      Catch ex As Exception
+        cf.Abort()
+        Throw
+      End Try
+
 
       Dim result As Object = response.Result
       If TypeOf result Is Exception Then
@@ -84,8 +91,14 @@ Namespace DataPortalClient
     Public Function Fetch(ByVal objectType As Type, ByVal criteria As Object, ByVal context As DataPortalContext) As DataPortalResult Implements IDataPortalProxy.Fetch
       Dim cf As ChannelFactory(Of IWcfPortal) = New ChannelFactory(Of IWcfPortal)(mEndPoint)
       Dim svr As IWcfPortal = cf.CreateChannel()
-      Dim response As WcfResponse = svr.Fetch(New FetchRequest(objectType, criteria, context))
-      cf.Close()
+      Dim response As WcfResponse
+      Try
+        response = svr.Fetch(New FetchRequest(objectType, criteria, context))
+        cf.Close()
+      Catch ex As Exception
+        cf.Abort()
+        Throw
+      End Try
 
       Dim result As Object = response.Result
       If TypeOf result Is Exception Then
@@ -105,8 +118,14 @@ Namespace DataPortalClient
     Public Function Update(ByVal obj As Object, ByVal context As DataPortalContext) As DataPortalResult Implements IDataPortalProxy.Update
       Dim cf As ChannelFactory(Of IWcfPortal) = New ChannelFactory(Of IWcfPortal)(mEndPoint)
       Dim svr As IWcfPortal = cf.CreateChannel()
-      Dim response As WcfResponse = svr.Update(New UpdateRequest(obj, context))
-      cf.Close()
+      Dim response As WcfResponse
+      Try
+        response = svr.Update(New UpdateRequest(obj, context))
+        cf.Close()
+      Catch ex As Exception
+        cf.Abort()
+        Throw
+      End Try
 
       Dim result As Object = response.Result
       If TypeOf result Is Exception Then
@@ -126,8 +145,15 @@ Namespace DataPortalClient
     Public Function Delete(ByVal criteria As Object, ByVal context As DataPortalContext) As DataPortalResult Implements IDataPortalProxy.Delete
       Dim cf As ChannelFactory(Of IWcfPortal) = New ChannelFactory(Of IWcfPortal)(mEndPoint)
       Dim svr As IWcfPortal = cf.CreateChannel()
-      Dim response As WcfResponse = svr.Delete(New DeleteRequest(criteria, context))
-      cf.Close()
+      Dim response As WcfResponse
+      Try
+        response = svr.Delete(New DeleteRequest(criteria, context))
+        cf.Close()
+
+      Catch ex As Exception
+        cf.Abort()
+        Throw
+      End Try
 
       Dim result As Object = response.Result
       If TypeOf result Is Exception Then
