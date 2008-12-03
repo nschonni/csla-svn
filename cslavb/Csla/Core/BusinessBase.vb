@@ -1956,13 +1956,13 @@ Namespace Core
             End If
 
           ElseIf Not field.Equals(newValue) Then
-            If TypeOf newValue Is String AndAlso newValue Is Nothing Then
+            If GetType(P).Equals(GetType(String)) AndAlso newValue Is Nothing Then
               newValue = CoerceValue(Of P)(GetType(String), field, String.Empty)
             End If
             OnPropertyChanging(propertyName)
             field = newValue
             PropertyHasChanged(propertyName)
-          End If
+            End If
 
         Catch ex As Exception
           Throw New PropertyLoadException(String.Format(My.Resources.PropertyLoadException, propertyName, ex.Message, ex.Message))
@@ -2007,7 +2007,7 @@ Namespace Core
             End If
 
           ElseIf Not field.Equals(newValue) Then
-            If TypeOf newValue Is String AndAlso newValue Is Nothing Then
+            If GetType(V).Equals(GetType(String)) AndAlso newValue Is Nothing Then
               newValue = CoerceValue(Of V)(GetType(String), Nothing, String.Empty)
             End If
             OnPropertyChanging(propertyName)
@@ -2094,6 +2094,9 @@ Namespace Core
               oldValue = DirectCast(fieldData.Value, P)
             End If
           End If
+          If GetType(F).Equals(GetType(String)) AndAlso newValue Is Nothing Then
+            newValue = CoerceValue(Of F)(GetType(String), Nothing, String.Empty)
+          End If
           LoadPropertyValue(Of P)(propertyInfo, oldValue, CoerceValue(Of P)(GetType(F), oldValue, newValue), True)
 
         Catch ex As Exception
@@ -2137,6 +2140,9 @@ Namespace Core
             Else
               oldValue = DirectCast(fieldData.Value, P)
             End If
+          End If
+          If GetType(P).Equals(GetType(String)) AndAlso newValue Is Nothing Then
+            newValue = CoerceValue(Of P)(GetType(String), Nothing, String.Empty)
           End If
           LoadPropertyValue(Of P)(propertyInfo, oldValue, newValue, True)
 

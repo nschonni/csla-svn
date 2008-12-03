@@ -19,6 +19,20 @@ namespace Csla.Test.PropertyGetSet
   public class PropertyGetSetTests
   {
     [TestMethod]
+    public void NullString()
+    {
+      EditableGetSet root = new EditableGetSet();
+      root.F01 = null;
+      Assert.AreEqual(string.Empty, root.F01, "F01 should be empty");
+      root.F06 = null;
+      Assert.AreEqual(string.Empty, root.F06, "F06 should be empty");
+      root.M01 = null;
+      Assert.AreEqual(string.Empty, root.M01, "M01 should be empty");
+      root.M07 = null;
+      Assert.AreEqual(string.Empty, root.M07, "M07 should be empty");
+    }
+
+    [TestMethod]
     public void ExplicitFieldProperties()
     {
       EditableGetSet root = new EditableGetSet();

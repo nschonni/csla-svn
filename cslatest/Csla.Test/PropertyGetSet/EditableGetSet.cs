@@ -48,6 +48,14 @@ namespace Csla.Test.PropertyGetSet
       set { SetProperty<bool>(F05Property, ref _f05, value); }
     }
 
+    private static Csla.PropertyInfo<object> F06Property = RegisterProperty<object>(typeof(EditableGetSet), new Csla.PropertyInfo<object>("F06", "field 6"));
+    private object _F06 = string.Empty;
+    public string F06
+    {
+      get { return GetProperty<object, string>(F06Property, _F06); }
+      set { SetProperty<object, string>(F06Property, ref _F06, value); }
+    }
+
     private static Csla.PropertyInfo<string> M01Property = RegisterProperty<string>(typeof(EditableGetSet), new Csla.PropertyInfo<string>("M01"));
     public string M01
     {
@@ -93,6 +101,13 @@ namespace Csla.Test.PropertyGetSet
     {
       get { return GetProperty<Guid>(M06Property); }
       set { SetProperty<Guid>(M06Property, value); }
+    }
+
+    private static Csla.PropertyInfo<object> M07Property = RegisterProperty<object>(typeof(EditableGetSet), new Csla.PropertyInfo<object>("M07", "field 7"));
+    public string M07
+    {
+      get { return GetProperty<object, string>(M07Property); }
+      set { SetProperty<object, string>(M07Property, value); }
     }
 
     private static Csla.PropertyInfo<EditableGetSet> C01Property = 

@@ -1962,7 +1962,7 @@ namespace Csla.Core
           }
           else if (!(field.Equals(newValue)))
           {
-            if (newValue is string && newValue == null)
+            if (typeof(P) == typeof(string) && newValue == null)
               newValue = Utilities.CoerceValue<P>(typeof(string), field, string.Empty);
             OnPropertyChanging(propertyName);
             field = newValue;
@@ -2017,7 +2017,7 @@ namespace Csla.Core
           }
           else if (!(field.Equals(newValue)))
           {
-            if (newValue is string && newValue == null)
+            if (typeof(V) == typeof(string) && newValue == null)
               newValue = Utilities.CoerceValue<V>(typeof(string), null, string.Empty);
             OnPropertyChanging(propertyName);
             field = Utilities.CoerceValue<P>(typeof(V), field, newValue);
@@ -2100,6 +2100,8 @@ namespace Csla.Core
             else
               oldValue = (P)fieldData.Value;
           }
+          if (typeof(F) == typeof(string) && newValue == null)
+            newValue = Utilities.CoerceValue<F>(typeof(string), null, string.Empty);
           LoadPropertyValue<P>(propertyInfo, oldValue, Utilities.CoerceValue<P>(typeof(F), oldValue, newValue), true);
         }
         catch (Exception ex)
@@ -2145,6 +2147,8 @@ namespace Csla.Core
             else
               oldValue = (P)fieldData.Value;
           }
+          if (typeof(P) == typeof(string) && newValue == null)
+            newValue = Utilities.CoerceValue<P>(typeof(string), null, string.Empty);
           LoadPropertyValue<P>(propertyInfo, oldValue, newValue, true);
         }
         catch (Exception ex)
