@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{AD7860FD-83E2-4E2C-A859-6FF077980884}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -427,6 +427,7 @@
     <EmbeddedResource Include="My Project\Resources.el.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.hu.resx" />
     <EmbeddedResource Include="My Project\Resources.zh-TW.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
