@@ -1960,13 +1960,16 @@ namespace Csla.Core
               PropertyHasChanged(propertyName);
             }
           }
-          else if (!(field.Equals(newValue)))
+          else
           {
             if (typeof(P) == typeof(string) && newValue == null)
               newValue = Utilities.CoerceValue<P>(typeof(string), field, string.Empty);
-            OnPropertyChanging(propertyName);
-            field = newValue;
-            PropertyHasChanged(propertyName);
+            if (!(field.Equals(newValue)))
+            {
+              OnPropertyChanging(propertyName);
+              field = newValue;
+              PropertyHasChanged(propertyName);
+            }
           }
         }
         catch (Exception ex)
@@ -2015,13 +2018,16 @@ namespace Csla.Core
               PropertyHasChanged(propertyName);
             }
           }
-          else if (!(field.Equals(newValue)))
+          else
           {
             if (typeof(V) == typeof(string) && newValue == null)
               newValue = Utilities.CoerceValue<V>(typeof(string), null, string.Empty);
-            OnPropertyChanging(propertyName);
-            field = Utilities.CoerceValue<P>(typeof(V), field, newValue);
-            PropertyHasChanged(propertyName);
+            if (!(field.Equals(newValue)))
+            {
+              OnPropertyChanging(propertyName);
+              field = Utilities.CoerceValue<P>(typeof(V), field, newValue);
+              PropertyHasChanged(propertyName);
+            }
           }
         }
         catch (Exception ex)

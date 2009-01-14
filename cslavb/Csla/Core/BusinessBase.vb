@@ -1955,14 +1955,16 @@ Namespace Core
               PropertyHasChanged(propertyName)
             End If
 
-          ElseIf Not field.Equals(newValue) Then
+          Else
             If GetType(P).Equals(GetType(String)) AndAlso newValue Is Nothing Then
               newValue = CoerceValue(Of P)(GetType(String), field, String.Empty)
             End If
-            OnPropertyChanging(propertyName)
-            field = newValue
-            PropertyHasChanged(propertyName)
+            If Not field.Equals(newValue) Then
+              OnPropertyChanging(propertyName)
+              field = newValue
+              PropertyHasChanged(propertyName)
             End If
+          End If
 
         Catch ex As Exception
           Throw New PropertyLoadException(String.Format(My.Resources.PropertyLoadException, propertyName, ex.Message, ex.Message))
@@ -2006,13 +2008,15 @@ Namespace Core
               PropertyHasChanged(propertyName)
             End If
 
-          ElseIf Not field.Equals(newValue) Then
+          Else
             If GetType(V).Equals(GetType(String)) AndAlso newValue Is Nothing Then
               newValue = CoerceValue(Of V)(GetType(String), Nothing, String.Empty)
             End If
-            OnPropertyChanging(propertyName)
-            field = CoerceValue(Of P)(GetType(V), field, newValue)
-            PropertyHasChanged(propertyName)
+            If Not field.Equals(newValue) Then
+              OnPropertyChanging(propertyName)
+              field = CoerceValue(Of P)(GetType(V), field, newValue)
+              PropertyHasChanged(propertyName)
+            End If
           End If
 
         Catch ex As Exception
