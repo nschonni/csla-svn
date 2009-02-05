@@ -1140,6 +1140,8 @@ namespace Csla.Core
       {
         if (_validationRules == null)
           _validationRules = new Csla.Validation.ValidationRules(this);
+        else if (_validationRules.Target == null)
+          _validationRules.SetTarget(this);
         return _validationRules;
       }
     }
