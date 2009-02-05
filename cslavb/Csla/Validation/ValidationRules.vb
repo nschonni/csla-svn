@@ -35,6 +35,12 @@ Namespace Validation
 
     End Sub
 
+    Friend ReadOnly Property Target() As Object
+      Get
+        Return _target
+      End Get
+    End Property
+
     Private ReadOnly Property BrokenRulesList() As BrokenRulesCollection
       Get
         If _brokenRules Is Nothing Then

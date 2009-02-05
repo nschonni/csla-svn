@@ -1154,6 +1154,8 @@ Namespace Core
       Get
         If _validationRules Is Nothing Then
           _validationRules = New Validation.ValidationRules(Me)
+        ElseIf _validationRules.Target Is Nothing Then
+          _validationRules.SetTarget(Me)
         End If
         Return _validationRules
       End Get
