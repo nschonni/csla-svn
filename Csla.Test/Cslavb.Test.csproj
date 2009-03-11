@@ -164,6 +164,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TestEFContext.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Data\TestEFContext1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TestEFContext.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Data\TestLinqToSqlContext.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -304,6 +309,10 @@
     <None Include="DataPortalTestDatabaseDataSet.xss">
       <DependentUpon>DataPortalTestDatabaseDataSet.xsd</DependentUpon>
     </None>
+    <EntityDeploy Include="Data\TestEFContext.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>TestEFContext1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
