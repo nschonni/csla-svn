@@ -164,11 +164,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TestEFContext.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Data\TestEFContext1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TestEFContext.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Data\TestLinqToSqlContext.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -227,7 +222,7 @@
     <Compile Include="Silverlight\ApplicationContext\ClientContextTests.server.cs" />
     <Compile Include="Silverlight\ApplicationContext\GlobalCOntextTests.server.cs" />
     <Compile Include="Silverlight\CommandBase\CommandBaseTests.cs" />
-    <Compile Include="DataPortal\AuthorizeDataPortalTests.cs" />
+    <Compile Include="Data\AuthorizeDataPortalTests.cs" />
     <Compile Include="Silverlight\DataPortal\AuthorizeDataPortalTests.cs" />
     <Compile Include="Silverlight\NameValueList\NameValueListTests.cs" />
     <Compile Include="Silverlight\PropertyGetSet\AbstractGetSet.cs" />
@@ -311,7 +306,7 @@
     </None>
     <EntityDeploy Include="Data\TestEFContext.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>TestEFContext1.Designer.cs</LastGenOutput>
+      <LastGenOutput>TestEFContext.Designer.cs</LastGenOutput>
     </EntityDeploy>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
