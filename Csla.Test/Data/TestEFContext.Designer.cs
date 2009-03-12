@@ -14,7 +14,7 @@
 // Generation date: 9/17/2008 11:23:42 AM
 namespace Csla.Test.Data
 {
-    
+
     /// <summary>
     /// There are no comments for DataPortalTestDatabaseEntities in the schema.
     /// </summary>
@@ -23,24 +23,24 @@ namespace Csla.Test.Data
         /// <summary>
         /// Initializes a new DataPortalTestDatabaseEntities object using the connection string found in the 'DataPortalTestDatabaseEntities' section of the application configuration file.
         /// </summary>
-        public DataPortalTestDatabaseEntities() : 
-                base("name=DataPortalTestDatabaseEntities", "DataPortalTestDatabaseEntities")
+        public DataPortalTestDatabaseEntities() :
+            base("name=DataPortalTestDatabaseEntities", "DataPortalTestDatabaseEntities")
         {
             this.OnContextCreated();
         }
         /// <summary>
         /// Initialize a new DataPortalTestDatabaseEntities object.
         /// </summary>
-        public DataPortalTestDatabaseEntities(string connectionString) : 
-                base(connectionString, "DataPortalTestDatabaseEntities")
+        public DataPortalTestDatabaseEntities(string connectionString) :
+            base(connectionString, "DataPortalTestDatabaseEntities")
         {
             this.OnContextCreated();
         }
         /// <summary>
         /// Initialize a new DataPortalTestDatabaseEntities object.
         /// </summary>
-        public DataPortalTestDatabaseEntities(global::System.Data.EntityClient.EntityConnection connection) : 
-                base(connection, "DataPortalTestDatabaseEntities")
+        public DataPortalTestDatabaseEntities(global::System.Data.EntityClient.EntityConnection connection) :
+            base(connection, "DataPortalTestDatabaseEntities")
         {
             this.OnContextCreated();
         }
@@ -76,8 +76,8 @@ namespace Csla.Test.Data
     /// LastName
     /// SmallColumn
     /// </KeyProperties>
-    [global::System.Data.Objects.DataClasses.EdmEntityTypeAttribute(NamespaceName="DataPortalTestDatabaseModel", Name="Table2")]
-    [global::System.Runtime.Serialization.DataContractAttribute(IsReference=true)]
+    [global::System.Data.Objects.DataClasses.EdmEntityTypeAttribute(NamespaceName = "DataPortalTestDatabaseModel", Name = "Table2")]
+    [global::System.Runtime.Serialization.DataContractAttribute(IsReference = true)]
     [global::System.Serializable()]
     public partial class Table2 : global::System.Data.Objects.DataClasses.EntityObject
     {
@@ -98,7 +98,7 @@ namespace Csla.Test.Data
         /// <summary>
         /// There are no comments for Property FirstName in the schema.
         /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(EntityKeyProperty = true, IsNullable = false)]
         [global::System.Runtime.Serialization.DataMemberAttribute()]
         public string FirstName
         {
@@ -121,7 +121,7 @@ namespace Csla.Test.Data
         /// <summary>
         /// There are no comments for Property LastName in the schema.
         /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(EntityKeyProperty = true, IsNullable = false)]
         [global::System.Runtime.Serialization.DataMemberAttribute()]
         public string LastName
         {
@@ -144,7 +144,7 @@ namespace Csla.Test.Data
         /// <summary>
         /// There are no comments for Property SmallColumn in the schema.
         /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(EntityKeyProperty = true, IsNullable = false)]
         [global::System.Runtime.Serialization.DataMemberAttribute()]
         public string SmallColumn
         {
