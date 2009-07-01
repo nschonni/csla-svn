@@ -1,7 +1,7 @@
 using System;
-using Csla.Serialization.Mobile;
-using Csla.Core;
 using System.ComponentModel;
+using Csla.Core;
+
 #if SILVERLIGHT
 using Csla.Serialization;
 #endif
@@ -20,8 +20,7 @@ namespace Csla
     /// Defines the TypeName property.
     /// </summary>
     [EditorBrowsable(EditorBrowsableState.Never)] 
-    public static readonly PropertyInfo<string> TypeNameProperty =
-      RegisterProperty<CriteriaBase, string>(c => c.TypeName);
+    public static readonly PropertyInfo<string> TypeNameProperty = RegisterProperty<string>(typeof(CriteriaBase), new Csla.PropertyInfo<string>("TypeName"));
 
     [NonSerialized]
     [NotUndoable]

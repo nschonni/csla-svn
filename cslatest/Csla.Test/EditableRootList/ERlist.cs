@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-
 namespace Csla.Test.EditableRootList
 {
   public class ERlist : Csla.EditableRootListBase<ERitem>

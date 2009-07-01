@@ -19,11 +19,8 @@
  SOFTWARE.
 */
 
-using Csla.C5;
 using System;
 using System.Reflection;
-using System.Reflection.Emit;
-using System.Diagnostics;
 using SCG = System.Collections.Generic;
 
 namespace Csla.C5

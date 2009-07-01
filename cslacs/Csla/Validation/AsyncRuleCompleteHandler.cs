@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Csla.Validation
+﻿namespace Csla.Validation
 {
   /// <summary>
   /// Delegate for handling the completion of an

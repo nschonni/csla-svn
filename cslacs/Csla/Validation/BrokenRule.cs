@@ -1,5 +1,4 @@
 using System;
-using Csla.Serialization;
 using Csla.Core;
 using Csla.Serialization.Mobile;
 

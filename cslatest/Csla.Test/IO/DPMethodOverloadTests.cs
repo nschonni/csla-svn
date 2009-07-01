@@ -1,9 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
 #if !NUNIT
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 #else
+using System;
 using NUnit.Framework;
 using TestClass = NUnit.Framework.TestFixtureAttribute;
 using TestInitialize = NUnit.Framework.SetUpAttribute;
@@ -28,7 +26,7 @@ namespace Csla.Test.IO
       Assert.AreEqual("No criteria", Csla.ApplicationContext.GlobalContext["Create"], "No criteria expected");
     }
 
-    [TestMethod]
+    [Test]
     public void CreateWithCriteria()
     {
       Csla.ApplicationContext.GlobalContext.Clear();
@@ -40,7 +38,7 @@ namespace Csla.Test.IO
       Assert.AreEqual("Criteria", Csla.ApplicationContext.GlobalContext["Create"], "Criteria expected");
     }
 
-    [TestMethod]
+    [Test]
     public void CreateWithOtherCriteria()
     {
       Csla.ApplicationContext.GlobalContext.Clear();
@@ -52,7 +50,7 @@ namespace Csla.Test.IO
       Assert.AreEqual("Other criteria", Csla.ApplicationContext.GlobalContext["Create"], "Other criteria expected");
     }
 
-    [TestMethod]
+    [Test]
     public void FetchNullCriteria()
     {
       Csla.ApplicationContext.GlobalContext.Clear();
@@ -64,7 +62,7 @@ namespace Csla.Test.IO
       Assert.AreEqual("Null criteria", Csla.ApplicationContext.GlobalContext["Fetch"], "Null criteria expected");
     }
 
-    [TestMethod]
+    [Test]
     public void FetchNoCriteria()
     {
       Csla.ApplicationContext.GlobalContext.Clear();
@@ -76,7 +74,7 @@ namespace Csla.Test.IO
       Assert.AreEqual("No criteria", Csla.ApplicationContext.GlobalContext["Fetch"], "No criteria expected");
     }
 
-    [TestMethod]
+    [Test]
     public void FetchWithCriteria()
     {
       Csla.ApplicationContext.GlobalContext.Clear();
@@ -88,7 +86,7 @@ namespace Csla.Test.IO
       Assert.AreEqual("Criteria", Csla.ApplicationContext.GlobalContext["Fetch"], "Criteria expected");
     }
 
-    [TestMethod]
+    [Test]
     public void FetchWithOtherCriteria()
     {
       Csla.ApplicationContext.GlobalContext.Clear();

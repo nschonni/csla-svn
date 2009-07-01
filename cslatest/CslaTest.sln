@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cslacs.Test", "Csla.Test\Cslacs.Test.csproj", "{D464BFBE-C26A-46E9-BC72-3978BCAD02D7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cslavb.Test", "Csla.Test\Cslavb.Test.csproj", "{002E4164-CFAF-4923-BEBB-B3A11281AB48}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CslaLight.Testing.Server", "Csla.Test\Silverlight\Server\CslaLight.Testing.Server.csproj", "{3374389D-59D8-44B1-B6D0-015819DB482C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Csla", "..\cslacs\Csla\Csla.csproj", "{B680631D-F0B8-4482-B4E4-DA1E50CB77A8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,20 +35,6 @@ Global
 		{D464BFBE-C26A-46E9-BC72-3978BCAD02D7}.Testing|Any CPU.Build.0 = Testing|Any CPU
 		{D464BFBE-C26A-46E9-BC72-3978BCAD02D7}.Testing|Mixed Platforms.ActiveCfg = Testing|Any CPU
 		{D464BFBE-C26A-46E9-BC72-3978BCAD02D7}.Testing|Mixed Platforms.Build.0 = Testing|Any CPU
-		{002E4164-CFAF-4923-BEBB-B3A11281AB48}.Debug|.NET.ActiveCfg = Debug|Any CPU
-		{002E4164-CFAF-4923-BEBB-B3A11281AB48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{002E4164-CFAF-4923-BEBB-B3A11281AB48}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{002E4164-CFAF-4923-BEBB-B3A11281AB48}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{002E4164-CFAF-4923-BEBB-B3A11281AB48}.Release|.NET.ActiveCfg = Release|Any CPU
-		{002E4164-CFAF-4923-BEBB-B3A11281AB48}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{002E4164-CFAF-4923-BEBB-B3A11281AB48}.Release|Any CPU.Build.0 = Release|Any CPU
-		{002E4164-CFAF-4923-BEBB-B3A11281AB48}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{002E4164-CFAF-4923-BEBB-B3A11281AB48}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{002E4164-CFAF-4923-BEBB-B3A11281AB48}.Testing|.NET.ActiveCfg = Release|Any CPU
-		{002E4164-CFAF-4923-BEBB-B3A11281AB48}.Testing|Any CPU.ActiveCfg = Release|Any CPU
-		{002E4164-CFAF-4923-BEBB-B3A11281AB48}.Testing|Any CPU.Build.0 = Release|Any CPU
-		{002E4164-CFAF-4923-BEBB-B3A11281AB48}.Testing|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{002E4164-CFAF-4923-BEBB-B3A11281AB48}.Testing|Mixed Platforms.Build.0 = Release|Any CPU
 		{3374389D-59D8-44B1-B6D0-015819DB482C}.Debug|.NET.ActiveCfg = Debug|Any CPU
 		{3374389D-59D8-44B1-B6D0-015819DB482C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3374389D-59D8-44B1-B6D0-015819DB482C}.Debug|Any CPU.Build.0 = Debug|Any CPU
@@ -64,6 +50,21 @@ Global
 		{3374389D-59D8-44B1-B6D0-015819DB482C}.Testing|Any CPU.Build.0 = Testing|Any CPU
 		{3374389D-59D8-44B1-B6D0-015819DB482C}.Testing|Mixed Platforms.ActiveCfg = Testing|Any CPU
 		{3374389D-59D8-44B1-B6D0-015819DB482C}.Testing|Mixed Platforms.Build.0 = Testing|Any CPU
+		{B680631D-F0B8-4482-B4E4-DA1E50CB77A8}.Debug|.NET.ActiveCfg = Debug|Any CPU
+		{B680631D-F0B8-4482-B4E4-DA1E50CB77A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B680631D-F0B8-4482-B4E4-DA1E50CB77A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B680631D-F0B8-4482-B4E4-DA1E50CB77A8}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{B680631D-F0B8-4482-B4E4-DA1E50CB77A8}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{B680631D-F0B8-4482-B4E4-DA1E50CB77A8}.Release|.NET.ActiveCfg = Release|Any CPU
+		{B680631D-F0B8-4482-B4E4-DA1E50CB77A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B680631D-F0B8-4482-B4E4-DA1E50CB77A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B680631D-F0B8-4482-B4E4-DA1E50CB77A8}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{B680631D-F0B8-4482-B4E4-DA1E50CB77A8}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{B680631D-F0B8-4482-B4E4-DA1E50CB77A8}.Testing|.NET.ActiveCfg = Testing|Any CPU
+		{B680631D-F0B8-4482-B4E4-DA1E50CB77A8}.Testing|Any CPU.ActiveCfg = Testing|Any CPU
+		{B680631D-F0B8-4482-B4E4-DA1E50CB77A8}.Testing|Any CPU.Build.0 = Testing|Any CPU
+		{B680631D-F0B8-4482-B4E4-DA1E50CB77A8}.Testing|Mixed Platforms.ActiveCfg = Testing|Any CPU
+		{B680631D-F0B8-4482-B4E4-DA1E50CB77A8}.Testing|Mixed Platforms.Build.0 = Testing|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

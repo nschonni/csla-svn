@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Csla.Threading;
-using UnitDriven;
-using Csla.Core;
+﻿#if NUNIT
+using System;
 using System.ComponentModel;
-
-#if NUNIT
+using Csla.Core;
+using Csla.Threading;
 using NUnit.Framework;
 using TestClass = NUnit.Framework.TestFixtureAttribute;
 using TestInitialize = NUnit.Framework.SetUpAttribute;
@@ -67,7 +62,7 @@ namespace Csla.Test.Threading
       Assert.IsFalse(busy.IsBusy);
     }
 
-    [TestMethod]
+    [Test]
     public void TestTimeout()
     {
       BusyBO busy = new BusyBO();
@@ -76,7 +71,7 @@ namespace Csla.Test.Threading
       Assert.IsTrue(busy.IsBusy);
     }
 
-    [TestMethod]
+    [Test]
     public void TestBusyLockObject()
     {
       BusyBO busy = new BusyBO();

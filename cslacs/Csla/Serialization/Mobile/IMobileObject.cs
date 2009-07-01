@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Csla.Serialization.Mobile
+﻿namespace Csla.Serialization.Mobile
 {
   /// <summary>
   /// Interface to be implemented by any object

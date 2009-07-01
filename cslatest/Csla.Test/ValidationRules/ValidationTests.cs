@@ -1,10 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-using UnitDriven;
-
 #if NUNIT
+using System;
 using NUnit.Framework;
+using UnitDriven;
 using TestClass = NUnit.Framework.TestFixtureAttribute;
 using TestInitialize = NUnit.Framework.SetUpAttribute;
 using TestCleanup = NUnit.Framework.TearDownAttribute;
@@ -243,7 +240,7 @@ namespace Csla.Test.ValidationRules
       context.Complete();
     }
 
-    [TestMethod()]
+    [Test()]
     public void BreakLengthRuleAndClone()
     {
       Csla.ApplicationContext.GlobalContext.Clear();
@@ -271,7 +268,7 @@ namespace Csla.Test.ValidationRules
       context.Complete();
     }
 
-    [TestMethod()]
+    [Test()]
     public void RegExSSN()
     {
       Csla.ApplicationContext.GlobalContext.Clear();
@@ -294,7 +291,7 @@ namespace Csla.Test.ValidationRules
 
     }
 
-    [TestMethod]
+    [Test]
     public void MergeBrokenRules()
     {
       UnitTestContext context = GetContext();
@@ -307,7 +304,7 @@ namespace Csla.Test.ValidationRules
       context.Assert.Success();
     }
 
-    [TestMethod]
+    [Test]
     public void VerifyUndoableStateStackOnClone()
     {
       Csla.ApplicationContext.GlobalContext.Clear();
@@ -326,14 +323,14 @@ namespace Csla.Test.ValidationRules
 
           string actual = rootClone.Name;
           context.Assert.AreEqual(expected, actual);
-          context.Assert.Try(rootClone.ApplyEdit);
+          context.Assert.Try((Action)rootClone.ApplyEdit);
 
           context.Assert.Success();
         });
       }
     }
 
-    [TestMethod()]
+    [Test()]
     public void ListChangedEventTrigger()
     {
       Csla.ApplicationContext.GlobalContext.Clear();

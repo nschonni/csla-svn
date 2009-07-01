@@ -1,7 +1,7 @@
 using System;
-using System.Web.Services;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Web.Services;
 
 namespace Csla.Server.Hosts
 {

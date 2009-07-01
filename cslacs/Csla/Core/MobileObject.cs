@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel;
-using Csla.Serialization;
 using Csla.Serialization.Mobile;
 
 namespace Csla.Core

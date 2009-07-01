@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Csla.Serialization.Mobile
+﻿namespace Csla.Serialization.Mobile
 {
   /// <summary>
   /// Interface defining callback methods used

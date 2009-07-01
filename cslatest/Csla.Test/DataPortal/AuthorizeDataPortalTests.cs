@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Configuration;
-using Csla.DataPortalClient;
+using Csla.Server;
 using Csla.Testing.Business.DataPortal;
 using NUnit.Framework;
-using Csla.Server;
-
 
 namespace Csla.Test.DataPortal
 {

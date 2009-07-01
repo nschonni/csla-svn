@@ -1,15 +1,11 @@
-﻿using Csla.Testing.Business.DataPortal;
-using UnitDriven;
-using Csla.DataPortalClient;
-
-#if SILVERLIGHT
+﻿#if SILVERLIGHT
 
 #else
-using System;
 #endif
 
 #if NUNIT
-using NUnit.Framework;
+using Csla.Testing.Business.DataPortal;
+using UnitDriven;
 using TestClass = NUnit.Framework.TestFixtureAttribute;
 using TestMethod = NUnit.Framework.TestAttribute;
 using TestInitialize = NUnit.Framework.SetUpAttribute;

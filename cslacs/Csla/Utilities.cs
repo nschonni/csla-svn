@@ -1,10 +1,10 @@
 using System;
 using System.ComponentModel;
-using System.Reflection;
-using System.Xml;
 using System.IO;
-using System.Runtime.Serialization;
+using System.Reflection;
 using System.Text;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace Csla
 {
@@ -247,8 +247,8 @@ namespace Csla
       using (var buffer = new MemoryStream())
       {
         XmlWriter writer = XmlWriter.Create(buffer);
-        DataContractSerializer dcs = new DataContractSerializer(graph.GetType());
-        dcs.WriteObject(writer, graph);
+        var dcs = new XmlSerializer(graph.GetType());
+        dcs.Serialize(writer, graph);
         writer.Flush();
         byte[] data = buffer.ToArray();
         return Encoding.UTF8.GetString(data, 0, data.Length);
@@ -261,8 +261,8 @@ namespace Csla
       using (var buffer = new MemoryStream(Encoding.UTF8.GetBytes(xml)))
       {
         XmlReader reader = XmlReader.Create(buffer);
-        DataContractSerializer dcs = new DataContractSerializer(typeof(T));
-        return (T)dcs.ReadObject(reader);
+        var dcs = new XmlSerializer(typeof(T));
+        return (T)dcs.Deserialize(reader);
       }
     }
     #endregion

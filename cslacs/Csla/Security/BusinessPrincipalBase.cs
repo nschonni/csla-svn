@@ -1,6 +1,5 @@
 using System;
 using System.Security.Principal;
-using Csla.Serialization;
 using Csla.Serialization.Mobile;
 
 namespace Csla.Security

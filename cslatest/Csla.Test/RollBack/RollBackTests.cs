@@ -1,10 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-
 #if !NUNIT
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 #else
+using System;
 using NUnit.Framework;
 using TestClass = NUnit.Framework.TestFixtureAttribute;
 using TestInitialize = NUnit.Framework.SetUpAttribute;
@@ -44,7 +41,7 @@ namespace Csla.Test.RollBack
             Assert.AreEqual(false, root.IsDirty, "isdirty is false");
         }
 
-        [TestMethod]
+        [Test]
         public void YesFail()
         {
             Csla.ApplicationContext.GlobalContext.Clear();
@@ -80,7 +77,7 @@ namespace Csla.Test.RollBack
             Assert.AreEqual(true, root.IsDirty, "isdirty is true");
         }
 
-        [TestMethod]
+        [Test]
         public void YesFailCancel()
         {
             Csla.ApplicationContext.GlobalContext.Clear();
@@ -119,7 +116,7 @@ namespace Csla.Test.RollBack
             Assert.AreEqual(true, root.IsDirty, "isdirty is true");
         }
 
-        [TestMethod]
+        [Test]
         public void EditParentEntity()
         {
             Csla.Test.DataBinding.ParentEntity p = Csla.Test.DataBinding.ParentEntity.NewParentEntity();

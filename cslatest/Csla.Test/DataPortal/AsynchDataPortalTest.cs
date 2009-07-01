@@ -1,24 +1,17 @@
 ﻿#if SILVERLIGHT
 using Csla.DataPortalClient;
 #else
-using Csla.Test.Basic;
 #endif
-using System;
 #if NUNIT
-using NUnit.Framework;
+using Csla.Test.Basic;
+using Csla.Test.DataPortalTest;
+using cslalighttest.CslaDataProvider;
+using UnitDriven;
 using TestClass = NUnit.Framework.TestFixtureAttribute;
 using TestMethod = NUnit.Framework.TestAttribute;
 using TestInitialize = NUnit.Framework.SetUpAttribute;
 using TestCleanup = NUnit.Framework.TearDownAttribute;
 #endif
-
-
-using Csla;
-using Csla.Core;
-using cslalighttest.CslaDataProvider;
-using UnitDriven;
-
-using Single=Csla.Test.DataPortalTest.Single;
 
 namespace Csla.Test.DataPortal
 {

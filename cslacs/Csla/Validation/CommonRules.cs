@@ -1,8 +1,8 @@
 using System;
-using Csla.Properties;
-using System.Text.RegularExpressions;
 using System.Reflection;
+using System.Text.RegularExpressions;
 using Csla.Core;
+using Csla.Properties;
 
 namespace Csla.Validation
 {

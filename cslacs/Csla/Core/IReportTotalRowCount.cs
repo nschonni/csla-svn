@@ -1,5 +1,3 @@
-using System;
-
 namespace Csla.Core
 {
   /// <summary>

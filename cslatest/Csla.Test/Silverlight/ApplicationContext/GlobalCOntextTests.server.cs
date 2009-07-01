@@ -1,9 +1,7 @@
-﻿using System.Configuration;
+﻿#if NUNIT
 using Csla.Security;
 using Csla.Testing.Business.ApplicationContext;
 using UnitDriven;
-
-#if NUNIT
 using TestMethod = NUnit.Framework.TestAttribute;
 
 #elif MSTEST

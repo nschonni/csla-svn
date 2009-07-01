@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Security.Principal;
-using Csla.Serialization;
-using System.Collections.Generic;
-using Csla.Core.FieldManager;
-using System.Runtime.Serialization;
-using Csla.DataPortalClient;
-using Csla.Silverlight;
 using Csla.Core;
+using Csla.Silverlight;
 
 namespace Csla.Security
 {

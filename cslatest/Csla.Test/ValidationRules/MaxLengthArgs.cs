@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-
 namespace Csla.Test.ValidationRules
 {
     public class MaxLengthArgs : Csla.Validation.RuleArgs

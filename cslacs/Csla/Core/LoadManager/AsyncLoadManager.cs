@@ -1,23 +1,25 @@
 ﻿using System;
-using System.Linq;
-using System.Net;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Ink;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Shapes;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
-using Csla.Serialization;
+using System.Linq;
+
+//using System.Net;
+//using System.Windows;
+//using System.Windows.Controls;
+//using System.Windows.Documents;
+//using System.Windows.Ink;
+//using System.Windows.Input;
+//using System.Windows.Media;
+//using System.Windows.Media.Animation;
+//using System.Windows.Shapes;
+//using System.Collections.ObjectModel;
+//using System.ComponentModel;
+//using Csla.Serialization;
 
 namespace Csla.Core.LoadManager
 {
   internal class AsyncLoadManager : INotifyBusy
   {
-    private ObservableCollection<AsyncLoader> _loading = new ObservableCollection<AsyncLoader>();
+      private BindingList<AsyncLoader> _loading = new BindingList<AsyncLoader>();
 
     public AsyncLoadManager() { }
 
@@ -104,7 +106,7 @@ namespace Csla.Core.LoadManager
     public event EventHandler<ErrorEventArgs> UnhandledAsyncException
     {
       add { _unhandledAsyncException = (EventHandler<ErrorEventArgs>)Delegate.Combine(_unhandledAsyncException, value); }
-      remove { _unhandledAsyncException = (EventHandler<ErrorEventArgs>)Delegate.Remove(_unhandledAsyncException, value); }
+      remove { _unhandledAsyncException = (EventHandler<ErrorEventArgs>)Delegate.Combine(_unhandledAsyncException, value); }
     }
 
     protected virtual void OnUnhandledAsyncException(ErrorEventArgs error)

@@ -1,7 +1,7 @@
 using System;
 using System.EnterpriseServices;
-using System.Runtime.InteropServices;
 using System.Reflection;
+using System.Runtime.InteropServices;
 
 namespace Csla.Server.Hosts
 {

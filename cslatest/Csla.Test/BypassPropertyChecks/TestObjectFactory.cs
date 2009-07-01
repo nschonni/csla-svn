@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Csla.Test.BypassPropertyChecks
+﻿namespace Csla.Test.BypassPropertyChecks
 {
   public class TestObjectFactory : Csla.Server.ObjectFactory
   {

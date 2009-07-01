@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-#if !NUNIT
+﻿#if !NUNIT
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 #else
+using System;
 using NUnit.Framework;
 using TestClass = NUnit.Framework.TestFixtureAttribute;
 using TestInitialize = NUnit.Framework.SetUpAttribute;
@@ -37,7 +34,7 @@ namespace Csla.Test.MethodCaller
       }
     }
 
-    [TestMethod]
+    [Test]
     public void CallInnerException()
     {
       try
@@ -52,7 +49,7 @@ namespace Csla.Test.MethodCaller
       }
     }
 
-    [TestMethod]
+    [Test]
     public void CallSuccessArrayParameters()
     {
       System.Data.DataTable table = new System.Data.DataTable();
@@ -68,7 +65,7 @@ namespace Csla.Test.MethodCaller
       Assert.AreEqual(returnValue2, 2);
     }
 
-    [TestMethod]
+    [Test]
     public void CallSuccessInheritedMethods()
     {
       

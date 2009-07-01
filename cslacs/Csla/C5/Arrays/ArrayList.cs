@@ -23,7 +23,6 @@
 #define HASHINDEXnot
 
 using System;
-using System.Diagnostics;
 using SCG = System.Collections.Generic;
 namespace Csla.C5
 {

@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml.Linq;
-using System.Runtime.Serialization;
 
 namespace Csla.Serialization.Mobile
 {
@@ -14,20 +10,19 @@ namespace Csla.Serialization.Mobile
 #if TESTING
   [System.Diagnostics.DebuggerNonUserCode]
 #endif
-  [DataContract]
+  [Serializable]
   public class SerializationInfo
   {
     /// <summary>
     /// Object that contains information about
     /// a single field.
     /// </summary>
-    [DataContract]
+    [Serializable]
     public class FieldData
     {
       /// <summary>
       /// Field value.
       /// </summary>
-      [DataMember]
       public object Value { get; set; }
 
       /// <summary>
@@ -35,13 +30,11 @@ namespace Csla.Serialization.Mobile
       /// specified enum type. Upon deserialization, the integer will be converted back
       /// to the enum type.
       /// </summary>
-      [DataMember]
       public string EnumTypeName { get; set; }
 
       /// <summary>
       /// Indicates whether the field is dirty.
       /// </summary>
-      [DataMember]
       public bool IsDirty { get; set; }
     }
 
@@ -49,18 +42,16 @@ namespace Csla.Serialization.Mobile
     /// Object that contains information about
     /// a single child reference.
     /// </summary>
-    [DataContract]
+    [Serializable]
     public class ChildData
     {
       /// <summary>
       /// Reference number for the child.
       /// </summary>
-      [DataMember]
       public int ReferenceId { get; set; }
       /// <summary>
       /// Indicates whether the child is dirty.
       /// </summary>
-      [DataMember]
       public bool IsDirty { get; set; }
     }
 
@@ -68,7 +59,6 @@ namespace Csla.Serialization.Mobile
     /// <summary>
     /// Dictionary containing child reference data.
     /// </summary>
-    [DataMember()]
     public Dictionary<string, ChildData> Children
     {
       get { return _children; }
@@ -79,7 +69,6 @@ namespace Csla.Serialization.Mobile
     /// <summary>
     /// Dictionary containg field data.
     /// </summary>
-    [DataMember()]
     public Dictionary<string, FieldData> Values
     {
       get { return _values; }
@@ -94,13 +83,11 @@ namespace Csla.Serialization.Mobile
     /// <summary>
     /// Reference number for this object.
     /// </summary>
-    [DataMember]
     public int ReferenceId { get; set; }
     /// <summary>
     /// Assembly-qualified type name of the
     /// object being serialized.
     /// </summary>
-    [DataMember]
     public string TypeName { get; set; }
 
     /// <summary>

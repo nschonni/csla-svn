@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-
 #if !NUNIT
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -33,7 +29,7 @@ namespace Csla.Test.LazyLoad
       Assert.IsNotNull(parent.GetChildList(), "GetChildList should not be null after ApplyEdit");
     }
 
-    [TestMethod]
+    [Test]
     public void NullCancelEdit()
     {
       AParent parent = new AParent();
@@ -56,7 +52,7 @@ namespace Csla.Test.LazyLoad
       Assert.IsNull(parent.GetChildList(), "GetChildList should be null after CancelEdit");
     }
 
-    [TestMethod]
+    [Test]
     public void NewChildEditLevel()
     {
       AParent parent = new AParent();
@@ -77,7 +73,7 @@ namespace Csla.Test.LazyLoad
       Assert.AreEqual(2, list[0].EditLevel, "Child edit level should be 2");
     }
 
-    [TestMethod]
+    [Test]
     public void NewChildEditLevelCancel()
     {
       AParent parent = new AParent();
@@ -97,7 +93,7 @@ namespace Csla.Test.LazyLoad
       Assert.IsNull(parent.GetChildList(), "GetChildList should be null after CancelEdit");
     }
 
-    [TestMethod]
+    [Test]
     public void NewChildEditLevelApply()
     {
       AParent parent = new AParent();

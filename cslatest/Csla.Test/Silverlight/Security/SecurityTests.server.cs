@@ -1,10 +1,8 @@
-﻿using System.Configuration.Provider;
+﻿#if NUNIT
+using System.Configuration.Provider;
 using System.Reflection;
 using System.Web.Security;
 using Csla.Testing.Business.Security;
-using UnitDriven;
-
-#if NUNIT
 using NUnit.Framework;
 using TestClass = NUnit.Framework.TestFixtureAttribute;
 using TestInitialize = NUnit.Framework.SetUpAttribute;
@@ -70,7 +68,7 @@ namespace Csla.Test.Silverlight.Security
 
     #region Login Using Membership Principal
 #if !CLIENTONLY
-    [TestMethod]
+    [Test]
     public void SetMembershipPrincipalWebServer()
     {
       SilverlightPrincipal.Logout();
@@ -81,7 +79,7 @@ namespace Csla.Test.Silverlight.Security
       Assert.AreEqual(true, Csla.ApplicationContext.User.IsInRole("User Role"));
     }
 
-    [TestMethod]
+    [Test]
     public void SetMembershipPrincipalDataPortal()
     {
       SilverlightPrincipal.Logout();
@@ -92,7 +90,7 @@ namespace Csla.Test.Silverlight.Security
       Assert.AreEqual(true, Csla.ApplicationContext.User.IsInRole("User Role"));
     }
 
-    [TestMethod]
+    [Test]
     public void SetInvalidMembershipPrincipal()
     {
       SilverlightPrincipal.Logout();

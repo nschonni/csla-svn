@@ -1,10 +1,8 @@
-﻿using Csla;
-using Csla.Testing.Business.EditableChildTests;
+﻿#if NUNIT
 using System;
-using UnitDriven;
-
-#if NUNIT
+using Csla.Testing.Business.EditableChildTests;
 using NUnit.Framework;
+using UnitDriven;
 using TestClass = NUnit.Framework.TestFixtureAttribute;
 using TestInitialize = NUnit.Framework.SetUpAttribute;
 using TestCleanup = NUnit.Framework.TearDownAttribute;
@@ -160,7 +158,7 @@ namespace cslalighttest.Stereotypes
       context.Complete();
     }
 
-    [TestMethod]
+    [Test]
     public void FetchByName_c2_Returns_Element_with_one_GrandChild()
     {
       var context = GetContext();
@@ -184,7 +182,7 @@ namespace cslalighttest.Stereotypes
 
     #region Calling Save on non-Root element - Child/GrandChild Save() - NotSupported
 
-    [TestMethod]
+    [Test]
     public void Save_on_EditableChild_Throws_NotSupportedException()
     {
       var context = GetContext();
@@ -215,7 +213,7 @@ namespace cslalighttest.Stereotypes
       context.Complete();
     }
 
-    [TestMethod]
+    [Test]
     public void Save_on_GrandChildList_Throws_NotSupportedException()
     {
       var context = GetContext();
@@ -246,7 +244,7 @@ namespace cslalighttest.Stereotypes
       context.Complete();
     }
 
-    [TestMethod]
+    [Test]
     public void Save_on_GrandChildList_Item_Throws_NotSupportedException()
     {
       var context = GetContext();
@@ -280,7 +278,7 @@ namespace cslalighttest.Stereotypes
     #endregion
 
     #region Save()
-    [TestMethod]
+    [Test]
     public void After_Saved_FetchedList_should_contain_same_number_of_items()
     {
       var context = GetContext();
@@ -308,7 +306,7 @@ namespace cslalighttest.Stereotypes
 
     }
 
-    [TestMethod]
+    [Test]
     public void After_Saved_FetchedList_Items_should_contain_same_values_and_Marked_NotDirty()
     {
       var context = GetContext();
@@ -343,7 +341,7 @@ namespace cslalighttest.Stereotypes
       context.Complete();
     }
 
-    [TestMethod]
+    [Test]
     public void After_Saved_GrandChild_should_be_NotDirty_and_should_have_same_value_as_Fetched_GrandChild()
     {
       var context = GetContext();

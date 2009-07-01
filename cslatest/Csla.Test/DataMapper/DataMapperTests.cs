@@ -1,11 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-
 #if !NUNIT
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 #else
+using System;
 using NUnit.Framework;
 using TestClass = NUnit.Framework.TestFixtureAttribute;
 using TestInitialize = NUnit.Framework.SetUpAttribute;
@@ -39,7 +36,7 @@ namespace Csla.Test.DataMapper
       Assert.AreEqual(4.2, target.MyDouble, "Double should match");
     }
 
-    [TestMethod]
+    [Test]
     public void BooleanTypes()
     {
       DataMapTarget target = new DataMapTarget();
@@ -57,7 +54,7 @@ namespace Csla.Test.DataMapper
       Assert.AreEqual(false, target.MyBool, "Bool from null should be false");
     }
 
-    [TestMethod]
+    [Test]
     public void GuidTypes()
     {
       DataMapTarget target = new DataMapTarget();
@@ -74,7 +71,7 @@ namespace Csla.Test.DataMapper
       Assert.AreEqual(testValue, target.MyGuid, "Guid values from string should match");
     }
 
-    [TestMethod]
+    [Test]
     public void NullableTypes()
     {
       DataMapTarget target = new DataMapTarget();
@@ -92,7 +89,7 @@ namespace Csla.Test.DataMapper
       Assert.AreEqual(null, target.MyNInt, "Int should be null");
     }
 
-    [TestMethod]
+    [Test]
     public void EnumTypes()
     {
       DataMapTarget target = new DataMapTarget();
@@ -107,7 +104,7 @@ namespace Csla.Test.DataMapper
       Assert.AreEqual(DataMapEnum.Third, target.MyEnum, "Enum should be Third");
     }
 
-    [TestMethod]
+    [Test]
     public void DateTimeTypes()
     {
       DataMapTarget target = new DataMapTarget();
@@ -122,7 +119,7 @@ namespace Csla.Test.DataMapper
       Assert.AreEqual(new DateTime(2007, 1, 1), target.MyDate, "Date should be 1/1/2007");
     }
 
-    [TestMethod]
+    [Test]
     public void SmartDateTypes()
     {
       DataMapTarget target = new DataMapTarget();
@@ -145,7 +142,7 @@ namespace Csla.Test.DataMapper
       Assert.IsFalse(target.MySmartDate.EmptyIsMin, "EmptyIsMin should be false after set");
     }
 
-    [TestMethod]
+    [Test]
     public void SetFields()
     {
       DataMapTarget target = new DataMapTarget();
@@ -172,7 +169,7 @@ namespace Csla.Test.DataMapper
       Assert.AreEqual(new Csla.SmartDate(new DateTime(2004, 3, 2)), target.MySmartDate, "SmartDate should be 3/2/2004");
     }
 
-    [TestMethod]
+    [Test]
     public void BasicDataMap()
     {
       Csla.Data.DataMap map = new Csla.Data.DataMap(typeof(DataMapTarget), typeof(DataMapTarget));

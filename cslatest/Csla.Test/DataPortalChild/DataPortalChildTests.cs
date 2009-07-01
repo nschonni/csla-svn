@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-#if !NUNIT
+﻿#if !NUNIT
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 #else
@@ -39,7 +35,7 @@ namespace Csla.Test.DataPortalChild
       Assert.AreEqual("Inserted", root.Child.Status, "Child status incorrect after Save");
     }
 
-    [TestMethod]
+    [Test]
     public void CreateAndDeleteChild()
     {
       Root root = new Root();
@@ -57,7 +53,7 @@ namespace Csla.Test.DataPortalChild
       Assert.AreEqual("Created", root.Child.Status, "Child status incorrect");
     }
 
-    [TestMethod]
+    [Test]
     public void FetchAndSaveChild()
     {
       Root root = new Root();
@@ -80,7 +76,7 @@ namespace Csla.Test.DataPortalChild
       Assert.AreEqual("Updated", root.Child.Status, "Child status incorrect after Save");
     }
 
-    [TestMethod]
+    [Test]
     public void FetchAndDeleteChild()
     {
       Root root = new Root();
@@ -103,7 +99,7 @@ namespace Csla.Test.DataPortalChild
       Assert.AreEqual("Deleted", root.Child.Status, "Child status incorrect after Save");
     }
 
-    [TestMethod]
+    [Test]
     public void FetchAndSaveChildList()
     {
       Root root = new Root();
@@ -128,7 +124,7 @@ namespace Csla.Test.DataPortalChild
       Assert.AreEqual("Inserted", root.ChildList[0].Status, "Child status incorrect after Save");
     }
 
-    [TestMethod]
+    [Test]
     public void FetchAndSaveChildListVerifyParent()
     {
       Root root = new Root();

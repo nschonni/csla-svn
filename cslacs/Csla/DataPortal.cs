@@ -1,10 +1,9 @@
 using System;
 using System.ComponentModel;
-using Csla.Reflection;
 using Csla.Properties;
-using Csla.Server;
+using Csla.Reflection;
 using Csla.Serialization.Mobile;
-using System.Windows;
+using Csla.Server;
 
 namespace Csla
 {
@@ -948,12 +947,6 @@ namespace Csla
 
     private static DataPortalClient.IDataPortalProxy GetDataPortalProxy(bool forceLocal)
     {
-      if (DataPortal.IsInDesignMode)
-      {
-        return new DataPortalClient.DesignTimeProxy();
-      }
-      else
-      {
         if (forceLocal)
         {
           return new DataPortalClient.LocalProxy();
@@ -970,7 +963,6 @@ namespace Csla
           }
           return (DataPortalClient.IDataPortalProxy)Activator.CreateInstance(_proxyType);
         }
-      }
     }
 
     /// <summary>
@@ -1013,18 +1005,5 @@ namespace Csla
 
     #endregion
 
-    #region Design Time Support
-
-    /// <summary>
-    /// Gets a value indicating whether the code is running
-    /// in WPF design mode.
-    /// </summary>
-    public static bool IsInDesignMode
-    {
-      get { return DesignerProperties.GetIsInDesignMode(new DependencyObject()); }
-    }
-
-
-    #endregion
   }
 }

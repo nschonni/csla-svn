@@ -1,6 +1,5 @@
-﻿using UnitDriven;
-
-#if NUNIT
+﻿#if NUNIT
+using UnitDriven;
 using TestClass = NUnit.Framework.TestFixtureAttribute;
 
 #elif MSTEST

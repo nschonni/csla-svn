@@ -1,13 +1,6 @@
 ﻿#region Namespace imports
 
-using System;
-using System.Data;
-using System.ComponentModel;
-using System.Configuration;
-using System.Drawing;
-using System.Windows.Forms;
-using System.Xml;
-using Csla;
+
 
 #endregion
 

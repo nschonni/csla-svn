@@ -19,11 +19,7 @@
  SOFTWARE.
 */
 
-using Csla.C5;
 using System;
-using System.Reflection;
-using System.Reflection.Emit;
-using System.Diagnostics;
 using System.Text;
 
 namespace Csla.C5

@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-
 #if !NUNIT
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -29,7 +25,7 @@ namespace Csla.Test.Nullable
             Assert.AreEqual(null, nullRoot.NullableInteger);
         }
 
-        [TestMethod()]
+        [Test()]
         public void TestNullableField()
         {
             Csla.ApplicationContext.GlobalContext.Clear();
@@ -38,7 +34,7 @@ namespace Csla.Test.Nullable
             Assert.AreEqual(null, nullRoot._nullableIntMember);
         }
 
-        [TestMethod()]
+        [Test()]
         public void TestNullableAfterClone()
         {
             Csla.ApplicationContext.GlobalContext.Clear();
@@ -50,7 +46,7 @@ namespace Csla.Test.Nullable
             Assert.AreEqual(null, nullRoot2.NullableInteger);
         }
 
-        [TestMethod()]
+        [Test()]
         public void TestNullableAfterEditCycle()
         {
             Csla.ApplicationContext.GlobalContext.Clear();

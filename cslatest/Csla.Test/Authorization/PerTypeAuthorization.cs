@@ -1,9 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-using UnitDriven;
-using System.Diagnostics;
-
 #if NUNIT
 using NUnit.Framework;
 using TestClass = NUnit.Framework.TestFixtureAttribute;
@@ -33,7 +27,7 @@ namespace Csla.Test.Authorization
       root.Test = "test";
     }
 
-    [TestMethod()]
+    [Test()]
     [ExpectedException(typeof(System.Security.SecurityException))]
     public void DenyWritePerInstance()
     {

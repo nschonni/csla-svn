@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
-using System.Text;
 
 namespace Csla.Windows
 {

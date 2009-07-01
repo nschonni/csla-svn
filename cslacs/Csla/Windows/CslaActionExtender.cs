@@ -1,14 +1,8 @@
 ﻿using System;
-using System.Data;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Configuration;
-using System.Drawing;
 using System.Windows.Forms;
-using System.Xml;
-using Csla;
 using Csla.Core;
-using Csla.Validation;
 using Csla.Properties;
 
 namespace Csla.Windows

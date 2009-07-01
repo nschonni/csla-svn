@@ -1,18 +1,18 @@
-﻿using System.Data;
-using System.Data.SqlClient;
-using Csla.Data;
-
-#if !NUNIT
+﻿#if !NUNIT
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 #else
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
+using System.Linq;
+using Csla.Data;
 using NUnit.Framework;
 using TestClass = NUnit.Framework.TestFixtureAttribute;
 using TestInitialize = NUnit.Framework.SetUpAttribute;
 using TestCleanup = NUnit.Framework.TearDownAttribute;
 using TestMethod = NUnit.Framework.TestAttribute;
-using System.Configuration;
-using System.Linq;
+
 #endif
 
 namespace Csla.Test.Data
@@ -35,27 +35,9 @@ namespace Csla.Test.Data
       {
       }
     }
-#if !CLIENTONLY
-    [TestMethod]
-    [ExpectedException(typeof(ConfigurationErrorsException))]
-    public void InvalidConnectionSetting_Throws_ConfigurationErrorsException_for_LinqToSqlContextDataContext()
-    {
-      using (var objectContextManager = ContextManager<TestLinqToSqlContextDataContext>.GetManager(InvalidTestDBConnection, true))
-      {
-      }
-    }
 
-    [TestMethod]
-    [ExpectedException(typeof(ConfigurationErrorsException))]
-    public void InvalidConnectionSetting_Throws_ConfigurationErrorsException_for_EntitiesContextDataContext()
-    {
-      using (var objectContextManager = ObjectContextManager<DataPortalTestDatabaseEntities>.GetManager("DataPortalTestDatabaseEntitiesxxxxxx", true))
-      {
-      }
-    }
-#endif
 
-    [TestMethod]
+    [Test]
     [ExpectedException(typeof(SqlException))]
     public void ConnectionSetting_with_Invalid_DB_Throws_ConfigurationErrorsException_for_SqlConnection()
     {
@@ -64,33 +46,7 @@ namespace Csla.Test.Data
       {
       }
     }
-#if !CLIENTONLY
 
-    [TestMethod]
-    [ExpectedException(typeof(SqlException))]
-    public void ConnectionSetting_with_Invalid_DB_Throws_ConfigurationErrorsException_for_LinqToSqlContextDataContext()
-    {
-      using (var objectContextManager = ContextManager<TestLinqToSqlContextDataContext>.GetManager(ConnectionWithMissingDB, true))
-      {
-        Assert.IsNotNull(objectContextManager);
-        //throws SqlException
-        var count = objectContextManager.DataContext.Table1s.GetNewBindingList().Count;
-      }
-    }
-
-    [TestMethod]
-    [ExpectedException(typeof(EntityException))]
-    public void ConnectionSetting_with_Invalid_DB_Throws_ConfigurationErrorsException_for_EntitiesContextDataContext()
-    {
-      using (var objectContextManager = ObjectContextManager<DataPortalTestDatabaseEntities>.GetManager(EntityConnectionWithMissingDB, true))
-      {
-        Assert.IsNotNull(objectContextManager);
-        //Throws EntityException
-        var table = (from p in objectContextManager.ObjectContext.Table2
-                    select p).ToList();
-      }
-    }
-#endif
     #endregion
 
     #region Data
@@ -109,31 +65,7 @@ namespace Csla.Test.Data
         }
       }
     }
-#if !CLIENTONLY
-    [Test]
-    public void Table1_retreived_through_LingToSqlDataContext_has_records()
-    {
-      using (var objectContextManager = ContextManager<TestLinqToSqlContextDataContext>.GetManager(TestDBConnection, true))
-      {
-        Assert.IsNotNull(objectContextManager);
-        Assert.IsTrue(objectContextManager.DataContext.Table1s.GetNewBindingList().Count > 0, "Data in table is missing");
-      }
-    }
 
-    [Test]
-    public void Table2_retreived_through_LingToEntitiesDataContext_has_records()
-    {
-      using (var objectContextManager = ObjectContextManager<DataPortalTestDatabaseEntities>.GetManager("DataPortalTestDatabaseEntities", true))
-      {
-        Assert.IsNotNull(objectContextManager);
-
-        var query = from p in objectContextManager.ObjectContext.Table2
-                    select p;
-
-        Assert.IsTrue(query.ToList().Count > 0, "Data in table is missing");
-      }
-    }
-#endif
     #endregion
 
     #region Transaction Manager

@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Csla.Serialization.Mobile;
-using Csla.Serialization;
-using serialization = System.Runtime.Serialization;
 using System.IO;
+using System.Xml.Serialization;
+using Csla.Serialization.Mobile;
+using serialization = System.Runtime.Serialization;
 
 namespace Csla.Core
 {
@@ -79,8 +77,8 @@ namespace Csla.Core
       {
         using (MemoryStream stream = new MemoryStream())
         {
-          serialization.DataContractSerializer serializer = new serialization.DataContractSerializer(GetType());
-          serializer.WriteObject(stream, this);
+          var serializer = new XmlSerializer(GetType());
+          serializer.Serialize(stream, this);
           stream.Flush();
           info.AddValue("$list", stream.ToArray());
         }
@@ -129,8 +127,8 @@ namespace Csla.Core
           byte[] buffer = (byte[])info.Values["$list"].Value;
           using (MemoryStream stream = new MemoryStream(buffer))
           {
-            serialization.DataContractSerializer dcs = new serialization.DataContractSerializer(GetType());
-            MobileList<T> list = (MobileList<T>)dcs.ReadObject(stream);
+            var dcs = new XmlSerializer(GetType());
+            MobileList<T> list = (MobileList<T>)dcs.Deserialize(stream);
             AddRange(list);
           }
         }

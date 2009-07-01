@@ -1,10 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-
 #if !NUNIT
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 #else
+using System;
 using NUnit.Framework;
 using TestClass = NUnit.Framework.TestFixtureAttribute;
 using TestInitialize = NUnit.Framework.SetUpAttribute;
@@ -26,7 +23,7 @@ namespace Csla.Test.EditableRootList
       Assert.IsTrue(list[0].IsNew, "Object should be new");
     }
 
-    [TestMethod]
+    [Test]
     public void RemoveNewItem()
     {
       ApplicationContext.GlobalContext.Clear();
@@ -43,7 +40,7 @@ namespace Csla.Test.EditableRootList
       Assert.IsTrue(item.IsNew, "Object should be new after delete");
     }
 
-    [TestMethod]
+    [Test]
     public void RemoveOldItem()
     {
       ApplicationContext.GlobalContext.Clear();
@@ -78,7 +75,7 @@ namespace Csla.Test.EditableRootList
       _isListSaved = (e.Error==null && e.NewObject != null);
     }
 
-    [TestMethod]
+    [Test]
     public void InsertItem()
     {
       _isListSaved = false;
@@ -98,7 +95,7 @@ namespace Csla.Test.EditableRootList
       Assert.IsFalse(list[0].IsNew, "Object should not be new");
     }
 
-    [TestMethod]
+    [Test]
     public void UpdateItem()
     {
       _isListSaved = false;
@@ -123,14 +120,14 @@ namespace Csla.Test.EditableRootList
       Assert.IsFalse(list[0].IsNew, "Object should not be new");
     }
 
-    [TestMethod]
+    [Test]
     public void BusyImplemented()
     {
       ERlist list = new ERlist();
       Assert.IsFalse(list.IsBusy);
     }
 
-    [TestMethod]
+    [Test]
     public void ErrorRecoveryTest()
     {
       ERlist list = new ERlist();

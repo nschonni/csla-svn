@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Security.Principal;
-using Csla.Serialization;
+
 namespace Csla.Security
 {
   /// <summary>
@@ -16,18 +15,5 @@ namespace Csla.Security
     /// </summary>
     public UnauthenticatedPrincipal() : base(new UnauthenticatedIdentity()) { }
 
-    /// <summary>
-    /// Returns a value indicating whether the user is in the
-    /// specified role.
-    /// </summary>
-    /// <param name="role">Role name.</param>
-    /// <returns></returns>
-    public override bool IsInRole(string role)
-    {
-      if (Csla.DataPortal.IsInDesignMode)
-        return true;
-      else
-        return base.IsInRole(role);
-    }
   }
 }

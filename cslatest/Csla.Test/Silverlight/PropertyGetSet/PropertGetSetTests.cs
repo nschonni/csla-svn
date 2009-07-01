@@ -1,7 +1,6 @@
-﻿using UnitDriven;
-
-#if NUNIT
-using NUnit.Framework;
+﻿#if NUNIT
+using System;
+using UnitDriven;
 using TestClass = NUnit.Framework.TestFixtureAttribute;
 using TestInitialize = NUnit.Framework.SetUpAttribute;
 using TestCleanup = NUnit.Framework.TearDownAttribute;
@@ -28,7 +27,7 @@ namespace Csla.Test.Silverlight.PropertyGetSet
     {
       var context = GetContext();
 
-      context.Assert.Try(() =>
+      context.Assert.Try((Action)(() =>
         {
           var item = new InheritedLoadPropertySet();
           item.Saved += (o, e) =>
@@ -37,7 +36,7 @@ namespace Csla.Test.Silverlight.PropertyGetSet
               context.Assert.Success();
             };
           item.BeginSave();
-        });
+        }));
 
       context.Complete();
     }

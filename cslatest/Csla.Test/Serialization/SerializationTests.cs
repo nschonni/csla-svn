@@ -1,14 +1,12 @@
+#if NUNIT
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Linq;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Linq;
+using Csla.Serialization;
 using Csla.Test.ValidationRules;
-using UnitDriven;
-
-#if NUNIT
 using NUnit.Framework;
+using UnitDriven;
 using TestClass = NUnit.Framework.TestFixtureAttribute;
 using TestInitialize = NUnit.Framework.SetUpAttribute;
 using TestCleanup = NUnit.Framework.TearDownAttribute;
@@ -268,7 +266,7 @@ namespace Csla.Test.Serialization
       context.Assert.Success();
     }
     
-    [TestMethod()]
+    [Test()]
     public void TestValidationRulesAfterSerialization()
     {
       UnitTestContext context = GetContext();
@@ -290,7 +288,7 @@ namespace Csla.Test.Serialization
       context.Complete();
     }
     
-    [TestMethod()]
+    [Test()]
     public void TestAuthorizationRulesAfterSerialization()
     {
       Csla.Test.Security.PermissionsRoot root = Csla.Test.Security.PermissionsRoot.NewPermissionsRoot();
@@ -362,15 +360,15 @@ namespace Csla.Test.Serialization
           "PublicStaticOnIsDirtyChanged";
     }
 
-    [TestMethod]
+    [Test]
     public void DCClone()
     {
-      System.Configuration.ConfigurationManager.AppSettings["CslaSerializationFormatter"] =
-        "NetDataContractSerializer";
+      System.Configuration.ConfigurationManager.AppSettings["e"] =
+        "BinaryFormatter";
       Assert.AreEqual(
-        Csla.ApplicationContext.SerializationFormatters.NetDataContractSerializer,
+        Csla.ApplicationContext.SerializationFormatters.BinaryFormatter,
         Csla.ApplicationContext.SerializationFormatter,
-        "Formatter should be NetDataContractSerializer");
+        "Formatter should be NetSerializableSerializer");
 
       DCRoot root = new DCRoot();
       root.Data = 123;
@@ -382,15 +380,15 @@ namespace Csla.Test.Serialization
       Assert.IsTrue(clone.IsDirty, "Clone IsDirty should be true");
     }
 
-    [TestMethod]
+    [Test]
     public void DCEditLevels()
     {
       System.Configuration.ConfigurationManager.AppSettings["CslaSerializationFormatter"] =
-        "NetDataContractSerializer";
+        "BinaryFormatter";
       Assert.AreEqual(
-        Csla.ApplicationContext.SerializationFormatters.NetDataContractSerializer,
+        Csla.ApplicationContext.SerializationFormatters.BinaryFormatter,
         Csla.ApplicationContext.SerializationFormatter,
-        "Formatter should be NetDataContractSerializer");
+        "Formatter should be NetSerializableSerializer");
 
       DCRoot root = new DCRoot();
       root.BeginEdit();
@@ -406,7 +404,7 @@ namespace Csla.Test.Serialization
       Assert.AreEqual(123, root.Data, "Data should be 123");
     }
 
-    [TestMethod]
+    [Test]
     public void AsyncLoadManagerSerializationTest()
     {
       Csla.Test.Basic.Children list = Csla.Test.Basic.Children.NewChildren();
@@ -421,7 +419,7 @@ namespace Csla.Test.Serialization
       Assert.AreEqual(editLevel + 1, newEditLevel, "Edit level incorrect after begin edit");
     }
 
-    [TestMethod]
+    [Test]
     public void SerializeCommand()
     {
       var cmd = new TestCommand();
@@ -432,23 +430,25 @@ namespace Csla.Test.Serialization
       var bf = (TestCommand)Csla.Core.ObjectCloner.Clone(cmd);
       Assert.AreEqual(cmd.Name, bf.Name, "after BinaryFormatter");
 
-      var ndcs = new System.Runtime.Serialization.NetDataContractSerializer();
+      var ndcs = new BinaryFormatterWrapper();
       ndcs.Serialize(buffer, cmd);
       buffer.Position = 0;
       var n = (TestCommand)ndcs.Deserialize(buffer);
       Assert.AreEqual(cmd.Name, n.Name, "after NDCS");
-#endif
 
+#else
       buffer = new System.IO.MemoryStream();
       var mf = new Csla.Serialization.Mobile.MobileFormatter();
       mf.Serialize(buffer, cmd);
       buffer.Position = 0;
       var m = (TestCommand)mf.Deserialize(buffer);
       Assert.AreEqual(cmd.Name, m.Name, "after MobileFormatter");
+
+#endif
     }
 
 #if !SILVERLIGHT
-    [TestMethod]
+    [Test]
     public void CommandOverDataPortal()
     {
       Csla.ApplicationContext.DataPortalProxy = "Csla.Testing.Business.TestProxies.AppDomainProxy, Csla.Testing.Business";

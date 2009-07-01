@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using Csla.Properties;
-using Csla.Serialization;
 using Csla.Serialization.Mobile;
 
 namespace Csla.Validation

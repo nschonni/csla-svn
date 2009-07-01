@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using UnitDriven;
-
-#if NUNIT
+﻿#if NUNIT
 using NUnit.Framework;
 using TestClass = NUnit.Framework.TestFixtureAttribute;
 using TestInitialize = NUnit.Framework.SetUpAttribute;
@@ -39,7 +34,7 @@ namespace Csla.Test.ChildChanged
       Assert.IsFalse(cc, "ChildChanged should not have fired");
     }
 
-    [TestMethod]
+    [Test]
     public void SingleChild()
     {
       bool pc = false;
@@ -59,7 +54,7 @@ namespace Csla.Test.ChildChanged
       Assert.IsTrue(cc, "ChildChanged should have fired");
     }
 
-    [TestMethod]
+    [Test]
     public void GrandChild()
     {
       bool pc = false;
@@ -94,7 +89,7 @@ namespace Csla.Test.ChildChanged
       Assert.IsTrue(ReferenceEquals(root.Child.Child, cca.ChildObject), "Ref should be equal");
     }
 
-    [TestMethod]
+    [Test]
     public void SingleList()
     {
       int lc = 0;
@@ -131,7 +126,7 @@ namespace Csla.Test.ChildChanged
       Assert.IsTrue(ReferenceEquals(root[0], cca.ChildObject), "Ref should be equal");
     }
 
-    [TestMethod]
+    [Test]
     public void SingleList_Serialized()
     {
       int lc = 0;
@@ -170,7 +165,7 @@ namespace Csla.Test.ChildChanged
       Assert.IsTrue(ReferenceEquals(root[0], cca.ChildObject), "Ref should be equal");
     }
 
-    [TestMethod]
+    [Test]
     public void ContainedList()
     {
       int lc = 0;
@@ -217,7 +212,7 @@ namespace Csla.Test.ChildChanged
       Assert.IsTrue(ReferenceEquals(root.List[0], cca.ChildObject), "Ref should be equal");
     }
 
-    [TestMethod]
+    [Test]
     public void ContainedList_Serialized()
     {
       int lc = 0;
@@ -266,7 +261,7 @@ namespace Csla.Test.ChildChanged
       Assert.IsTrue(ReferenceEquals(root.List[0], cca.ChildObject), "Ref should be equal");
     }
 
-    [TestMethod]
+    [Test]
     public void ListOfLists()
     {
       bool lc = false;

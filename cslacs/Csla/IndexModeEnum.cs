@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Csla
+﻿namespace Csla
 {
   /// <summary>
   /// Enum used to determine how a given property should be indexed

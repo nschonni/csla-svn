@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Specialized;
 using Csla.Core;
 
 namespace Csla.Server

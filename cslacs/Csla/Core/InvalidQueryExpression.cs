@@ -1,5 +1,4 @@
-﻿using System;
-using Csla.Properties;
+﻿using Csla.Properties;
 
 namespace Csla.Core
 {

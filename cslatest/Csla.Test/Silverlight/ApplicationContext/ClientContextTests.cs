@@ -1,9 +1,6 @@
-﻿using System.Configuration;
+﻿#if NUNIT
 using System.Security.Principal;
 using UnitDriven;
-
-#if NUNIT
-using NUnit.Framework;
 using TestClass = NUnit.Framework.TestFixtureAttribute;
 using TestInitialize = NUnit.Framework.SetUpAttribute;
 using TestCleanup = NUnit.Framework.TearDownAttribute;

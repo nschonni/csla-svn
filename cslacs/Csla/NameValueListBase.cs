@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel;
-using Csla.Properties;
 using Csla.Core;
+using Csla.Properties;
 using Csla.Serialization.Mobile;
 
 namespace Csla

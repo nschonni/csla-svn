@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-using UnitDriven;
-
 #if NUNIT
 using NUnit.Framework;
 using TestClass = NUnit.Framework.TestFixtureAttribute;
@@ -37,7 +32,7 @@ namespace Csla.Test.ValidationRules
       Assert.AreEqual("Always info", root.BrokenRulesCollection.GetFirstMessage("Test", Csla.Validation.RuleSeverity.Information).Description, "'Always info' should be broken");
     }
 
-    [TestMethod]
+    [Test]
     public void NoError()
     {
       NoErrorRoot root = new NoErrorRoot();

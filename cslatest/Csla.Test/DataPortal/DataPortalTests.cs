@@ -1,11 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-using Csla.Test.DataBinding;
-using System.Data;
-using System.Data.SqlClient;
-
 #if NUNIT
+using System;
+using System.Data.SqlClient;
+using Csla.Test.DataBinding;
 using NUnit.Framework;
 using TestClass = NUnit.Framework.TestFixtureAttribute;
 using TestInitialize = NUnit.Framework.SetUpAttribute;
@@ -120,7 +116,7 @@ namespace Csla.Test.DataPortal
             ClearDataBase();
         }
 
-        [TestMethod()]
+        [Test()]
         public void TestTransactionScopeUpdate()
         {
             Csla.Test.DataPortal.TransactionalRoot tr = Csla.Test.DataPortal.TransactionalRoot.NewTransactionalRoot();
@@ -195,7 +191,7 @@ namespace Csla.Test.DataPortal
             ClearDataBase();
         }
 
-        [TestMethod()]
+        [Test()]
         public void StronglyTypedDataPortalMethods()
         {
             //test strongly-typed DataPortal_Fetch method
@@ -219,7 +215,7 @@ namespace Csla.Test.DataPortal
             Assert.AreEqual(567, Csla.ApplicationContext.GlobalContext["StronglyTypedDP_Criteria"]);
         }
 
-        [TestMethod()]
+        [Test()]
         public void DataPortalEvents()
         {
             Csla.DataPortal.DataPortalInvoke += new Action<DataPortalEventArgs>(ClientPortal_DataPortalInvoke);
@@ -246,7 +242,7 @@ namespace Csla.Test.DataPortal
             }
         }
 
-        [TestMethod]
+        [Test]
         public void CallDataPortalOverrides()
         {
             Csla.ApplicationContext.GlobalContext.Clear();

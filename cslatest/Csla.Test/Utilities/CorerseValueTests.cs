@@ -1,12 +1,6 @@
-﻿using Csla;
-using Csla.DataPortalClient;
-using Csla.Testing.Business.ReadOnlyTest;
+﻿#if NUNIT
 using System;
-using Csla.Testing.Business.Security;
 using UnitDriven;
-
-#if NUNIT
-using NUnit.Framework;
 using TestClass = NUnit.Framework.TestFixtureAttribute;
 using TestInitialize = NUnit.Framework.SetUpAttribute;
 using TestCleanup = NUnit.Framework.TearDownAttribute;

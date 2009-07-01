@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Reflection;
 using Csla.Properties;
-using Csla.Server;
-using Csla;
 
 namespace Csla.Reflection
 {

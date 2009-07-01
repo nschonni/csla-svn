@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Xml;
-using System.Xml.Linq;
+using System.Xml.Serialization;
 using Csla.Properties;
 using Csla.Reflection;
-using Csla.Validation;
 
 namespace Csla.Serialization.Mobile
 {
@@ -81,9 +79,9 @@ namespace Csla.Serialization.Mobile
       ConvertEnumsToIntegers();
       List<SerializationInfo> serialized = _serializationReferences.Values.ToList();
 
-      DataContractSerializer dc = GetDataContractSerializer();
+      var dc = GetDataContractSerializer();
 
-      dc.WriteObject(writer, serialized);
+      dc.Serialize(writer, serialized);
     }
 
     /// <summary>
@@ -125,9 +123,9 @@ namespace Csla.Serialization.Mobile
       }
     }
 
-    private DataContractSerializer GetDataContractSerializer()
+    private XmlSerializer GetDataContractSerializer()
     {
-      return new DataContractSerializer(
+      return new XmlSerializer(
         typeof(List<SerializationInfo>),
         new Type[] { typeof(List<int>), typeof(byte[]), typeof(DateTimeOffset) });
     }
@@ -232,9 +230,9 @@ namespace Csla.Serialization.Mobile
     /// <returns></returns>
     public object Deserialize(XmlReader reader)
     {
-      DataContractSerializer dc = GetDataContractSerializer();
+      var dc = GetDataContractSerializer();
 
-      List<SerializationInfo> deserialized = dc.ReadObject(reader) as List<SerializationInfo>;
+      List<SerializationInfo> deserialized = dc.Deserialize(reader) as List<SerializationInfo>;
 
       _deserializationReferences = new Dictionary<int, IMobileObject>();
       foreach (SerializationInfo info in deserialized)

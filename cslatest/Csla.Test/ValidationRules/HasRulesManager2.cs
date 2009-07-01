@@ -1,9 +1,6 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
-using Csla.Serialization;
-using Csla.Serialization.Mobile;
 using Csla.Core;
+using Csla.Serialization.Mobile;
 
 namespace Csla.Test.ValidationRules
 {

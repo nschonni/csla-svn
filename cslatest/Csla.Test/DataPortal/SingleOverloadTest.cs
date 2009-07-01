@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-using Csla;
-
 using NUnit.Framework;
 
 namespace Csla.Test.DataPortalTest

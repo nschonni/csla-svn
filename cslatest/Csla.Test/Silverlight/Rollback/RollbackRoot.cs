@@ -1,6 +1,4 @@
 ﻿using System;
-using Csla.DataPortalClient;
-using Csla.Serialization;
 
 namespace Csla.Test.Silverlight.Rollback
 {

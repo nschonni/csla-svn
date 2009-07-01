@@ -1,5 +1,3 @@
-using System;
-
 namespace Csla.Serialization
 {
   /// <summary>
@@ -17,10 +15,7 @@ namespace Csla.Serialization
 #if SILVERLIGHT
       return new Csla.Serialization.Mobile.MobileFormatter();
 #else
-      if (ApplicationContext.SerializationFormatter == ApplicationContext.SerializationFormatters.BinaryFormatter)
-        return new BinaryFormatterWrapper();
-      else
-        return new NetDataContractSerializerWrapper();
+      return new BinaryFormatterWrapper();
 #endif
     }
   }

@@ -1,5 +1,3 @@
-using System;
-
 namespace Csla
 {
   internal static class DefaultFilter

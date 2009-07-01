@@ -1,16 +1,15 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq.Expressions;
-using System.Reflection;
 using System.Runtime.Serialization;
 using Csla.Core;
-using Csla.Properties;
 using Csla.Core.FieldManager;
 using Csla.Core.LoadManager;
-using Csla.Reflection;
-using Csla.Server;
+using Csla.Properties;
 using Csla.Security;
+using Csla.Server;
+//JOB
+//using System.Linq.Expressions;
 
 namespace Csla
 {
@@ -615,51 +614,6 @@ namespace Csla
     protected static PropertyInfo<P> RegisterProperty<P>(PropertyInfo<P> info)
     {
       return Core.FieldManager.PropertyInfoManager.RegisterProperty<P>(typeof(T), info);
-    }
-
-    /// <summary>
-    /// Indicates that the specified property belongs
-    /// to the business object type.
-    /// </summary>
-    /// <typeparam name="P">Type of property</typeparam>
-    /// <param name="propertyLambdaExpression">Property Expression</param>
-    /// <returns></returns>
-    protected static PropertyInfo<P> RegisterProperty<P>(Expression<Func<T, object>> propertyLambdaExpression)
-    {
-      PropertyInfo reflectedPropertyInfo = Reflect<T>.GetProperty(propertyLambdaExpression);
-
-      return RegisterProperty(new PropertyInfo<P>(reflectedPropertyInfo.Name));
-    }
-
-    /// <summary>
-    /// Indicates that the specified property belongs
-    /// to the business object type.
-    /// </summary>
-    /// <typeparam name="P">Type of property</typeparam>
-    /// <param name="propertyLambdaExpression">Property Expression</param>
-    /// <param name="friendlyName">Friendly description for a property to be used in databinding</param>
-    /// <returns></returns>
-    protected static PropertyInfo<P> RegisterProperty<P>(Expression<Func<T, object>> propertyLambdaExpression, string friendlyName)
-    {
-      PropertyInfo reflectedPropertyInfo = Reflect<T>.GetProperty(propertyLambdaExpression);
-
-      return RegisterProperty(new PropertyInfo<P>(reflectedPropertyInfo.Name, friendlyName));
-    }
-
-    /// <summary>
-    /// Indicates that the specified property belongs
-    /// to the business object type.
-    /// </summary>
-    /// <typeparam name="P">Type of property</typeparam>
-    /// <param name="propertyLambdaExpression">Property Expression</param>
-    /// <param name="friendlyName">Friendly description for a property to be used in databinding</param>
-    /// <param name="defaultValue">Default Value for the property</param>
-    /// <returns></returns>
-    protected static PropertyInfo<P> RegisterProperty<P>(Expression<Func<T, object>> propertyLambdaExpression, string friendlyName, P defaultValue)
-    {
-      PropertyInfo reflectedPropertyInfo = Reflect<T>.GetProperty(propertyLambdaExpression);
-
-      return RegisterProperty(new PropertyInfo<P>(reflectedPropertyInfo.Name, friendlyName, defaultValue));
     }
 
     #endregion
@@ -1513,7 +1467,7 @@ namespace Csla
     public event EventHandler<ErrorEventArgs> UnhandledAsyncException
     {
       add { _unhandledAsyncException = (EventHandler<ErrorEventArgs>)Delegate.Combine(_unhandledAsyncException, value); }
-      remove { _unhandledAsyncException = (EventHandler<ErrorEventArgs>)Delegate.Remove(_unhandledAsyncException, value); }
+      remove { _unhandledAsyncException = (EventHandler<ErrorEventArgs>)Delegate.Combine(_unhandledAsyncException, value); }
     }
 
     /// <summary>

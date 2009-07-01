@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-#if !NUNIT
+﻿#if !NUNIT
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 #else
 using NUnit.Framework;
@@ -29,7 +25,7 @@ namespace Csla.Test.LogicalExecutionLocation
 
     }
 
-    [TestMethod]
+    [Test]
     public void TestRulesLogicalExecutionLocation()
     {
  

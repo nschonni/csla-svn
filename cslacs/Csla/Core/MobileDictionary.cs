@@ -1,8 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Csla.Serialization;
+﻿using System;
+using System.Collections.Generic;
 using Csla.Serialization.Mobile;
-using System;
 
 namespace Csla.Core
 {

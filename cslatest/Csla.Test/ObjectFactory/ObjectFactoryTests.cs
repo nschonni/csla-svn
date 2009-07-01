@@ -1,10 +1,4 @@
-﻿using System;
-using System.Configuration;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-#if !NUNIT
+﻿#if !NUNIT
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 #else
 using NUnit.Framework;
@@ -42,7 +36,7 @@ namespace Csla.Test.ObjectFactory
       }
     }
 
-    [TestMethod]
+    [Test]
     public void CreateLocal()
     {
       Csla.ApplicationContext.DataPortalProxy = "Csla.Testing.Business.TestProxies.AppDomainProxy, Csla.Testing.Business";
@@ -63,7 +57,7 @@ namespace Csla.Test.ObjectFactory
       }
     }
 
-    [TestMethod]
+    [Test]
     public void CreateMissing()
     {
       Csla.ApplicationContext.User = new Csla.Security.UnauthenticatedPrincipal();
@@ -87,7 +81,7 @@ namespace Csla.Test.ObjectFactory
       }
     }
 
-    [TestMethod]
+    [Test]
     public void FetchNoCriteria()
     {
       Csla.Server.FactoryDataPortal.FactoryLoader =
@@ -98,7 +92,7 @@ namespace Csla.Test.ObjectFactory
       Assert.IsFalse(root.IsDirty, "Should not be dirty");
     }
 
-    [TestMethod]
+    [Test]
     public void FetchCriteria()
     {
       Csla.Server.FactoryDataPortal.FactoryLoader =
@@ -109,7 +103,7 @@ namespace Csla.Test.ObjectFactory
       Assert.IsFalse(root.IsDirty, "Should not be dirty");
     }
 
-    [TestMethod]
+    [Test]
     public void Update()
     {
       Csla.Server.FactoryDataPortal.FactoryLoader =
@@ -123,7 +117,7 @@ namespace Csla.Test.ObjectFactory
       Assert.IsFalse(root.IsDirty, "Should not be dirty");
     }
 
-    [TestMethod]
+    [Test]
     public void UpdateEnterpriseServices()
     {
       try
@@ -147,7 +141,7 @@ namespace Csla.Test.ObjectFactory
       }
     }
 
-    [TestMethod]
+    [Test]
     public void UpdateTransactionScope()
     {
       Csla.Server.FactoryDataPortal.FactoryLoader =
@@ -161,7 +155,7 @@ namespace Csla.Test.ObjectFactory
       Assert.IsFalse(root.IsDirty, "Should not be dirty");
     }
 
-    [TestMethod]
+    [Test]
     public void Delete()
     {
       Csla.ApplicationContext.GlobalContext.Clear();
@@ -174,7 +168,7 @@ namespace Csla.Test.ObjectFactory
       Assert.AreEqual("Delete", Csla.ApplicationContext.GlobalContext["ObjectFactory"].ToString(), "Data should match");
     }
 
-    [TestMethod]
+    [Test]
     public void FetchLoadProperty()
     {
       Csla.Server.FactoryDataPortal.FactoryLoader =

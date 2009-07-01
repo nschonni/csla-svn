@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
-using System.Web.UI;
 using System.ComponentModel.Design;
+using System.Web.UI;
 using System.Windows.Forms;
 
 namespace Csla.Web.Design

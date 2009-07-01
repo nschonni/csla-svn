@@ -1,12 +1,12 @@
 using System;
-using System.Collections.Specialized;
 using System.Collections.Generic;
-using System.Reflection;
-using System.IO;
-using Csla.Serialization;
+using System.Collections.Specialized;
 using System.ComponentModel;
+using System.IO;
+using System.Reflection;
 using Csla.Properties;
 using Csla.Reflection;
+using Csla.Serialization;
 using Csla.Serialization.Mobile;
 
 namespace Csla.Core

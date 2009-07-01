@@ -29,8 +29,9 @@
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-    <TargetFrameworkSubset>Full</TargetFrameworkSubset>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <TargetFrameworkSubset>
+    </TargetFrameworkSubset>
     <SccProjectName>
     </SccProjectName>
     <SccLocalPath>
@@ -45,7 +46,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\cs\Debug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;csla20cs;NUNIT</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;csla20cs;NUNIT; !SILVERLIGHT</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>1</WarningLevel>
   </PropertyGroup>
@@ -69,10 +70,9 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Csla, Version=3.6.0.0, Culture=neutral, PublicKeyToken=93be5fdc093e4c30, processorArchitecture=MSIL">
+    <Reference Include="LinqBridge, Version=1.0.0.0, Culture=neutral, PublicKeyToken=c2b14eb747628076, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\cslacs\Csla\bin\Debug\Csla.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\..\Dependencies\LinqBridge\LinqBridge.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
@@ -80,24 +80,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\Program Files\NUnit 2.4.8\bin\nunit.framework.dll</HintPath>
     </Reference>
-    <Reference Include="PresentationCore, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=x86" />
-    <Reference Include="PresentationFramework, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.configuration" />
-    <Reference Include="System.Core">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
     <Reference Include="System.Data" />
-    <Reference Include="System.Data.Entity">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Data.Linq">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Runtime.Serialization, Version=3.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <RequiredTargetFramework>3.0</RequiredTargetFramework>
-    </Reference>
     <Reference Include="System.Security" />
     <Reference Include="System.Web" />
     <Reference Include="System.Windows.Forms" />
@@ -106,7 +92,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Dependencies\UnitDriven\UnitDrivenNET.dll</HintPath>
     </Reference>
-    <Reference Include="WindowsBase, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppContext\AppContextTests.cs" />
@@ -145,12 +130,8 @@
     <Compile Include="ChildChanged\SingleRoot.cs" />
     <Compile Include="ChildrenByInterface\ChildInterfaceTests.cs" />
     <Compile Include="Basic\CollectionTests.cs" />
-    <Compile Include="CslaDataProvider\CslaDataProviderTests.cs" />
     <Compile Include="CslaDataProvider\Customer.cs" />
     <Compile Include="CslaDataProvider\ProviderList.cs" />
-    <Compile Include="CslaQueryProvider\CslaQueryProviderTests.cs" />
-    <Compile Include="CslaQueryProvider\DynamicQueryTests.cs" />
-    <Compile Include="CslaQueryProvider\MSDynamicQuery.cs" />
     <Compile Include="DataMapper\DataMapperTests.cs" />
     <Compile Include="DataPortalChild\Child.cs" />
     <Compile Include="DataPortalChild\ChildList.cs" />
@@ -189,16 +170,6 @@
     <Compile Include="DataPortal\DataPortalTests.cs" />
     <Compile Include="DataPortal\DpRoot.cs" />
     <Compile Include="Data\ContextTests.cs" />
-    <Compile Include="Data\TestEFContext.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TestEFContext.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Data\TestLinqToSqlContext.designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TestLinqToSqlContext.dbml</DependentUpon>
-    </Compile>
     <Compile Include="Data\TransactionContextUser.cs" />
     <Compile Include="Data\TransactionContextUserList.cs" />
     <Compile Include="DPException\DataPortalExceptionTests.cs" />
@@ -215,7 +186,6 @@
     <Compile Include="ObjectFactory\ObjectFactoryTests.cs" />
     <Compile Include="ObjectFactory\Root.cs" />
     <Compile Include="ObjectFactory\RootFactory.cs" />
-    <Compile Include="IdentityConverter\IdentityConverterTests.cs" />
     <Compile Include="IO\DPMethodOverloadTests.cs" />
     <Compile Include="IO\IOTests.cs" />
     <Compile Include="LazyLoad\AChild.cs" />
@@ -266,23 +236,6 @@
     <Compile Include="Silverlight\Rollback\RollbackTests.cs" />
     <Compile Include="Silverlight\Security\SecurityTests.server.cs" />
     <Compile Include="Silverlight\Security\SecurityTests.cs" />
-    <Compile Include="Silverlight\Serialization\Address.cs" />
-    <Compile Include="Silverlight\Serialization\AddressBase.cs" />
-    <Compile Include="Silverlight\Serialization\AddressList.cs" />
-    <Compile Include="Silverlight\Serialization\BindingListTests.cs" />
-    <Compile Include="Silverlight\Serialization\Customer.cs" />
-    <Compile Include="Silverlight\Serialization\CustomerContact.cs" />
-    <Compile Include="Silverlight\Serialization\CustomerWithEnum.cs" />
-    <Compile Include="Silverlight\Serialization\CustomMobileList.cs" />
-    <Compile Include="Silverlight\Serialization\MockNonBusinessObject.cs" />
-    <Compile Include="Silverlight\Serialization\MockReadOnly.cs" />
-    <Compile Include="Silverlight\Serialization\MockReadOnlyList.cs" />
-    <Compile Include="Silverlight\Serialization\Person.cs" />
-    <Compile Include="Silverlight\Serialization\PersonWIthSmartDateField.cs" />
-    <Compile Include="Silverlight\Serialization\ReadOnlyPerson.cs" />
-    <Compile Include="Silverlight\Serialization\ReadOnlyPersonList.cs" />
-    <Compile Include="Silverlight\Serialization\SerializationTests.cs" />
-    <Compile Include="Silverlight\Serialization\UndoTests.cs" />
     <Compile Include="Silverlight\Stereotypes\EditableChildTestsLocal.cs" />
     <Compile Include="Silverlight\Stereotypes\EditableChildTestsRemote.cs" />
     <Compile Include="Silverlight\Stereotypes\EditableRootTests.cs" />
@@ -337,11 +290,6 @@
     <None Include="DataPortalTestDatabaseDataSet.xss">
       <DependentUpon>DataPortalTestDatabaseDataSet.xsd</DependentUpon>
     </None>
-    <None Include="Data\TestLinqToSqlContext.dbml">
-      <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>TestLinqToSqlContext.designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -387,15 +335,10 @@
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="Data\TestEFContext.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>TestEFContext.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="Data\TestLinqToSqlContext.dbml.layout">
-      <DependentUpon>TestLinqToSqlContext.dbml</DependentUpon>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
+    <ProjectReference Include="..\..\cslacs\Csla\Csla.csproj">
+      <Project>{B680631D-F0B8-4482-B4E4-DA1E50CB77A8}</Project>
+      <Name>Csla</Name>
+    </ProjectReference>
     <ProjectReference Include="Silverlight\Server\CslaLight.Testing.Server.csproj">
       <Project>{3374389D-59D8-44B1-B6D0-015819DB482C}</Project>
       <Name>CslaLight.Testing.Server</Name>

@@ -1,10 +1,6 @@
-﻿using System.Configuration;
-using System.Security.Principal;
+﻿#if NUNIT
 using Csla.Security;
 using Csla.Testing.Business.ApplicationContext;
-
-#if NUNIT
-using NUnit.Framework;
 using TestClass = NUnit.Framework.TestFixtureAttribute;
 using TestInitialize = NUnit.Framework.SetUpAttribute;
 using TestCleanup = NUnit.Framework.TearDownAttribute;

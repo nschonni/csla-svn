@@ -1,11 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-using Csla.Test.Security;
-using UnitDriven;
-using System.Diagnostics;
-
 #if NUNIT
+using Csla.Test.Security;
 using NUnit.Framework;
 using TestClass = NUnit.Framework.TestFixtureAttribute;
 using TestInitialize = NUnit.Framework.SetUpAttribute;
@@ -109,7 +103,7 @@ namespace Csla.Test.Authorization
             Security.TestPrincipal.SimulateLogout();
         }
 
-        [TestMethod()]
+        [Test()]
         public void TestAuthBeginEditRules()
         {
             ApplicationContext.GlobalContext.Clear();
@@ -229,7 +223,7 @@ namespace Csla.Test.Authorization
             Security.TestPrincipal.SimulateLogout();
         }
 
-        [TestMethod()]
+        [Test()]
         public void TestAuthorizationAfterEditCycle()
         {
             Csla.ApplicationContext.GlobalContext.Clear();
@@ -249,8 +243,8 @@ namespace Csla.Test.Authorization
             Csla.Test.Security.TestPrincipal.SimulateLogout();
         }
 
+        [Test]
         [ExpectedException(typeof(System.Security.SecurityException))]
-        [TestMethod]
         public void TestUnauthorizedAccessToGet()
         {
             Csla.ApplicationContext.GlobalContext.Clear();
@@ -262,7 +256,7 @@ namespace Csla.Test.Authorization
         }
 
         [ExpectedException(typeof(System.Security.SecurityException))]
-        [TestMethod]
+        [Test]
         public void TestUnauthorizedAccessToSet()
         {
             PermissionsRoot pr = PermissionsRoot.NewPermissionsRoot();
@@ -271,7 +265,7 @@ namespace Csla.Test.Authorization
             pr.FirstName = "test";
         }
 
-        [TestMethod]
+        [Test]
         public void TestAuthorizedAccess()
         {
             Csla.ApplicationContext.GlobalContext.Clear();
@@ -297,7 +291,7 @@ namespace Csla.Test.Authorization
 #endif
         }
 
-        [TestMethod]
+        [Test]
         public void TestAuthExecute()
         {
           Csla.ApplicationContext.GlobalContext.Clear();
@@ -322,7 +316,7 @@ namespace Csla.Test.Authorization
 #endif
         }
 
-        [TestMethod]
+        [Test]
         [ExpectedException(typeof(System.Security.SecurityException))]
         public void TestUnAuthExecute()
         {

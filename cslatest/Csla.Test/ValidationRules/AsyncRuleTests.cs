@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Threading;
-using System.Threading;
-using UnitDriven;
-
-#if NUNIT
+﻿#if NUNIT
+using System;
 using NUnit.Framework;
+using UnitDriven;
 using TestClass = NUnit.Framework.TestFixtureAttribute;
 using TestInitialize = NUnit.Framework.SetUpAttribute;
 using TestCleanup = NUnit.Framework.TearDownAttribute;
@@ -102,7 +96,7 @@ namespace Csla.Test.ValidationRules
     {
       UnitTestContext context = GetContext();
 
-      context.Assert.Try(() => 
+      context.Assert.Try((Action)(() => 
       {
         try
         {
@@ -112,12 +106,12 @@ namespace Csla.Test.ValidationRules
         {
           throw ex.InnerException;
         }
-      });
+      }));
       context.Assert.Fail();
       context.Complete();
     }
 
-    [TestMethod]
+    [Test]
     public void ValidateMultipleObjectsSimultaneously()
     {
       UnitTestContext context = GetContext();

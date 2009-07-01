@@ -1,10 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-using UnitDriven;
-
 #if NUNIT
+using System;
 using NUnit.Framework;
+using UnitDriven;
 using TestClass = NUnit.Framework.TestFixtureAttribute;
 using TestInitialize = NUnit.Framework.SetUpAttribute;
 using TestCleanup = NUnit.Framework.TearDownAttribute;
@@ -95,7 +92,7 @@ namespace Csla.Test.ValidationRules
       UnitTestContext context = GetContext();
       // creating the object should trigger AddBusinessRules()
       // which should fail due to the bad exception
-      context.Assert.Try(() => new HasBadSharedRule());
+      context.Assert.Try((Action)(() => new HasBadSharedRule()));
       context.Complete();
     }
   }

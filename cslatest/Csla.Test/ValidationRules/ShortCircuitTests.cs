@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-using UnitDriven;
-
 #if NUNIT
 using NUnit.Framework;
 using TestClass = NUnit.Framework.TestFixtureAttribute;
@@ -26,7 +21,7 @@ namespace Csla.Test.ValidationRules
       Assert.AreEqual("Test required", root.BrokenRulesCollection.GetFirstBrokenRule("Test").Description, "'Test required' should be broken");
     }
 
-    [TestMethod]
+    [Test]
     public void ShortCircuitOnPropertySet()
     {
       ShortCircuit root = new ShortCircuit();
@@ -38,7 +33,7 @@ namespace Csla.Test.ValidationRules
       Assert.AreEqual("Test required", root.BrokenRulesCollection.GetFirstBrokenRule("Test").Description, "'Test required' should be broken");
     }
 
-    [TestMethod]
+    [Test]
     public void HigherThreshold()
     {
       ShortCircuit root = new ShortCircuit();

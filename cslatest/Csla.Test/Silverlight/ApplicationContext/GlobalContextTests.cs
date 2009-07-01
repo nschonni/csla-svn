@@ -1,10 +1,8 @@
-﻿using System.Configuration;
+﻿#if NUNIT
+using System.Configuration;
 using System.Security.Principal;
-using Csla.Testing.Business.ApplicationContext;
-using UnitDriven;
-
-#if NUNIT
 using NUnit.Framework;
+using UnitDriven;
 using TestClass = NUnit.Framework.TestFixtureAttribute;
 using TestInitialize = NUnit.Framework.SetUpAttribute;
 using TestCleanup = NUnit.Framework.TearDownAttribute;
@@ -61,7 +59,7 @@ namespace Csla.Test.Silverlight.ApplicationContext
       context.Complete();
     }
 
-    [TestMethod]
+    [Test]
     public void ChangeInClientContextDoesNotAffectGlobalContext()
     {
       var context = GetContext();

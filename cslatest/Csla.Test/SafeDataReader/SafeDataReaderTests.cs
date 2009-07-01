@@ -1,19 +1,17 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-using Csla.Test.DataBinding;
-using System.Data;
-using System.Data.SqlClient;
-
 #if !NUNIT
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 #else
+using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
 using NUnit.Framework;
 using TestClass = NUnit.Framework.TestFixtureAttribute;
 using TestInitialize = NUnit.Framework.SetUpAttribute;
 using TestCleanup = NUnit.Framework.TearDownAttribute;
 using TestMethod = NUnit.Framework.TestAttribute;
-using System.Configuration;
+
 #endif
 
 namespace Csla.Test.SafeDataReader
@@ -63,7 +61,7 @@ namespace Csla.Test.SafeDataReader
             }
         }
 
-        [TestMethod()]
+        [Test()]
         public void TestFieldCount()
         {
             SqlConnection cn = new SqlConnection(CONNECTION_STRING);
@@ -145,7 +143,7 @@ namespace Csla.Test.SafeDataReader
         //    Assert.AreEqual("Johnson", root.LastName);
         //}
 
-        [TestMethod()]
+        [Test()]
         public void GetSchemaTable()
         {
             SqlConnection cn = new SqlConnection(CONNECTION_STRING);
@@ -186,7 +184,7 @@ namespace Csla.Test.SafeDataReader
             //}
         }
 
-        [TestMethod()]
+        [Test()]
         public void IsDBNull()
         {
             SqlConnection cn = new SqlConnection(CONNECTION_STRING);
@@ -207,7 +205,7 @@ namespace Csla.Test.SafeDataReader
             cn.Close();
         }
 
-        [TestMethod()]
+        [Test()]
         public void GetDataTypes()
         {
             SqlConnection cn = new SqlConnection(CONNECTION_STRING);
@@ -258,7 +256,7 @@ namespace Csla.Test.SafeDataReader
 
 
 
-        [TestMethod()]
+        [Test()]
         [ExpectedException(typeof(SqlException))]
         public void ThrowSqlException()
         {
@@ -273,7 +271,7 @@ namespace Csla.Test.SafeDataReader
             }
         }
 
-        [TestMethod()]
+        [Test()]
         public void TestSafeDataReader()
         {
             List<string> list = new List<string>();

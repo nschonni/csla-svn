@@ -1,10 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-
 #if !NUNIT
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 #else
+using System;
+using System.Collections.Generic;
 using NUnit.Framework;
 using TestClass = NUnit.Framework.TestFixtureAttribute;
 using TestInitialize = NUnit.Framework.SetUpAttribute;
@@ -36,14 +34,14 @@ namespace Csla.Test.Basic
             Assert.AreEqual("data", p.Data);
         }
 
-        [TestMethod]
+        [Test]
         public void TestReadOnlyList()
         {
             //ReadOnlyList list = ReadOnlyList.GetReadOnlyList();
            // Assert.AreEqual("Fetched", Csla.ApplicationContext.GlobalContext["ReadOnlyList"]);
         }
 
-        [TestMethod]
+        [Test]
         public void TestNameValueList()
         {
             NameValueListObj nvList = NameValueListObj.GetNameValueListObj();
@@ -60,7 +58,7 @@ namespace Csla.Test.Basic
             //Assert.AreEqual("something", nvList[45].Value);
         }
 
-        [TestMethod]
+        [Test]
         public void TestCommandBase()
         {
             Csla.ApplicationContext.GlobalContext.Clear();
@@ -68,7 +66,7 @@ namespace Csla.Test.Basic
             Assert.AreEqual("Executed", obj.ExecuteServerCode().AProperty);
         }
 
-        [TestMethod]
+        [Test]
         public void CreateGenRoot()
         {
             Csla.ApplicationContext.GlobalContext.Clear();
@@ -82,7 +80,7 @@ namespace Csla.Test.Basic
             Assert.AreEqual(true, root.IsDirty);
         }
 
-        [TestMethod]
+        [Test]
         public void InheritanceUndo()
         {
           Csla.ApplicationContext.GlobalContext.Clear();
@@ -99,7 +97,7 @@ namespace Csla.Test.Basic
           root.ApplyEdit();
         }
 
-        [TestMethod]
+        [Test]
         public void CreateRoot()
         {
             Csla.ApplicationContext.GlobalContext.Clear();
@@ -113,7 +111,7 @@ namespace Csla.Test.Basic
             Assert.AreEqual(true, root.IsDirty);
         }
 
-        [TestMethod]
+        [Test]
         public void AddChild()
         {
             Csla.ApplicationContext.GlobalContext.Clear();
@@ -123,7 +121,7 @@ namespace Csla.Test.Basic
             Assert.AreEqual("1", root.Children[0].Data);
         }
 
-        [TestMethod]
+        [Test]
         public void AddRemoveChild()
         {
             Csla.ApplicationContext.GlobalContext.Clear();
@@ -133,7 +131,7 @@ namespace Csla.Test.Basic
             Assert.AreEqual(0, root.Children.Count);
         }
 
-        [TestMethod]
+        [Test]
         public void AddRemoveAddChild()
         {
             Csla.ApplicationContext.GlobalContext.Clear();
@@ -149,7 +147,7 @@ namespace Csla.Test.Basic
             Assert.AreEqual("1", root.Children[0].Data);
         }
 
-        [TestMethod]
+        [Test]
         public void AddGrandChild()
         {
             Csla.ApplicationContext.GlobalContext.Clear();
@@ -161,7 +159,7 @@ namespace Csla.Test.Basic
             Assert.AreEqual("1", child.GrandChildren[0].Data);
         }
 
-        [TestMethod]
+        [Test]
         public void AddRemoveGrandChild()
         {
             Csla.ApplicationContext.GlobalContext.Clear();
@@ -198,7 +196,7 @@ namespace Csla.Test.Basic
         //    Assert.AreEqual<string>("GC Deserialized", ((string)(Csla.ApplicationContext.GlobalContext["GCDeserialized"])));
         //}
 
-        [TestMethod]
+        [Test]
         public void ClearChildList()
         {
             Csla.ApplicationContext.GlobalContext.Clear();
@@ -211,7 +209,7 @@ namespace Csla.Test.Basic
             Assert.AreEqual(3, root.Children.DeletedCount, "Deleted count should be 3");
         }
 
-        [TestMethod]
+        [Test]
         public void NestedAddAcceptchild()
         {
             Csla.ApplicationContext.GlobalContext.Clear();
@@ -228,7 +226,7 @@ namespace Csla.Test.Basic
             Assert.AreEqual(3, root.Children.Count);
         }
 
-        [TestMethod]
+        [Test]
         public void NestedAddDeleteAcceptChild()
         {
             Csla.ApplicationContext.GlobalContext.Clear();
@@ -255,7 +253,7 @@ namespace Csla.Test.Basic
             Assert.AreEqual(false, root.Children.ContainsDeleted(childC), "Deleted child should not be in deleted collection after third applyedit");
         }
 
-        [TestMethod]
+        [Test]
         public void BasicEquality()
         {
             Csla.ApplicationContext.GlobalContext.Clear();
@@ -275,7 +273,7 @@ namespace Csla.Test.Basic
             Assert.AreEqual(false, Equals(null, r2), "Objects should not be equal");
         }
 
-        [TestMethod]
+        [Test]
         public void ChildEquality()
         {
             Csla.ApplicationContext.GlobalContext.Clear();
@@ -304,7 +302,7 @@ namespace Csla.Test.Basic
             Assert.AreEqual(true, root.Children.ContainsDeleted(c3), "Deleted collection should contain c3");
         }
 
-        [TestMethod]
+        [Test]
         public void DeletedListTest()
         {
           Csla.ApplicationContext.GlobalContext.Clear();
@@ -327,7 +325,7 @@ namespace Csla.Test.Basic
           Assert.AreEqual(1, root.Children.Count);
         }
 
-        [TestMethod]
+        [Test]
         public void DeletedListTestWithCancel()
         {
           Csla.ApplicationContext.GlobalContext.Clear();

@@ -1,8 +1,8 @@
 #if !CLIENTONLY
 using System;
-using System.Web.UI;
 using System.ComponentModel;
 using System.Reflection;
+using System.Web.UI;
 using Csla.Properties;
 
 namespace Csla.Web

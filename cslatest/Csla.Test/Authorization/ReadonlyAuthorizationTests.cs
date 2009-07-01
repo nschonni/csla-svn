@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Csla.Test.Security;
-using UnitDriven;
-using System.Diagnostics;
-
-#if NUNIT
+﻿#if NUNIT
 using NUnit.Framework;
 using TestClass = NUnit.Framework.TestFixtureAttribute;
 using TestInitialize = NUnit.Framework.SetUpAttribute;
@@ -43,7 +36,7 @@ namespace Csla.Test.Authorization
 
     }
 
-    [TestMethod()]
+    [Test()]
     [ExpectedException(typeof(System.Security.SecurityException))]
     public void TestDenyInstanceAndShared()
     {
@@ -58,7 +51,7 @@ namespace Csla.Test.Authorization
 
     }
 
-    [TestMethod()]
+    [Test()]
     [ExpectedException(typeof(System.Security.SecurityException))]
     public void TestDenyInstanceAndSharedForClone()
     {

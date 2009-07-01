@@ -1,12 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-using Csla;
-using System.Threading;
-
 #if !NUNIT
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 #else
+using System;
+using System.Collections.Generic;
+using System.Threading;
 using NUnit.Framework;
 using TestClass = NUnit.Framework.TestFixtureAttribute;
 using TestInitialize = NUnit.Framework.SetUpAttribute;
@@ -37,7 +34,7 @@ namespace Csla.Test.AppContext
 
         #endregion
 
-        [TestMethod()]
+        [Test()]
         public void ApplicationContextProperties()
         {
             Assert.AreEqual("Local", ApplicationContext.DataPortalProxy);
@@ -52,7 +49,7 @@ namespace Csla.Test.AppContext
         /// This test fails if "CSLA" is all capitol letters. Using "Csla",
         /// as the namespace implies, is correct.
         /// </remarks>
-        [TestMethod()]
+        [Test()]
         public void NoContext()
         {
             //clear the contexts
@@ -76,7 +73,7 @@ namespace Csla.Test.AppContext
         #endregion
 
         #region TestOnDemandContexts
-        [TestMethod]
+        [Test]
         public void TestOnDemandContexts()
         {
             //Make sure its all clear completely
@@ -131,7 +128,7 @@ namespace Csla.Test.AppContext
         #endregion
 
         #region TestAppContext across different Threads
-        [TestMethod]
+        [Test]
         public void TestAppContextAcrossDifferentThreads()
         {
             List<AppContextThread> AppContextThreadList = new List<AppContextThread>();
@@ -181,7 +178,7 @@ namespace Csla.Test.AppContext
         #endregion
 
         #region ClearContexts
-        [TestMethod]
+        [Test]
         public void ClearContexts()
         {
             ApplicationContext.GlobalContext.Clear();
@@ -237,7 +234,7 @@ namespace Csla.Test.AppContext
         /// Clearing the GlobalContext clears the ClientContext also? 
         /// Should the ClientContext be cleared explicitly also?
         /// </remarks>
-        [TestMethod()]
+        [Test()]
         public void ClientContext()
         {
             Csla.ApplicationContext.GlobalContext.Clear();
@@ -272,7 +269,7 @@ namespace Csla.Test.AppContext
         /// <summary>
         /// Test the Global Context
         /// </summary>
-        [TestMethod()]
+        [Test()]
         public void GlobalContext()
         {
             Csla.ApplicationContext.GlobalContext.Clear();
@@ -313,7 +310,7 @@ namespace Csla.Test.AppContext
         /// VB library does not seem to contain the DataPortalInvokeEventHandler object so I put a conditional compile
         /// flag around this method and set a warning message.
         /// </remarks>
-        [TestMethod()]
+        [Test()]
         public void DataPortalEvents()
         {
             ApplicationContext.GlobalContext.Clear();
@@ -351,7 +348,7 @@ namespace Csla.Test.AppContext
         /// <summary>
         /// Test the FaileCreate Context
         /// </summary>
-        [TestMethod()]
+        [Test()]
         public void FailCreateContext()
         {
             ApplicationContext.GlobalContext.Clear();
@@ -376,7 +373,7 @@ namespace Csla.Test.AppContext
         #endregion
 
         #region FailFetchContext
-        [TestMethod()]
+        [Test()]
         public void FailFetchContext()
         {
             ApplicationContext.GlobalContext.Clear();
@@ -399,7 +396,7 @@ namespace Csla.Test.AppContext
         #endregion
 
         #region FailUpdateContext
-        [TestMethod()]
+        [Test()]
         public void FailUpdateContext()
         {
             ApplicationContext.GlobalContext.Clear();
@@ -437,7 +434,7 @@ namespace Csla.Test.AppContext
         #endregion
 
         #region FailDeleteContext
-        [TestMethod()]
+        [Test()]
         public void FailDeleteContext()
         {
             ApplicationContext.GlobalContext.Clear();

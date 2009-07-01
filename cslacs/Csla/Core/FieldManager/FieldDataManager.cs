@@ -1,8 +1,8 @@
 ﻿using System;
-using System.IO;
 using System.Collections.Generic;
-using Csla.Serialization;
+using System.IO;
 using Csla.Properties;
+using Csla.Serialization;
 using Csla.Serialization.Mobile;
 
 namespace Csla.Core.FieldManager

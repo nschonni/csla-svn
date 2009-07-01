@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Csla.Test.Utilities
+﻿namespace Csla.Test.Utilities
 {
   public class UtilitiesTestHelper
   {

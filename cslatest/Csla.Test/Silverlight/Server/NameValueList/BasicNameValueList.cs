@@ -1,6 +1,4 @@
 ﻿using System;
-using Csla.Silverlight;
-using Csla.Serialization;
 using Csla;
 
 namespace cslalighttest.NameValueList

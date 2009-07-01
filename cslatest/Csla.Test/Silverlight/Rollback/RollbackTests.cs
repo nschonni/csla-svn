@@ -1,5 +1,5 @@
 ﻿#if NUNIT
-using NUnit.Framework;
+using UnitDriven;
 using TestClass = NUnit.Framework.TestFixtureAttribute;
 using TestInitialize = NUnit.Framework.SetUpAttribute;
 using TestCleanup = NUnit.Framework.TearDownAttribute;
@@ -8,8 +8,6 @@ using TestSetup = NUnit.Framework.SetUpAttribute;
 #elif MSTEST
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 #endif
-
-using UnitDriven;
 
 namespace Csla.Test.Silverlight.Rollback
 {

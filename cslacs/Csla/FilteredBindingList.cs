@@ -1,7 +1,7 @@
 using System;
-using System.ComponentModel;
-using System.Collections.Generic;
 using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
 using Csla.Properties;
 
 namespace Csla

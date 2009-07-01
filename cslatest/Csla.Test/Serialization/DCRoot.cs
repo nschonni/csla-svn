@@ -1,15 +1,11 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Runtime.Serialization;
-using Csla;
 
 namespace Csla.Test.Serialization
 {
-  [DataContract]
+  [Serializable]
   public class DCRoot : BusinessBase<DCRoot>
   {
-    [DataMember]
+    
     int _data;
     public int Data
     {
@@ -44,10 +40,10 @@ namespace Csla.Test.Serialization
     }
   }
 
-  [DataContract]
+  [Serializable]
   public class NonCslaChild
   {
-    [DataMember]
+    
     private int _value;
 
     public int TheValue

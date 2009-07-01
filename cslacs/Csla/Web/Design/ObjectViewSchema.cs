@@ -2,11 +2,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Web.UI.Design;
 using System.ComponentModel;
 using System.ComponentModel.Design;
-using Csla;
-using Csla.Web.Design;
+using System.Web.UI.Design;
 
 namespace Csla.Web.Design
 {

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Csla.Core
+﻿namespace Csla.Core
 {
   /// <summary>
   /// Defines members required for smart

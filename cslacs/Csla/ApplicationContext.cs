@@ -1,8 +1,7 @@
 using System;
-using System.Threading;
-using System.Security.Principal;
-using System.Collections.Specialized;
 using System.Configuration;
+using System.Security.Principal;
+using System.Threading;
 using System.Web;
 using Csla.Core;
 
@@ -36,33 +35,28 @@ namespace Csla
 #if !CLIENTONLY
         if (HttpContext.Current != null)
           current = HttpContext.Current.User;
-        else if (System.Windows.Application.Current != null)
-        {
+        else
           if (_principal == null)
           {
             if (ApplicationContext.AuthenticationType != "Windows")
               _principal = new Csla.Security.UnauthenticatedPrincipal();
             else
               _principal = new WindowsPrincipal(WindowsIdentity.GetCurrent());
+            current = _principal;
           }
-          current = _principal;
-        }
-        else
+          else
           current = Thread.CurrentPrincipal;
 #else
-        if (System.Windows.Application.Current != null)
-        {
           if (_principal == null)
           {
             if (ApplicationContext.AuthenticationType != "Windows")
               _principal = new Csla.Security.UnauthenticatedPrincipal();
             else
               _principal = new WindowsPrincipal(WindowsIdentity.GetCurrent());
+            current = _principal;
           }
-          current = _principal;
-        }
-        else
-          current = Thread.CurrentPrincipal;
+          else
+            current = Thread.CurrentPrincipal;
 #endif
         return current;
       }
@@ -71,12 +65,12 @@ namespace Csla
 #if !CLIENTONLY
         if (HttpContext.Current != null)
           HttpContext.Current.User = value;
-        else if (System.Windows.Application.Current != null)
-          _principal = value;
+//        else if (System.Windows.Application.Current != null)
+//          _principal = value;
         Thread.CurrentPrincipal = value;
 #else
-        if (System.Windows.Application.Current != null)
-          _principal = value;
+//        if (System.Windows.Application.Current != null)
+//          _principal = value;
         Thread.CurrentPrincipal = value;
 #endif
       }

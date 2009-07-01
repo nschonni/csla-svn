@@ -14,19 +14,11 @@
 #pragma warning disable 1591
 
 namespace Csla.WebServiceHost {
-    using System.Diagnostics;
-    using System.Web.Services;
-    using System.ComponentModel;
-    using System.Web.Services.Protocols;
-    using System;
-    using System.Xml.Serialization;
-    
-    
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.1426")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Web.Services.WebServiceBindingAttribute(Name="WebServicePortalSoap", Namespace="http://ws.lhotka.net/Csla")]
+    [System.CodeDom.Compiler.GeneratedCode("System.Web.Services", "2.0.50727.1426")]
+    [System.Diagnostics.DebuggerStepThrough()]
+    [System.ComponentModel.DesignerCategory("code")]
+    [System.Web.Services.WebServiceBinding(Name="WebServicePortalSoap", Namespace="http://ws.lhotka.net/Csla")]
     public partial class WebServicePortal : System.Web.Services.Protocols.SoapHttpClientProtocol {
         
         private System.Threading.SendOrPostCallback CreateOperationCompleted;
@@ -88,9 +80,9 @@ namespace Csla.WebServiceHost {
         public event DeleteCompletedEventHandler DeleteCompleted;
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://ws.lhotka.net/Csla/Create", RequestNamespace="http://ws.lhotka.net/Csla", ResponseNamespace="http://ws.lhotka.net/Csla", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")]
-        public byte[] Create([System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")] byte[] requestData) {
+        [System.Web.Services.Protocols.SoapDocumentMethod("http://ws.lhotka.net/Csla/Create", RequestNamespace="http://ws.lhotka.net/Csla", ResponseNamespace="http://ws.lhotka.net/Csla", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElement(DataType="base64Binary")]
+        public byte[] Create([System.Xml.Serialization.XmlElement(DataType="base64Binary")] byte[] requestData) {
             object[] results = this.Invoke("Create", new object[] {
                         requestData});
             return ((byte[])(results[0]));
@@ -118,9 +110,9 @@ namespace Csla.WebServiceHost {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://ws.lhotka.net/Csla/Fetch", RequestNamespace="http://ws.lhotka.net/Csla", ResponseNamespace="http://ws.lhotka.net/Csla", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")]
-        public byte[] Fetch([System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")] byte[] requestData) {
+        [System.Web.Services.Protocols.SoapDocumentMethod("http://ws.lhotka.net/Csla/Fetch", RequestNamespace="http://ws.lhotka.net/Csla", ResponseNamespace="http://ws.lhotka.net/Csla", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElement(DataType="base64Binary")]
+        public byte[] Fetch([System.Xml.Serialization.XmlElement(DataType="base64Binary")] byte[] requestData) {
             object[] results = this.Invoke("Fetch", new object[] {
                         requestData});
             return ((byte[])(results[0]));
@@ -148,9 +140,9 @@ namespace Csla.WebServiceHost {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://ws.lhotka.net/Csla/Update", RequestNamespace="http://ws.lhotka.net/Csla", ResponseNamespace="http://ws.lhotka.net/Csla", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")]
-        public byte[] Update([System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")] byte[] requestData) {
+        [System.Web.Services.Protocols.SoapDocumentMethod("http://ws.lhotka.net/Csla/Update", RequestNamespace="http://ws.lhotka.net/Csla", ResponseNamespace="http://ws.lhotka.net/Csla", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElement(DataType="base64Binary")]
+        public byte[] Update([System.Xml.Serialization.XmlElement(DataType="base64Binary")] byte[] requestData) {
             object[] results = this.Invoke("Update", new object[] {
                         requestData});
             return ((byte[])(results[0]));
@@ -178,9 +170,9 @@ namespace Csla.WebServiceHost {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://ws.lhotka.net/Csla/Delete", RequestNamespace="http://ws.lhotka.net/Csla", ResponseNamespace="http://ws.lhotka.net/Csla", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")]
-        public byte[] Delete([System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")] byte[] requestData) {
+        [System.Web.Services.Protocols.SoapDocumentMethod("http://ws.lhotka.net/Csla/Delete", RequestNamespace="http://ws.lhotka.net/Csla", ResponseNamespace="http://ws.lhotka.net/Csla", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElement(DataType="base64Binary")]
+        public byte[] Delete([System.Xml.Serialization.XmlElement(DataType="base64Binary")] byte[] requestData) {
             object[] results = this.Invoke("Delete", new object[] {
                         requestData});
             return ((byte[])(results[0]));
@@ -227,13 +219,13 @@ namespace Csla.WebServiceHost {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.1426")]
+    [System.CodeDom.Compiler.GeneratedCode("System.Web.Services", "2.0.50727.1426")]
     public delegate void CreateCompletedEventHandler(object sender, CreateCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.1426")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.CodeDom.Compiler.GeneratedCode("System.Web.Services", "2.0.50727.1426")]
+    [System.Diagnostics.DebuggerStepThrough()]
+    [System.ComponentModel.DesignerCategory("code")]
     public partial class CreateCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
@@ -253,13 +245,13 @@ namespace Csla.WebServiceHost {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.1426")]
+    [System.CodeDom.Compiler.GeneratedCode("System.Web.Services", "2.0.50727.1426")]
     public delegate void FetchCompletedEventHandler(object sender, FetchCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.1426")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.CodeDom.Compiler.GeneratedCode("System.Web.Services", "2.0.50727.1426")]
+    [System.Diagnostics.DebuggerStepThrough()]
+    [System.ComponentModel.DesignerCategory("code")]
     public partial class FetchCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
@@ -279,13 +271,13 @@ namespace Csla.WebServiceHost {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.1426")]
+    [System.CodeDom.Compiler.GeneratedCode("System.Web.Services", "2.0.50727.1426")]
     public delegate void UpdateCompletedEventHandler(object sender, UpdateCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.1426")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.CodeDom.Compiler.GeneratedCode("System.Web.Services", "2.0.50727.1426")]
+    [System.Diagnostics.DebuggerStepThrough()]
+    [System.ComponentModel.DesignerCategory("code")]
     public partial class UpdateCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
@@ -305,13 +297,13 @@ namespace Csla.WebServiceHost {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.1426")]
+    [System.CodeDom.Compiler.GeneratedCode("System.Web.Services", "2.0.50727.1426")]
     public delegate void DeleteCompletedEventHandler(object sender, DeleteCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.1426")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.CodeDom.Compiler.GeneratedCode("System.Web.Services", "2.0.50727.1426")]
+    [System.Diagnostics.DebuggerStepThrough()]
+    [System.ComponentModel.DesignerCategory("code")]
     public partial class DeleteCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;

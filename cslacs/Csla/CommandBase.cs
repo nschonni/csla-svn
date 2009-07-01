@@ -1,12 +1,8 @@
 using System;
 using System.ComponentModel;
-using Csla.Server;
-using Csla.Properties;
 using Csla.Core;
-using Csla.Serialization.Mobile;
-using Csla.Serialization;
-using Csla.DataPortalClient;
-
+using Csla.Properties;
+using Csla.Server;
 
 namespace Csla
 {

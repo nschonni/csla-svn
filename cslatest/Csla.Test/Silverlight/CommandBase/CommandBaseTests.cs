@@ -1,10 +1,8 @@
-﻿using Csla;
-using Csla.DataPortalClient;
-using UnitDriven;
+﻿#if NUNIT
+using Csla;
 using Csla.Testing.Business.CommandBase;
-
-#if NUNIT
 using NUnit.Framework;
+using UnitDriven;
 using TestClass = NUnit.Framework.TestFixtureAttribute;
 using TestInitialize = NUnit.Framework.SetUpAttribute;
 using TestCleanup = NUnit.Framework.TearDownAttribute;
@@ -117,7 +115,7 @@ namespace cslalighttest.CommandBase
 
 #endif
 
-    [TestMethod]
+    [Test]
     public void Asynch_StaticPortal_call_wo_userState_passed_Results_parameters_passed_to_server_and_noException()
     {
       var context = GetContext();
@@ -133,7 +131,7 @@ namespace cslalighttest.CommandBase
       context.Complete();
     }
 
-    [TestMethod]
+    [Test]
     public void Asynch_StaticPortal_call_with_userState_passed_Results_parameters_passed_to_server_with_userState_and_noException()
     {
       var context = GetContext();

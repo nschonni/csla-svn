@@ -1,10 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-using Csla.Test.Security;
-using System.Data;
-using System.Data.SqlClient;
-
 #if !NUNIT
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -69,7 +62,7 @@ namespace Csla.Test.DPException
             Assert.AreEqual("Called", Csla.ApplicationContext.GlobalContext["OnDataPortalException"]);
         }
 
-        [TestMethod()]
+        [Test()]
         public void CheckInnerExceptionsOnDelete()
         {
             Csla.ApplicationContext.Clear();
@@ -100,7 +93,7 @@ namespace Csla.Test.DPException
             Assert.AreEqual("Called", Csla.ApplicationContext.GlobalContext["OnDataPortalException"]);
         }
 
-        [TestMethod()]
+        [Test()]
         public void CheckInnerExceptionsOnFetch()
         {
             Csla.ApplicationContext.GlobalContext.Clear();

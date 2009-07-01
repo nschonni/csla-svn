@@ -1,12 +1,9 @@
 ﻿#region using
 
+#if NUNIT
 using System;
 using System.ComponentModel;
-using UnitDriven;
 using Csla.Serialization.Mobile;
-using Csla.Core;
-
-#if NUNIT
 using NUnit.Framework;
 using TestClass = NUnit.Framework.TestFixtureAttribute;
 using TestInitialize = NUnit.Framework.SetUpAttribute;
@@ -46,7 +43,7 @@ namespace Csla.Test.PropertyGetSet
       Assert.AreEqual("c", root.TopBase);
     }
 
-    [TestMethod]
+    [Test]
     public void NullString()
     {
       EditableGetSet root = new EditableGetSet();
@@ -60,7 +57,7 @@ namespace Csla.Test.PropertyGetSet
       Assert.AreEqual(string.Empty, root.M07, "M07 should be empty");
     }
 
-    [TestMethod]
+    [Test]
     public void ExplicitFieldProperties()
     {
       EditableGetSet root = new EditableGetSet();
@@ -90,7 +87,7 @@ namespace Csla.Test.PropertyGetSet
       root.PropertyChanged -= new System.ComponentModel.PropertyChangedEventHandler(root_PropertyChanged);
     }
 
-    [TestMethod]
+    [Test]
     public void SerializedExplicitFieldProperties()
     {
       EditableGetSet root = new EditableGetSet();
@@ -109,7 +106,7 @@ namespace Csla.Test.PropertyGetSet
       Assert.IsTrue(root.IsDirty, "Root should be dirty");
     }
 
-    [TestMethod]
+    [Test]
     public void ManagedFieldProperties()
     {
       EditableGetSet root = new EditableGetSet();
@@ -144,7 +141,7 @@ namespace Csla.Test.PropertyGetSet
       root.PropertyChanged -= new System.ComponentModel.PropertyChangedEventHandler(root_PropertyChanged);
     }
 
-    [TestMethod]
+    [Test]
     public void ManagedFieldBaseProperties()
     {
       EditableGetSet root = new EditableGetSet();
@@ -178,7 +175,7 @@ namespace Csla.Test.PropertyGetSet
       root.PropertyChanged -= new System.ComponentModel.PropertyChangedEventHandler(root_PropertyChanged);
     }
 
-    [TestMethod]
+    [Test]
     public void SerializedManagedFieldProperties()
     {
       EditableGetSet root = new EditableGetSet();
@@ -198,7 +195,7 @@ namespace Csla.Test.PropertyGetSet
       Assert.IsTrue(root.IsDirty, "Root should be dirty");
     }
 
-    [TestMethod]
+    [Test]
     public void MarkClean()
     {
       EditableGetSet root = new EditableGetSet();
@@ -212,7 +209,7 @@ namespace Csla.Test.PropertyGetSet
       Assert.IsFalse(root.IsDirty, "Root should not be dirty");
     }
 
-    [TestMethod]
+    [Test]
     public void SmartDateProperties()
     {
       EditableGetSet root = new EditableGetSet();
@@ -228,7 +225,7 @@ namespace Csla.Test.PropertyGetSet
       Assert.IsTrue(root.IsDirty, "Root should be dirty");
     }
 
-    [TestMethod]
+    [Test]
     public void SimpleChildProperties()
     {
       EditableGetSet root = new EditableGetSet();
@@ -268,7 +265,7 @@ namespace Csla.Test.PropertyGetSet
       child.PropertyChanged -= new System.ComponentModel.PropertyChangedEventHandler(root_PropertyChanged);
     }
 
-    [TestMethod]
+    [Test]
     public void SerializedSimpleChildProperties()
     {
       EditableGetSet root = new EditableGetSet();
@@ -308,7 +305,7 @@ namespace Csla.Test.PropertyGetSet
       root.PropertyChanged -= new System.ComponentModel.PropertyChangedEventHandler(root_PropertyChanged);
     }
 
-    [TestMethod]
+    [Test]
     public void RootUndoCancel()
     {
       EditableGetSet root = new EditableGetSet();
@@ -335,7 +332,7 @@ namespace Csla.Test.PropertyGetSet
       Assert.IsFalse(root.IsDirty, "Root should not be dirty");
     }
 
-    [TestMethod]
+    [Test]
     public void RootUndoApply()
     {
       EditableGetSet root = new EditableGetSet();
@@ -371,7 +368,7 @@ namespace Csla.Test.PropertyGetSet
       Assert.IsFalse(root.IsDirty, "Root should not be dirty after Save");
     }
 
-    [TestMethod]
+    [Test]
     public void RootChildUndoCancel()
     {
       EditableGetSet root = new EditableGetSet();
@@ -395,7 +392,7 @@ namespace Csla.Test.PropertyGetSet
       Assert.IsTrue(root.IsDirty, "Root should be dirty after second child created");
     }
 
-    [TestMethod]
+    [Test]
     public void SerializedEditLevel()
     {
       EditableGetSet root = new EditableGetSet();
@@ -416,7 +413,7 @@ namespace Csla.Test.PropertyGetSet
       Assert.IsTrue(root.IsDirty, "Root should be dirty");
     }
 
-    [TestMethod]
+    [Test]
     public void RootChildUndoCancelIsDirty()
     {
       EditableGetSet root = new EditableGetSet();
@@ -436,7 +433,7 @@ namespace Csla.Test.PropertyGetSet
       Assert.IsTrue(root.IsDirty, "Root should now be dirty since it lazy loaded ManagedChild");
     }
 
-    [TestMethod]
+    [Test]
     public void RootChildUndoApply()
     {
       EditableGetSet root = new EditableGetSet();
@@ -466,7 +463,7 @@ namespace Csla.Test.PropertyGetSet
       Assert.IsFalse(root.IsDirty, "Root should not be dirty after Save");
     }
 
-    [TestMethod]
+    [Test]
     public void RootChildListUndoCancel()
     {
       EditableGetSet root = new EditableGetSet();
@@ -493,7 +490,7 @@ namespace Csla.Test.PropertyGetSet
       Assert.IsFalse(secondList.IsDirty, "Second list should not be dirty");
     }
 
-    [TestMethod]
+    [Test]
     public void RootChildListUndoApply()
     {
       var root = new EditableGetSet();
@@ -529,14 +526,14 @@ namespace Csla.Test.PropertyGetSet
       Assert.IsFalse(root.ManagedChildList.IsDirty, "List should not be dirty after Save");
     }
 
-    [TestMethod]
+    [Test]
     public void LoadNullProperty()
     {
       var root = new EditableGetSet();
       Assert.AreEqual(Guid.Empty, root.M06, "Guid should be null");
     }
 
-    [TestMethod]
+    [Test]
     [ExpectedException(typeof(InvalidOperationException))]
     public void PropertyNotRegistered()
     {
@@ -566,7 +563,7 @@ namespace Csla.Test.PropertyGetSet
       _changedName = e.PropertyName;
     }
 
-    [TestMethod]
+    [Test]
     public void FieldDirty()
     {
       EditableGetSet root = new EditableGetSet();
@@ -575,7 +572,7 @@ namespace Csla.Test.PropertyGetSet
       Assert.IsTrue(root.ManagedStringFieldDirty, "ManagedStringField should be dirty");
     }
 
-    [TestMethod]
+    [Test]
     public void If_ManagedStringField_Property_Changes_ChildChanged_Event_Should_Not_Fire()
     {
       var root = new EditableGetSet();
@@ -583,7 +580,7 @@ namespace Csla.Test.PropertyGetSet
       root.ManagedStringField = "test";
     }
 
-    [TestMethod]
+    [Test]
     public void If_FieldBackedString_Property_Changes_On_ManagedChild_Then_ChildChanged_Should_Fire_On_Root_ButNot_On_ManagedChild()
     {
       int changed = 0;
@@ -595,7 +592,7 @@ namespace Csla.Test.PropertyGetSet
       Assert.AreEqual(1, changed);
     }
 
-    [TestMethod]
+    [Test]
     public void If_FieldBackedString_Property_Changes_On_Item_In_ManagedChildList_Then_ChildChanged_Fires_On_Root_And_On_ManagedChildList()
     {
       int rootChanged = 0;
@@ -614,7 +611,7 @@ namespace Csla.Test.PropertyGetSet
       Assert.AreEqual(1, listChanged);
     }
 
-    [TestMethod]
+    [Test]
     public void If_FieldBackedString_Changes_On_GrandChild_Then_ChildChanged_Fires_On_GrandChild_Child_and_Root()
     {
       int rootChanged = 0;
@@ -648,7 +645,7 @@ namespace Csla.Test.PropertyGetSet
       Assert.AreEqual(1, grandChildPropertyChanged);//Property changed on GrandChildList Item
     }
 
-    [TestMethod]
+    [Test]
     public void If_FieldBackedString_Property_Is_Changed_On_Child_After_CancelEdit_Then_ChildChanged_Fires_On_Root()
     {
       var root = new EditableGetSet();
@@ -667,33 +664,33 @@ namespace Csla.Test.PropertyGetSet
       Assert.AreEqual(1, changed);
     }
 
-    [TestMethod]
-    public void If_FieldBackedString_Is_Changed_On_GrandChild_List_Item_After_Root_Is_Deserialized_Then_Root_ChildChanged_Event_Fires()
-    {
-      var root = new EditableGetSet();
-      var child = new EditableGetSet(true);
-      var grandChild = new EditableGetSet(true);
-      root.ManagedChildList.Add(child);
-      child.ManagedChildList.Add(grandChild);
+//    [Test]
+//    public void If_FieldBackedString_Is_Changed_On_GrandChild_List_Item_After_Root_Is_Deserialized_Then_Root_ChildChanged_Event_Fires()
+//    {
+//      var root = new EditableGetSet();
+//      var child = new EditableGetSet(true);
+//      var grandChild = new EditableGetSet(true);
+//      root.ManagedChildList.Add(child);
+//      child.ManagedChildList.Add(grandChild);
 
-      byte[] buffer = MobileFormatter.Serialize(root);
-      root = (EditableGetSet)MobileFormatter.Deserialize(buffer);
+//      byte[] buffer = MobileFormatter.Serialize(root);
+//      root = (EditableGetSet)MobileFormatter.Deserialize(buffer);
 
-      int changed = 0;
-      root.ChildChanged += (o, e) => { changed++; };
-      root.ManagedChildList[0].ManagedChildList[0].FieldBackedString = "changed";
-      Assert.AreEqual(1, changed, "after MobileFormatter");
+//      int changed = 0;
+//      root.ChildChanged += (o, e) => { changed++; };
+//      root.ManagedChildList[0].ManagedChildList[0].FieldBackedString = "changed";
+//      Assert.AreEqual(1, changed, "after MobileFormatter");
 
-#if !SILVERLIGHT
-      changed = 0;
-      root = root.Clone();
-      root.ChildChanged += (o, e) => { changed++; };
-      root.ManagedChildList[0].ManagedChildList[0].FieldBackedString = "changed again";
-      Assert.AreEqual(1, changed, "after clone");
-#endif
-    }
+//#if !SILVERLIGHT
+//      changed = 0;
+//      root = root.Clone();
+//      root.ChildChanged += (o, e) => { changed++; };
+//      root.ManagedChildList[0].ManagedChildList[0].FieldBackedString = "changed again";
+//      Assert.AreEqual(1, changed, "after clone");
+//#endif
+//    }
 
-    [TestMethod]
+    [Test]
     [ExpectedException(typeof(InvalidOperationException))]
     public void LazyLoadChild_GetBeforeSet()
     {
@@ -701,7 +698,7 @@ namespace Csla.Test.PropertyGetSet
       var child = root.LazyChild;
     }
 
-    [TestMethod]
+    [Test]
     public void LazyLoadChild_GetAfterSet()
     {
       var root = new EditableGetSet();

@@ -1,6 +1,6 @@
 using System;
-using Csla.Reflection;
 using Csla.Properties;
+using Csla.Reflection;
 
 namespace Csla.Server
 {

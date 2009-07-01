@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Csla.Validation;
+﻿using Csla.Validation;
 
 namespace Csla.Test.ValidationRules
 {

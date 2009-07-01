@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-
-namespace Csla.Windows
+﻿namespace Csla.Windows
 {
   /// <summary>
   /// Event args object containing information about a

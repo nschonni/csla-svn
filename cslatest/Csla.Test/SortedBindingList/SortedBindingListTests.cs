@@ -1,11 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.ComponentModel;
-
 #if !NUNIT
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 #else
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using NUnit.Framework;
 using TestClass = NUnit.Framework.TestFixtureAttribute;
 using TestInitialize = NUnit.Framework.SetUpAttribute;
@@ -51,7 +49,7 @@ namespace Csla.Test.SortedBindingList
             Console.WriteLine("list changed");
         }
 
-        [TestMethod()]
+        [Test()]
         public void DescendingSort()
         {
             string[] strArr = { "zandy", "alex", "Chris", "bert", "alfred", "Bert", "Jimmy", "chris", "chris", "mobbit", "myper", "Corey", "Monkey" };
@@ -107,7 +105,7 @@ namespace Csla.Test.SortedBindingList
         //    }
         //}
 
-        [TestMethod()]
+        [Test()]
         public void CopyTo()
         {
             int[] intArray = { 5, 7, 1, 3, 5, 44, 32 };
@@ -131,7 +129,7 @@ namespace Csla.Test.SortedBindingList
             }        
         }
 
-      [TestMethod]
+      [Test]
       public void IndexOf()
       {
         List<string> list = new List<string>();
@@ -151,7 +149,7 @@ namespace Csla.Test.SortedBindingList
         Assert.AreEqual(1, sortedList.IndexOf(charlie), "Sorted index should be 1");
       }
 
-      [TestMethod]
+      [Test]
       public void SourceList()
       {
         List<string> list = new List<string>();

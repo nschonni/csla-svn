@@ -1,12 +1,6 @@
-﻿using Csla;
-using Csla.DataPortalClient;
-using Csla.Testing.Business.ReadOnlyTest;
-using System;
-using Csla.Testing.Business.Security;
-using UnitDriven;
-
-#if NUNIT
+﻿#if NUNIT
 using NUnit.Framework;
+using UnitDriven;
 using TestClass = NUnit.Framework.TestFixtureAttribute;
 using TestInitialize = NUnit.Framework.SetUpAttribute;
 using TestCleanup = NUnit.Framework.TearDownAttribute;
@@ -84,7 +78,7 @@ namespace Csla.Test.BypassPropertyChecks
     }
 
 
-    [TestMethod]
+    [Test]
     public void TestBypassReadWriteNoRights()
     {
       UnitTestContext context = GetContext();
@@ -105,7 +99,7 @@ namespace Csla.Test.BypassPropertyChecks
       context.Complete();
     }
 
-    [TestMethod]
+    [Test]
     public void TestBypassReadWriteWithRights()
     {
       UnitTestContext context = GetContext();
@@ -125,7 +119,7 @@ namespace Csla.Test.BypassPropertyChecks
       context.Complete();
     }
 
-    [TestMethod]
+    [Test]
     [ExpectedException(typeof(System.Security.SecurityException))]
     public void TestBypassWriteNoRightsDoNotBypass()
     {
@@ -153,7 +147,7 @@ namespace Csla.Test.BypassPropertyChecks
       context.Complete();
     }
 
-    [TestMethod]
+    [Test]
     public void TestBypassReadNoRightsDoNotBypass()
     {
       UnitTestContext context = GetContext();
@@ -176,7 +170,7 @@ namespace Csla.Test.BypassPropertyChecks
 
 
     
-    [TestMethod]
+    [Test]
     public void TestBypassReadWriteNoRightsBackingField()
     {
       UnitTestContext context = GetContext();
@@ -197,7 +191,7 @@ namespace Csla.Test.BypassPropertyChecks
       context.Complete();
     }
 
-    [TestMethod]
+    [Test]
     public void TestBypassReadWriteWithRightsBackingField()
     {
       UnitTestContext context = GetContext();
@@ -217,7 +211,7 @@ namespace Csla.Test.BypassPropertyChecks
       context.Complete();
     }
 
-    [TestMethod]
+    [Test]
     [ExpectedException(typeof(System.Security.SecurityException))]
     public void TestBypassWriteNoRightsDoNotBypassBackingField()
     {
@@ -246,7 +240,7 @@ namespace Csla.Test.BypassPropertyChecks
       context.Complete();
     }
 
-    [TestMethod]
+    [Test]
     public void TestBypassReadNoRightsDoNotBypassBackingField()
     {
       UnitTestContext context = GetContext();
@@ -269,7 +263,7 @@ namespace Csla.Test.BypassPropertyChecks
 
 #if !SILVERLIGHT
 
-    [TestMethod]
+    [Test]
     public void TestBypassFactory()
     {
       UnitTestContext context = GetContext();

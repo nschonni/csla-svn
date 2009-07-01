@@ -1,16 +1,14 @@
 using System;
-using System.Linq;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.Serialization;
-using Csla.Properties;
-using System.Collections.Specialized;
-using Csla.Validation;
-using System.Collections.ObjectModel;
 using Csla.Core.LoadManager;
-using Csla.Server;
+using Csla.Properties;
 using Csla.Security;
 using Csla.Serialization.Mobile;
+using Csla.Server;
+using Csla.Validation;
 
 namespace Csla.Core
 {
@@ -1187,7 +1185,7 @@ namespace Csla.Core
         if (_validationRules == null)
         {
           _validationRules = new Csla.Validation.ValidationRules(this);
-          _validationRules.ValidatingRules.CollectionChanged += new NotifyCollectionChangedEventHandler(ValidatingRules_CollectionChanged);
+          _validationRules.ValidatingRules.ListChanged += ValidatingRules_CollectionChanged;
         }
         else if (_validationRules.Target == null)
           _validationRules.SetTarget(this);
@@ -1195,33 +1193,34 @@ namespace Csla.Core
       }
     }
 
-    void ValidatingRules_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+    void ValidatingRules_CollectionChanged(object sender, ListChangedEventArgs e)
     {
-      if (e.Action == NotifyCollectionChangedAction.Remove)
+        var rules = (BindingList<IAsyncRuleMethod >) sender;
+
+      if (e.ListChangedType == ListChangedType.ItemDeleted)
       {
-        foreach (IAsyncRuleMethod rule in e.OldItems)
-        {
-          lock (_validationRules.ValidatingRules)
-          {
-            // This rule could be validating multiple times simultaneously, we only want to call
-            // OnPropertyIdle if the rule is completely removed from the list.
-            if (!_validationRules.ValidatingRules.Contains(rule))
-            {
-              foreach (IPropertyInfo property in rule.AsyncRuleArgs.Properties)
-              {
-                OnPropertyChanged(property.Name);
-                OnBusyChanged(new BusyChangedEventArgs(property.Name, false));
-              }
-            }
-          }
-        }
+          //IAsyncRuleMethod rule;
+          //if (rules.Count > 0) rule = rules[e.NewIndex];
+          //lock (_validationRules.ValidatingRules)
+          //{
+          //  // This rule could be validating multiple times simultaneously, we only want to call
+          //  // OnPropertyIdle if the rule is completely removed from the list.
+          //  if (!_validationRules.ValidatingRules.Contains(rule))
+          //  {
+          //    foreach (IPropertyInfo property in rule.AsyncRuleArgs.Properties)
+          //    {
+          //      OnPropertyChanged(property.Name);
+          //      OnBusyChanged(new BusyChangedEventArgs(property.Name, false));
+          //    }
+          //  }
+          //}
 
         if (!ValidationRules.IsValidating)
           OnValidationComplete();
       }
-      else if (e.Action == NotifyCollectionChangedAction.Add)
+      else if (e.ListChangedType == ListChangedType.ItemAdded)
       {
-        foreach (IAsyncRuleMethod rule in e.NewItems)
+          IAsyncRuleMethod rule = rules[e.NewIndex];
           foreach (IPropertyInfo property in rule.AsyncRuleArgs.Properties)
             OnBusyChanged(new BusyChangedEventArgs(property.Name, true));
       }
@@ -2871,7 +2870,7 @@ namespace Csla.Core
     public event EventHandler<ErrorEventArgs> UnhandledAsyncException
     {
       add { _unhandledAsyncException = (EventHandler<ErrorEventArgs>)Delegate.Combine(_unhandledAsyncException, value); }
-      remove { _unhandledAsyncException = (EventHandler<ErrorEventArgs>)Delegate.Remove(_unhandledAsyncException, value); }
+      remove { _unhandledAsyncException = (EventHandler<ErrorEventArgs>)Delegate.Combine(_unhandledAsyncException, value); }
     }
 
     /// <summary>

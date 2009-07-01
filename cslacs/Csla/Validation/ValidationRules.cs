@@ -1,10 +1,9 @@
 using System;
-using System.Linq;
 using System.Collections.Generic;
-using Csla.Serialization;
+using System.ComponentModel;
+using System.Linq;
 using Csla.Core;
 using Csla.Serialization.Mobile;
-using System.Collections.ObjectModel;
 
 namespace Csla.Validation
 {
@@ -36,7 +35,7 @@ namespace Csla.Validation
     private ValidationRulesManager _rulesToCheck;
 
     [NonSerialized]
-    private ObservableCollection<IAsyncRuleMethod> _validatingRules;
+    private BindingList<IAsyncRuleMethod> _validatingRules;
 
     //used to synchronize various async operations
     private object SyncRoot = new object();
@@ -66,12 +65,12 @@ namespace Csla.Validation
       }
     }
 
-    internal ObservableCollection<IAsyncRuleMethod> ValidatingRules
+    internal BindingList<IAsyncRuleMethod> ValidatingRules
     {
       get
       {
         if (_validatingRules == null)
-          _validatingRules = new ObservableCollection<IAsyncRuleMethod>();
+          _validatingRules = new BindingList<IAsyncRuleMethod>();
         
         return _validatingRules;
       }

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Csla.Security
+﻿namespace Csla.Security
 {
   /// <summary>
   /// Interface defining an object that
