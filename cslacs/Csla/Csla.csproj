@@ -75,10 +75,6 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="LinqBridge, Version=1.0.0.0, Culture=neutral, PublicKeyToken=c2b14eb747628076, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\libs\LinqBridge\LinqBridge.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
@@ -166,6 +162,31 @@
     <Compile Include="DataPortalT.cs" />
     <Compile Include="Data\ConnectionManagerT.cs" />
     <Compile Include="Data\TransactionManager.cs" />
+    <Compile Include="LinqBridge\ExtensionAttribute.cs" />
+    <Compile Include="LinqBridge\Func and Action delegates.cs" />
+    <Compile Include="LinqBridge\GroupedEnumerable.cs" />
+    <Compile Include="LinqBridge\Grouping.cs" />
+    <Compile Include="LinqBridge\IGrouping.cs" />
+    <Compile Include="LinqBridge\ILookup.cs" />
+    <Compile Include="LinqBridge\IOrderedEnumerable.cs" />
+    <Compile Include="LinqBridge\Lookup.cs" />
+    <Compile Include="LinqBridge\OrderByEnumerable.cs" />
+    <Compile Include="LinqBridge\Query Operators\Aggregation Operators - Average.cs" />
+    <Compile Include="LinqBridge\Query Operators\Aggregation Operators - Sum.cs" />
+    <Compile Include="LinqBridge\Query Operators\Aggregation Operators.cs" />
+    <Compile Include="LinqBridge\Query Operators\Conversion Operators.cs" />
+    <Compile Include="LinqBridge\Query Operators\Element Operators.cs" />
+    <Compile Include="LinqBridge\Query Operators\Enumerable Private.cs" />
+    <Compile Include="LinqBridge\Query Operators\Filtering Operators.cs" />
+    <Compile Include="LinqBridge\Query Operators\Generation Operators.cs" />
+    <Compile Include="LinqBridge\Query Operators\Grouping Operators.cs" />
+    <Compile Include="LinqBridge\Query Operators\Joining Operators.cs" />
+    <Compile Include="LinqBridge\Query Operators\Misc Operators.cs" />
+    <Compile Include="LinqBridge\Query Operators\Ordering Operators.cs" />
+    <Compile Include="LinqBridge\Query Operators\Projection Operators.cs" />
+    <Compile Include="LinqBridge\Query Operators\Quantifiers.cs" />
+    <Compile Include="LinqBridge\Query Operators\Set Operators.cs" />
+    <Compile Include="LinqBridge\ThenByEnumerable.cs" />
     <Compile Include="Reflection\DynamicMemberHandle.cs" />
     <Compile Include="RelationshipTypes.cs" />
     <Compile Include="Security\CslaIdentity.cs" />
@@ -543,6 +564,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\favicon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="LinqBridge\LinqBridge_License.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
