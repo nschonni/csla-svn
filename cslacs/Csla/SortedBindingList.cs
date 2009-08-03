@@ -769,12 +769,12 @@ namespace Csla
                 _sortIndex.Add(
                   new ListItem(newKey, e.NewIndex));
               else
-                _sortIndex.Insert(0, 
+                _sortIndex.Insert(0,
                   new ListItem(newKey, e.NewIndex));
               if (!_initiatedLocally)
                 OnListChanged(
                   new ListChangedEventArgs(
-                  ListChangedType.ItemAdded, 
+                  ListChangedType.ItemAdded,
                   SortedIndex(e.NewIndex)));
             }
             else
@@ -803,7 +803,10 @@ namespace Csla
         }
       }
       else
-        OnListChanged(e);
+      {
+        if (!_initiatedLocally)
+          OnListChanged(e);
+      }
     }
 
     private int OriginalIndex(int sortedIndex)
@@ -847,16 +850,16 @@ namespace Csla
     {
       ICancelAddNew can = _list as ICancelAddNew;
       if (can != null)
-        can.CancelNew(itemIndex);
+        can.CancelNew(OriginalIndex(itemIndex));
       else
-        _list.RemoveAt(itemIndex);
+        _list.RemoveAt(OriginalIndex(itemIndex));
     }
 
     void ICancelAddNew.EndNew(int itemIndex)
     {
       ICancelAddNew can = _list as ICancelAddNew;
       if (can != null)
-        can.EndNew(itemIndex);
+        can.EndNew(OriginalIndex(itemIndex));
     }
 
     #endregion
