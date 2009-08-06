@@ -138,8 +138,12 @@ namespace Csla.Silverlight
       }
     }
 
+    private bool _settingSource;
+
     private void SetSource(object old, object @new)
     {
+      _settingSource = true;
+
       DetachSource(old);
       AttachSource(@new);
 
@@ -149,6 +153,8 @@ namespace Csla.Silverlight
 
       CheckProperty();
       UpdateState();
+
+      _settingSource = false;
     }
 
     /// <summary>
@@ -395,7 +401,7 @@ namespace Csla.Silverlight
 
     private void EnsureTarget()
     {
-      if (_target == null)
+      if (!_settingSource && _target == null)
       {
         _target = VisualTree.FindParent(RelativeTargetPath, this);
         if (!string.IsNullOrEmpty(RelativeTargetName))
