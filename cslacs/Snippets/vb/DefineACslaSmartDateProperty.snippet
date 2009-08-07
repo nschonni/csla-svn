@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
   <CodeSnippet Format="1.0.0">
     <Header>
-      <Title>Define a Csla SmartDate Property</Title>
+      <Title>Define a Csla Property</Title>
       <Author>Rockford Lhotka</Author>
       <Description>Defines a Csla-style Property with a SmartDate backing field.</Description>
       <HelpUrl />
@@ -36,7 +36,7 @@
           <Function />
         </Literal>
       </Declarations>
-      <Code Language="VB" Kind="method decl" Delimiter="$"><![CDATA[Private Shared $PropertyName$Property As PropertyInfo(Of SmartDate) = RegisterProperty(New PropertyInfo(Of SmartDate)("$PropertyName$", "$FriendlyName$"))
+      <Code Language="VB" Kind="method decl" Delimiter="$"><![CDATA[Public Shared $PropertyName$Property As PropertyInfo(Of SmartDate) = RegisterProperty(New PropertyInfo(Of SmartDate)("$PropertyName$", "$FriendlyName$"))
 ''' <Summary>
 ''' Gets and sets the $FriendlyName$ value.
 ''' </Summary>
