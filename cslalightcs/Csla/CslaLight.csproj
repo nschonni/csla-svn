@@ -103,6 +103,15 @@
     <Compile Include="..\..\cslacs\Csla\CommandBase.cs">
       <Link>CommandBase.cs</Link>
     </Compile>
+    <Compile Include="..\..\cslacs\Csla\Core\FieldManager\DefaultPropertyInfoFactory.cs">
+      <Link>Core\FieldManager\DefaultPropertyInfoFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\..\cslacs\Csla\Core\FieldManager\PropertyInfoFactory.cs">
+      <Link>Core\FieldManager\PropertyInfoFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\..\cslacs\Csla\Core\IPropertyInfoFactory.cs">
+      <Link>Core\IPropertyInfoFactory.cs</Link>
+    </Compile>
     <Compile Include="..\..\cslacs\Csla\DataPortalResult.cs">
       <Link>DataPortalResult.cs</Link>
     </Compile>

@@ -158,9 +158,12 @@
     <Compile Include="Core\AsyncFactoryDelegates.cs" />
     <Compile Include="Core\BusyChangedEventArgs.cs" />
     <Compile Include="Core\ErrorEventArgs.cs" />
+    <Compile Include="Core\FieldManager\DefaultPropertyInfoFactory.cs" />
+    <Compile Include="Core\FieldManager\PropertyInfoFactory.cs" />
     <Compile Include="Core\FieldManager\PropertyInfoList.cs" />
     <Compile Include="Core\INotifyChildChanged.cs" />
     <Compile Include="Core\INotifyUnhandledAsyncException.cs" />
+    <Compile Include="Core\IPropertyInfoFactory.cs" />
     <Compile Include="Core\IReadOnlyBindingList.cs" />
     <Compile Include="Core\LoadManager\AsyncLoader.cs" />
     <Compile Include="Core\LoadManager\AsyncLoadManager.cs" />
