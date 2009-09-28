@@ -119,6 +119,7 @@
     <Compile Include="ChildrenByInterface\ChildInterfaceTests.cs" />
     <Compile Include="Basic\CollectionTests.cs" />
     <Compile Include="CslaDataProvider\CslaDataProviderTests.cs" />
+    <Compile Include="CslaDataProvider\Customer.cs" />
     <Compile Include="CslaDataProvider\ProviderList.cs" />
     <Compile Include="CslaQueryProvider\CslaQueryProviderTests.cs" />
     <Compile Include="DataMapper\DataMapperTests.cs" />
@@ -159,12 +160,12 @@
     <Compile Include="DataPortal\DataPortalTests.cs" />
     <Compile Include="DataPortal\DpRoot.cs" />
     <Compile Include="Data\ContextTests.cs" />
-    <Compile Include="Data\TestEFContext.Designer.cs">
+    <Compile Include="Data\TestEFContext1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>TestEFContext.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Data\TestLinqToSqlContext.designer.cs">
+    <Compile Include="Data\TestLinqToSqlContext1.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>TestLinqToSqlContext.dbml</DependentUpon>
@@ -239,6 +240,9 @@
     <Compile Include="Silverlight\Serialization\AddressBase.cs" />
     <Compile Include="Silverlight\Serialization\AddressList.cs" />
     <Compile Include="Silverlight\Serialization\BindingListTests.cs" />
+    <Compile Include="Silverlight\Serialization\Customer.cs" />
+    <Compile Include="Silverlight\Serialization\CustomerContact.cs" />
+    <Compile Include="Silverlight\Serialization\CustomerWithEnum.cs" />
     <Compile Include="Silverlight\Serialization\CustomMobileList.cs" />
     <Compile Include="Silverlight\Serialization\MockNonBusinessObject.cs" />
     <Compile Include="Silverlight\Serialization\MockReadOnly.cs" />
@@ -304,6 +308,15 @@
     <None Include="DataPortalTestDatabaseDataSet.xss">
       <DependentUpon>DataPortalTestDatabaseDataSet.xsd</DependentUpon>
     </None>
+    <EntityDeploy Include="Data\TestEFContext.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>TestEFContext1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Data\TestLinqToSqlContext.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>TestLinqToSqlContext1.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -354,6 +367,14 @@
       <Project>{3374389D-59D8-44B1-B6D0-015819DB482C}</Project>
       <Name>CslaLight.Testing.ServerVB</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Data\TestLinqToSqlContext.dbml.layout">
+      <DependentUpon>TestLinqToSqlContext.dbml</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
