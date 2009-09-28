@@ -1,0 +1,39 @@
+﻿using System;
+
+namespace Csla.Test.PropertyGetSet
+{
+  [Serializable]
+  public class EditableGetSetTopBase<T> : BusinessBase<T> 
+    where T: EditableGetSetTopBase<T>
+  {
+    private static int _dummy;
+
+    public EditableGetSetTopBase()
+    {
+      _dummy = 0;
+    }
+
+    private static PropertyInfo<string> TopBaseProperty = RegisterProperty<string>(new PropertyInfo<string>("TopBase", "TopBase"));
+    public string TopBase
+    {
+      get { return GetProperty<string>(TopBaseProperty); }
+      set { SetProperty<string>(TopBaseProperty, value); }
+    }
+  }
+
+  [Serializable]
+  public class EditableGetSetTopNFIBase<T> : BusinessBase<T>
+    where T : EditableGetSetTopNFIBase<T>
+  {
+    public EditableGetSetTopNFIBase()
+    {
+    }
+
+    public static PropertyInfo<string> TopBaseProperty = RegisterProperty<string>(new PropertyInfo<string>("TopBase", "TopBase"));
+    public string TopBase
+    {
+      get { return GetProperty<string>(TopBaseProperty); }
+      set { SetProperty<string>(TopBaseProperty, value); }
+    }
+  }
+}

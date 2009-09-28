@@ -1,0 +1,40 @@
+﻿using System;
+
+namespace Csla.Test.DataPortalChild
+{
+  [Serializable]
+  public class ChildList : BusinessListBase<ChildList, Child>
+  {
+    public static ChildList GetList()
+    {
+      return Csla.DataPortal.FetchChild<ChildList>();
+    }
+
+    private ChildList()
+    {
+      MarkAsChild();
+    }
+
+    public object MyParent
+    {
+      get { return this.Parent; }
+    }
+
+    private string _status;
+    public string Status
+    {
+      get { return _status; }
+    }
+
+    protected void Child_Fetch()
+    {
+      _status = "Fetched";
+    }
+
+    protected override void Child_Update(params object[] p)
+    {
+      base.Child_Update();
+      _status = "Updated";
+    }
+  }
+}
