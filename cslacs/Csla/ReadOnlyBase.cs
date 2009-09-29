@@ -616,6 +616,62 @@ namespace Csla
       return Core.FieldManager.PropertyInfoManager.RegisterProperty<P>(typeof(T), info);
     }
 
+	    #region JOB - added 29.09.09
+    /// <summary>
+    /// Indicates that the specified property belongs
+    /// to the business object type.
+    /// </summary>
+    /// <typeparam name="P">Type of property.</typeparam>
+    /// <param name="propertyName">Name of the property.</param>
+    /// <returns>The provided IPropertyInfo object.</returns>
+    protected static PropertyInfo<P> RegisterProperty<P>(string propertyName)
+    {
+      return RegisterProperty(Csla.Core.FieldManager.PropertyInfoFactory.Factory.Create<P>(typeof(T), propertyName));
+    }
+
+    /// <summary>
+    /// Indicates that the specified property belongs
+    /// to the business object type.
+    /// </summary>
+    /// <typeparam name="P">Type of property.</typeparam>
+    /// <param name="propertyName">Name of the property.</param>
+    /// <param name="friendlyName">Name of the friendly.</param>
+    /// <returns>The provided IPropertyInfo object.</returns>
+    protected static PropertyInfo<P> RegisterProperty<P>(string propertyName, string friendlyName)
+    {
+      return RegisterProperty(Csla.Core.FieldManager.PropertyInfoFactory.Factory.Create<P>(typeof(T), propertyName, friendlyName));
+    }
+
+    /// <summary>
+    /// Indicates that the specified property belongs
+    /// to the business object type.
+    /// </summary>
+    /// <typeparam name="P">Type of property.</typeparam>
+    /// <param name="propertyName">Name of the property.</param>
+    /// <param name="friendlyName">Name of the friendly.</param>
+    /// <param name="defaultValue">The default value.</param>
+    /// <returns>The provided IPropertyInfo object.</returns>
+    protected static PropertyInfo<P> RegisterProperty<P>(string propertyName, string friendlyName, P defaultValue)
+    {
+      return RegisterProperty(Csla.Core.FieldManager.PropertyInfoFactory.Factory.Create<P>(typeof(T), propertyName, friendlyName, defaultValue));
+    }
+
+    /// <summary>
+    /// Indicates that the specified property belongs
+    /// to the business object type.
+    /// </summary>
+    /// <typeparam name="P">Type of property.</typeparam>
+    /// <param name="propertyName">Name of the property.</param>
+    /// <param name="friendlyName">Name of the friendly.</param>
+    /// <param name="relationship">The relationship.</param>
+    /// <returns>The provided IPropertyInfo object.</returns>
+    protected static PropertyInfo<P> RegisterProperty<P>(string propertyName, string friendlyName, RelationshipTypes relationship)
+    {
+      return RegisterProperty(Csla.Core.FieldManager.PropertyInfoFactory.Factory.Create<P>(typeof(T), propertyName, friendlyName, relationship));
+    }
+
+    #endregion 
+	
     #endregion
 
     #region  Get Properties
