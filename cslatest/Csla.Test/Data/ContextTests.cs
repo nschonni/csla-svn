@@ -78,18 +78,18 @@ namespace Csla.Test.Data
       int counter = list.Count;
 
       list.Add(new TransactionContextUser
-                 {
-                   FirstName = "First",
-                   LastName = "Last",
-                   SmallColumn = "aaaa"
-                 });
+      {
+        FirstName = "First",
+        LastName = "Last",
+        SmallColumn = "aaaa"
+      });
 
       list.Add(new TransactionContextUser
-                 {
-                   FirstName = "First1",
-                   LastName = "Last1",
-                   SmallColumn = "bbbbbbbbbbbbbb"
-                 });
+      {
+        FirstName = "First1",
+        LastName = "Last1",
+        SmallColumn = "bbbbbbbbbbbbbb"
+      });
 
       bool gotError = false;
       try
@@ -103,10 +103,14 @@ namespace Csla.Test.Data
       }
 
       Assert.IsTrue(gotError, "SQL should have thrown an error");
-      Assert.AreEqual(0,ApplicationContext.LocalContext.Count,"Transaction context should have been null");
+      int tCount = 0;
+      foreach (var r in ApplicationContext.LocalContext.Keys)
+        if (r.ToString().StartsWith("__transaction:"))
+          tCount++;
+      Assert.AreEqual(0, tCount, "Transaction context should have been null");
 
       list = TransactionContextUserList.GetList();
-      Assert.AreEqual(counter, list.Count,"Data should not have been saved.");
+      Assert.AreEqual(counter, list.Count, "Data should not have been saved.");
     }
 
     [Test]
@@ -133,7 +137,12 @@ namespace Csla.Test.Data
                       });
 
       list.Save();
-      Assert.AreEqual(0, ApplicationContext.LocalContext.Count, "Transaction context should have been null");
+
+      int tCount = 0;
+      foreach (var r in ApplicationContext.LocalContext.Keys)
+        if (r.ToString().StartsWith("__transaction:"))
+          tCount++;
+      Assert.AreEqual(0, tCount, "Transaction context should have been null");
 
       list = TransactionContextUserList.GetList();
       Assert.AreEqual(beforeInsertCount + 2, list.Count, "Data should have been saved.");
@@ -142,7 +151,13 @@ namespace Csla.Test.Data
       list.Remove(list.Last(o => o.LastName == "Last"));
 
       list.Save();
-      Assert.AreEqual(0, ApplicationContext.LocalContext.Count, "Transaction context should have been null");
+
+      tCount = 0;
+      foreach (var r in ApplicationContext.LocalContext.Keys)
+        if (r.ToString().StartsWith("__transaction:"))
+          tCount++;
+      Assert.AreEqual(0, tCount, "Transaction context should have been null");
+
       list = TransactionContextUserList.GetList();
       Assert.AreEqual(beforeInsertCount, list.Count, "Data should not have been saved.");
     }
@@ -159,6 +174,5 @@ namespace Csla.Test.Data
     }
 
     #endregion
-
   }
 }

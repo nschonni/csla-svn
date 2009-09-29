@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Globalization;
+using System.Threading;
 using NUnit.Framework;
 using TestClass = NUnit.Framework.TestFixtureAttribute;
 using TestInitialize = NUnit.Framework.SetUpAttribute;
@@ -208,6 +210,9 @@ namespace Csla.Test.SafeDataReader
         [Test()]
         public void GetDataTypes()
         {
+            Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("en-US");
+            Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("en-US");
+
             SqlConnection cn = new SqlConnection(CONNECTION_STRING);
             SqlCommand cm = cn.CreateCommand();
             cm.CommandText = 
@@ -274,6 +279,9 @@ namespace Csla.Test.SafeDataReader
         [Test()]
         public void TestSafeDataReader()
         {
+            Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("en-US");
+            Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("en-US");
+
             List<string> list = new List<string>();
 
             SqlConnection cn = new SqlConnection(CONNECTION_STRING);
