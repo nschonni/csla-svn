@@ -206,7 +206,7 @@ namespace Csla.Wpf
       DependencyProperty.RegisterAttached("ManualEnableControl",
       typeof(bool),
       typeof(InvokeMethod),
-      new PropertyMetadata((o, e) =>
+      new PropertyMetadata(true, (o, e) =>
       {
         var ctrl = o as UIElement;
         if (ctrl != null)
@@ -379,7 +379,12 @@ namespace Csla.Wpf
       else if (pCount == 1)
         _targetMethod.Invoke(_target, new object[] { p });
       else if (pCount == 2)
-        _targetMethod.Invoke(_target, new object[] { _element, p });
+        _targetMethod.Invoke(_target, new object[] { _element, new ExecuteEventArgs
+        {
+          MethodParameter = p,
+          TriggerParameter = e,
+          TriggerSource = (FrameworkElement)_element
+        }});
       else if (pCount == 3)
         _targetMethod.Invoke(_target, new object[] { _element, e, p });
     }

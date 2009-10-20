@@ -463,6 +463,7 @@ namespace Csla.Wpf
 
     #region Verbs
 
+#if !SILVERLIGHT
     /// <summary>
     /// Creates or retrieves a new instance of the 
     /// Model by invoking a static factory method.
@@ -470,6 +471,50 @@ namespace Csla.Wpf
     /// <param name="factoryMethod">Name of the static factory method.</param>
     /// <param name="factoryParameters">Factory method parameters.</param>
     protected virtual void DoRefresh(string factoryMethod, params object[] factoryParameters)
+    {
+      T result = default(T);
+      if (typeof(T) != null)
+      {
+        Error = null;
+        try
+        {
+          result = (T)MethodCaller.CallFactoryMethod(typeof(T), factoryMethod, factoryParameters);
+          HookObjectEvents(Model, result);
+          if (ManageObjectLifetime)
+          {
+            var undo = result as Csla.Core.ISupportUndo;
+            if (undo != null)
+              undo.BeginEdit();
+          }
+          Model = result;
+        }
+        catch (Exception ex)
+        {
+          Error = ex;
+        }
+        SetProperties();
+        OnRefreshed();
+      }
+    }
+
+    /// <summary>
+    /// Creates or retrieves a new instance of the 
+    /// Model by invoking a static factory method.
+    /// </summary>
+    /// <param name="factoryMethod">Name of the static factory method.</param>
+    protected virtual void DoRefresh(string factoryMethod)
+    {
+      DoRefresh(factoryMethod, new object[] { });
+    }
+#endif
+
+    /// <summary>
+    /// Creates or retrieves a new instance of the 
+    /// Model by invoking a static factory method.
+    /// </summary>
+    /// <param name="factoryMethod">Name of the static factory method.</param>
+    /// <param name="factoryParameters">Factory method parameters.</param>
+    protected virtual void BeginRefresh(string factoryMethod, params object[] factoryParameters)
     {
       if (typeof(T) != null)
         try
@@ -493,9 +538,9 @@ namespace Csla.Wpf
     /// Model by invoking a static factory method.
     /// </summary>
     /// <param name="factoryMethod">Name of the static factory method.</param>
-    protected virtual void DoRefresh(string factoryMethod)
+    protected virtual void BeginRefresh(string factoryMethod)
     {
-      DoRefresh(factoryMethod, new object[] { });
+      BeginRefresh(factoryMethod, new object[] { });
     }
 
     private Delegate CreateHandler(Type objectType)
@@ -514,19 +559,19 @@ namespace Csla.Wpf
       if (eventArgs.Error == null)
       {
         HookObjectEvents(Model, eventArgs.Object);
-        Model = eventArgs.Object;
         if (ManageObjectLifetime)
         {
-          var undo = Model as Csla.Core.ISupportUndo;
+          var undo = eventArgs.Object as Csla.Core.ISupportUndo;
           if (undo != null)
             undo.BeginEdit();
         }
-        SetProperties();
+        Model = eventArgs.Object;
       }
       else
       {
         Error = eventArgs.Error;
       }
+      SetProperties();
       OnRefreshed();
     }
 
@@ -538,11 +583,59 @@ namespace Csla.Wpf
     protected virtual void OnRefreshed()
     { }
 
+#if !SILVERLIGHT
     /// <summary>
     /// Saves the Model, first committing changes
     /// if ManagedObjectLifetime is true.
     /// </summary>
-    protected virtual void DoSave()
+    protected virtual T DoSave()
+    {
+      T result = (T)Model;
+      Error = null;
+      try
+      {
+        Csla.Core.ISupportUndo undo;
+        var savable = Model as Csla.Core.ISavable;
+        if (ManageObjectLifetime)
+        {
+          // clone the object if possible
+          ICloneable clonable = Model as ICloneable;
+          if (clonable != null)
+            savable = (Csla.Core.ISavable)clonable.Clone();
+
+          //apply changes
+          var undoable = savable as Csla.Core.ISupportUndo;
+          if (undoable != null)
+            undoable.ApplyEdit();
+        }
+
+        result = (T)savable.Save();
+
+        HookObjectEvents(Model, result);
+        if (ManageObjectLifetime)
+        {
+          undo = result as Csla.Core.ISupportUndo;
+          if (undo != null)
+            undo.BeginEdit();
+        }
+        Model = result;
+        SetProperties();
+        OnSaved();
+      }
+      catch (Exception ex)
+      {
+        Error = ex;
+        OnSaved();
+      }
+      return result;
+    }
+#endif
+
+    /// <summary>
+    /// Saves the Model, first committing changes
+    /// if ManagedObjectLifetime is true.
+    /// </summary>
+    protected virtual void BeginSave()
     {
       try
       {
@@ -567,13 +660,13 @@ namespace Csla.Wpf
           if (e.Error == null)
           {
             var result = e.NewObject;
+            HookObjectEvents(Model, result);
             if (ManageObjectLifetime)
             {
               undo = result as Csla.Core.ISupportUndo;
               if (undo != null)
                 undo.BeginEdit();
             }
-            HookObjectEvents(Model, result);
             Model = (T)result;
           }
           else
@@ -620,15 +713,29 @@ namespace Csla.Wpf
       }
     }
 
+#if SILVERLIGHT
     /// <summary>
     /// Adds a new item to the Model (if it
     /// is a collection).
     /// </summary>
-    protected virtual void DoAddNew()
+    protected virtual void BeginAddNew()
     {
       ((IBindingList)Model).AddNew();
       SetProperties();
     }
+#else
+    /// <summary>
+    /// Adds a new item to the Model (if it
+    /// is a collection).
+    /// </summary>
+    protected virtual object DoAddNew()
+    {
+      var ibl = ((IBindingList)Model);
+      var result = ibl.AddNew();
+      SetProperties();
+      return result;
+    }
+#endif
 
     /// <summary>
     /// Removes an item from the Model (if it
@@ -675,6 +782,8 @@ namespace Csla.Wpf
 
     private void HookObjectEvents(object oldValue, object newValue)
     {
+      if (ReferenceEquals(oldValue, newValue)) return;
+
       // unhook events from old value
       if (oldValue != null)
       {
