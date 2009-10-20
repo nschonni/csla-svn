@@ -1422,7 +1422,7 @@ namespace Csla.Validation
       object pValue = Utilities.CallByName(
         target, e.PropertyName, CallType.Get);
 #if SILVERLIGHT
-      var ctx = new System.ComponentModel.DataAnnotations.ValidationContext(pValue, null, null);
+      var ctx = new System.ComponentModel.DataAnnotations.ValidationContext(target, null, null);
       var result = args.Attribute.GetValidationResult(pValue, ctx);
       if (result != null)
       {
