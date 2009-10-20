@@ -78,6 +78,30 @@ namespace Csla.Test.DataAnnotations
 
       context.Complete();
     }
+
+#if SILVERLIGHT
+    [TestMethod]
+    public void CustomAttribute()
+    {
+      var context = GetContext();
+
+      var dp = new Csla.DataPortal<Custom>();
+      dp.CreateCompleted += (o, e) =>
+      {
+        var root = e.Object;
+        var rules = root.GetRules();
+
+        Assert.AreEqual(1, rules.Length, "Should be 1 rule");
+        Assert.IsFalse(root.IsValid, "Obj shouldn't be valid");
+        Assert.AreEqual(1, root.BrokenRulesCollection.Count, "Should be 1 broken rule");
+        Assert.AreEqual("Name must be abc", root.BrokenRulesCollection[0].Description, "Desc should match");
+        context.Assert.Success();
+      };
+      dp.BeginCreate();
+
+      context.Complete();
+    }
+#endif
   }
 
   [Serializable]
@@ -115,4 +139,38 @@ namespace Csla.Test.DataAnnotations
       return ValidationRules.GetRuleDescriptions();
     }
   }
+
+#if SILVERLIGHT
+  [Serializable]
+  public class Custom : BusinessBase<Custom>
+  {
+    private static PropertyInfo<string> NameProperty = RegisterProperty<string>(c => c.Name);
+    [TestRule]
+    public string Name
+    {
+      get { return GetProperty(NameProperty); }
+      set { SetProperty(NameProperty, value); }
+    }
+
+    public string[] GetRules()
+    {
+      return ValidationRules.GetRuleDescriptions();
+    }
+  }
+
+  public class TestRuleAttribute : ValidationAttribute
+  {
+    protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+    {
+      if (validationContext.ObjectInstance == null)
+        return new ValidationResult("ObjectInstance is null");
+      var obj = validationContext.ObjectInstance as Custom;
+      if (obj == null)
+        return new ValidationResult("ObjectInstance is not the Custom type");
+      if (string.IsNullOrEmpty(obj.Name) || obj.Name != "abc")
+        return new ValidationResult("Name must be abc");
+      return null;
+    }
+  }
+#endif
 }
