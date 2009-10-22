@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.ComponentModel;
 using System.Collections.Generic;
+using Csla.Properties;
 
 #if SILVERLIGHT
 namespace Csla.Silverlight
@@ -163,15 +164,7 @@ namespace Csla.Wpf
         if (be != null && be.ParentBinding != null)
         {
           var newBinding = CopyBinding(be.ParentBinding);
-          fe.SetBinding(MethodNameProperty, newBinding);
-
-          //var dataItem = be.DataItem;
-          //string path = be.ParentBinding.Path.Path;
-          //if (dataItem != null && !string.IsNullOrEmpty(path))
-          //{
-          //  var pi = Csla.Reflection.MethodCaller.GetProperty(dataItem.GetType(), path);
-          //  return Csla.Reflection.MethodCaller.GetPropertyValue(dataItem, pi);
-          //}
+          fe.SetBinding(MethodParameterProperty, newBinding);
         }
       }
       return ctrl.GetValue(MethodParameterProperty);
@@ -289,6 +282,9 @@ namespace Csla.Wpf
             // so hook up the event
 
             _targetMethod = _target.GetType().GetMethod(methodName);
+            var pCount = _targetMethod.GetParameters().Length;
+            if (pCount != 0 && pCount != 2)
+              throw new NotSupportedException(Csla.Properties.Resources.ExecuteBadParams);
 
             var eventRef = ctrl.GetType().GetEvent(triggerEvent);
             if (eventRef != null && AddControl(ctrl.GetHashCode()))
@@ -315,11 +311,11 @@ namespace Csla.Wpf
                 }
                 else
                 {
-                  throw new NotSupportedException();
+                  throw new NotSupportedException(Csla.Properties.Resources.ExecuteBadTriggerEvent);
                 }
               }
               else
-                throw new NotSupportedException();
+                throw new NotSupportedException(Csla.Properties.Resources.ExecuteBadTriggerEvent);
             }
           }
         }
@@ -376,17 +372,13 @@ namespace Csla.Wpf
       var pCount = _targetMethod.GetParameters().Length;
       if (pCount == 0)
         _targetMethod.Invoke(_target, null);
-      else if (pCount == 1)
-        _targetMethod.Invoke(_target, new object[] { p });
       else if (pCount == 2)
-        _targetMethod.Invoke(_target, new object[] { _element, new ExecuteEventArgs
+        _targetMethod.Invoke(_target, new object[] { this, new ExecuteEventArgs
         {
           MethodParameter = p,
           TriggerParameter = e,
           TriggerSource = (FrameworkElement)_element
         }});
-      else if (pCount == 3)
-        _targetMethod.Invoke(_target, new object[] { _element, e, p });
     }
   }
 }
