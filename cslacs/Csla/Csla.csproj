@@ -466,6 +466,7 @@
     <Compile Include="Wpf\CslaDataProviderCommandManager.cs" />
     <Compile Include="Wpf\DataDecoratorBase.cs" />
     <Compile Include="Wpf\ErrorDialog.cs" />
+    <Compile Include="Wpf\ErrorEventArgs.cs" />
     <Compile Include="Wpf\Execute.cs" />
     <Compile Include="Wpf\ExecuteEventArgs.cs" />
     <Compile Include="Wpf\InvokeMethod.cs" />

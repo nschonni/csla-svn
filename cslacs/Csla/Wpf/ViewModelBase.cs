@@ -87,9 +87,30 @@ namespace Csla.Wpf
       get { return _error; }
       protected set
       {
-        _error = value;
-        OnPropertyChanged("Error");
+        if (!ReferenceEquals(_error, value))
+        {
+          _error = value;
+          OnPropertyChanged("Error");
+          if (_error != null)
+            OnError(_error);
+        }
       }
+    }
+
+    /// <summary>
+    /// Event raised when an error occurs during processing.
+    /// </summary>
+    public event EventHandler<ErrorEventArgs> ErrorOccurred;
+
+    /// <summary>
+    /// Raises ErrorOccurred event when an error occurs
+    /// during processing.
+    /// </summary>
+    /// <param name="error"></param>
+    protected virtual void OnError(Exception error)
+    {
+      if (ErrorOccurred != null)
+        ErrorOccurred(this, new ErrorEventArgs { Error = error });
     }
 
     private bool _isBusy;
@@ -779,7 +800,6 @@ namespace Csla.Wpf
 
     #region Model Changes Handling
 
-
     private void HookObjectEvents(object oldValue, object newValue)
     {
       if (ReferenceEquals(oldValue, newValue)) return;
@@ -814,7 +834,7 @@ namespace Csla.Wpf
     }
 
 
-    void Model_BusyChanged(object sender, BusyChangedEventArgs e)
+    private void Model_BusyChanged(object sender, BusyChangedEventArgs e)
     {
       // only set busy state for entire object.  Ignore busy state based
       // on asynch rules being active
