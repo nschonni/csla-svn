@@ -282,6 +282,9 @@ namespace Csla.Wpf
             // so hook up the event
 
             _targetMethod = _target.GetType().GetMethod(methodName);
+            if (_targetMethod == null)
+              throw new MissingMethodException(methodName);
+
             var pCount = _targetMethod.GetParameters().Length;
             if (pCount != 0 && pCount != 2)
               throw new NotSupportedException(Csla.Properties.Resources.ExecuteBadParams);

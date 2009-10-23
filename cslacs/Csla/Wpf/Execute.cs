@@ -76,21 +76,19 @@ namespace Csla.Wpf
         if (target != null)
         {
           var methodInfo = target.GetType().GetMethod(methodName);
-          if (methodInfo != null)
-          {
-            var pCount = methodInfo.GetParameters().Length;
-            if (pCount == 0)
-              methodInfo.Invoke(target, null);
-            else if (pCount == 2)
-              methodInfo.Invoke(target, new object[] { this, new ExecuteEventArgs
+          if (methodInfo == null)
+            throw new MissingMethodException(methodName);
+
+          var pCount = methodInfo.GetParameters().Length;
+          if (pCount == 0)
+            methodInfo.Invoke(target, null);
+          else if (pCount == 2)
+            methodInfo.Invoke(target, new object[] { this, new ExecuteEventArgs
               {
                   TriggerSource = element,
                   MethodParameter = this.MethodParameter,
                   TriggerParameter = parameter
               }});
-            else
-              throw new NotSupportedException(Csla.Properties.Resources.ExecuteBadParams);
-          }
           else
             throw new NotSupportedException(Csla.Properties.Resources.ExecuteBadParams);
         }
