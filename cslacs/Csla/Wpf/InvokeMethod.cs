@@ -373,15 +373,25 @@ namespace Csla.Wpf
     {
       object p = GetMethodParameter(_element);
       var pCount = _targetMethod.GetParameters().Length;
-      if (pCount == 0)
-        _targetMethod.Invoke(_target, null);
-      else if (pCount == 2)
-        _targetMethod.Invoke(_target, new object[] { this, new ExecuteEventArgs
+      try
+      {
+        if (pCount == 0)
+          _targetMethod.Invoke(_target, null);
+        else if (pCount == 2)
+          _targetMethod.Invoke(_target, new object[] { this, new ExecuteEventArgs
         {
           MethodParameter = p,
           TriggerParameter = e,
           TriggerSource = (FrameworkElement)_element
         }});
+      }
+      catch (System.Reflection.TargetInvocationException ex)
+      {
+        if (ex.InnerException != null)
+          throw ex.InnerException;
+        else
+          throw;
+      }
     }
   }
 }
