@@ -47,13 +47,24 @@ namespace Csla.Wpf
     /// Gets or sets the Model object.
     /// </summary>
     public static readonly DependencyProperty ModelProperty =
-        DependencyProperty.Register("Model", typeof(object), typeof(ViewModelBase<T>), null);
+        DependencyProperty.Register("Model", typeof(T), typeof(ViewModelBase<T>),
+        new PropertyMetadata((o, e) => 
+        {
+          var viewmodel = (ViewModelBase<T>)o;
+          viewmodel.HookObjectEvents(e.OldValue, e.NewValue);
+          if (viewmodel.ManageObjectLifetime)
+          {
+            var undo = e.NewValue as Csla.Core.ISupportUndo;
+            if (undo != null)
+              undo.BeginEdit();
+          }
+        }));
     /// <summary>
     /// Gets or sets the Model object.
     /// </summary>
-    public object Model
+    public T Model
     {
-      get { return GetValue(ModelProperty); }
+      get { return (T)GetValue(ModelProperty); }
       set { SetValue(ModelProperty, value); }
     }
 
@@ -499,15 +510,7 @@ namespace Csla.Wpf
         Error = null;
         try
         {
-          result = (T)MethodCaller.CallFactoryMethod(typeof(T), factoryMethod, factoryParameters);
-          HookObjectEvents(Model, result);
-          if (ManageObjectLifetime)
-          {
-            var undo = result as Csla.Core.ISupportUndo;
-            if (undo != null)
-              undo.BeginEdit();
-          }
-          Model = result;
+          Model = (T)MethodCaller.CallFactoryMethod(typeof(T), factoryMethod, factoryParameters);
         }
         catch (Exception ex)
         {
@@ -578,20 +581,9 @@ namespace Csla.Wpf
       IsBusy = false;
       var eventArgs = (IDataPortalResult)e;
       if (eventArgs.Error == null)
-      {
-        HookObjectEvents(Model, eventArgs.Object);
-        if (ManageObjectLifetime)
-        {
-          var undo = eventArgs.Object as Csla.Core.ISupportUndo;
-          if (undo != null)
-            undo.BeginEdit();
-        }
-        Model = eventArgs.Object;
-      }
+        Model = (T)eventArgs.Object;
       else
-      {
         Error = eventArgs.Error;
-      }
       SetProperties();
       OnRefreshed();
     }
@@ -632,13 +624,6 @@ namespace Csla.Wpf
 
         result = (T)savable.Save();
 
-        HookObjectEvents(Model, result);
-        if (ManageObjectLifetime)
-        {
-          undo = result as Csla.Core.ISupportUndo;
-          if (undo != null)
-            undo.BeginEdit();
-        }
         Model = result;
         SetProperties();
         OnSaved();
@@ -681,13 +666,6 @@ namespace Csla.Wpf
           if (e.Error == null)
           {
             var result = e.NewObject;
-            HookObjectEvents(Model, result);
-            if (ManageObjectLifetime)
-            {
-              undo = result as Csla.Core.ISupportUndo;
-              if (undo != null)
-                undo.BeginEdit();
-            }
             Model = (T)result;
           }
           else
