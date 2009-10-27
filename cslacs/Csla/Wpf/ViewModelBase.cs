@@ -51,7 +51,7 @@ namespace Csla.Wpf
         new PropertyMetadata((o, e) => 
         {
           var viewmodel = (ViewModelBase<T>)o;
-          viewmodel.HookObjectEvents(e.OldValue, e.NewValue);
+          viewmodel.OnModelChanged(e.OldValue, e.NewValue);
           if (viewmodel.ManageObjectLifetime)
           {
             var undo = e.NewValue as Csla.Core.ISupportUndo;
@@ -778,7 +778,14 @@ namespace Csla.Wpf
 
     #region Model Changes Handling
 
-    private void HookObjectEvents(object oldValue, object newValue)
+    /// <summary>
+    /// Invoked when the Model changes, allowing
+    /// event handlers to be unhooked from the old
+    /// object and hooked on the new object.
+    /// </summary>
+    /// <param name="oldValue">Previous Model reference.</param>
+    /// <param name="newValue">New Model reference.</param>
+    protected virtual void OnModelChanged(object oldValue, object newValue)
     {
       if (ReferenceEquals(oldValue, newValue)) return;
 
