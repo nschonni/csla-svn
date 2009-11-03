@@ -321,11 +321,12 @@ namespace Csla.Test.ChildChanged
         cca = e;
       };
       child.List[0].Name = "abc";
-      Assert.IsTrue(lc, "ListChanged should have fired");
 #if !SILVERLIGHT
+      Assert.IsTrue(lc, "ListChanged should have fired");
       Assert.IsNotNull(lcp, "PropertyDescriptor should be provided");
       Assert.AreEqual("Name", lcp.Name, "PropertyDescriptor.Name should be Name");
 #endif
+      Assert.IsFalse(lc, "ListChanged should not have fired");
       Assert.IsTrue(rcc, "root.ChildChanged should have fired");
       Assert.IsTrue(ccc, "child.ChildChanged should have fired");
       Assert.IsTrue(cc, "list.ChildChanged should have fired");
