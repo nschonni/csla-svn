@@ -118,7 +118,6 @@ namespace Csla.DataPortalClient
     /// <summary>
     /// Starts a delete operation.
     /// </summary>
-    /// <param name="criteria"></param>
     /// <param name="criteria">Criteria object.</param>
     public void BeginDelete(object criteria)
     {
