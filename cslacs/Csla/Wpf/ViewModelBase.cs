@@ -606,7 +606,6 @@ namespace Csla.Wpf
       Error = null;
       try
       {
-        Csla.Core.ISupportUndo undo;
         var savable = Model as Csla.Core.ISavable;
         if (ManageObjectLifetime)
         {
@@ -644,7 +643,6 @@ namespace Csla.Wpf
     {
       try
       {
-        Csla.Core.ISupportUndo undo;
         var savable = Model as Csla.Core.ISavable;
         if (ManageObjectLifetime)
         {

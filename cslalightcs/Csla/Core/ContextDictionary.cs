@@ -21,6 +21,11 @@ namespace Csla.Core
   [Serializable()]
   public class ContextDictionary : Dictionary<string, object>, IMobileObject
   {
+    public bool Contains(string key)
+    {
+      return ContainsKey(key);
+    }
+
     #region IMobileObject Members
 
     void IMobileObject.GetState(SerializationInfo info)
