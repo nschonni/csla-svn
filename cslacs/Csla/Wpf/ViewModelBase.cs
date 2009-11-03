@@ -504,7 +504,6 @@ namespace Csla.Wpf
     /// <param name="factoryParameters">Factory method parameters.</param>
     protected virtual void DoRefresh(string factoryMethod, params object[] factoryParameters)
     {
-      T result = default(T);
       if (typeof(T) != null)
       {
         Error = null;
