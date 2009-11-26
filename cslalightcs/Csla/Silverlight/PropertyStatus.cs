@@ -147,6 +147,9 @@ namespace Csla.Silverlight
 
     private void DetachSource(object source)
     {
+      var p = source as INotifyPropertyChanged;
+      if (p != null)
+        p.PropertyChanged -= source_PropertyChanged;
       INotifyBusy busy = source as INotifyBusy;
       if (busy != null)
         busy.BusyChanged -= source_BusyChanged;
@@ -154,9 +157,18 @@ namespace Csla.Silverlight
 
     private void AttachSource(object source)
     {
+      var p = source as INotifyPropertyChanged;
+      if (p != null)
+        p.PropertyChanged += source_PropertyChanged;
       INotifyBusy busy = source as INotifyBusy;
       if (busy != null)
         busy.BusyChanged += source_BusyChanged;
+    }
+
+    void source_PropertyChanged(object sender, PropertyChangedEventArgs e)
+    {
+      if (e.PropertyName == _bindingPath)
+        UpdateState();
     }
 
     void source_BusyChanged(object sender, BusyChangedEventArgs e)
