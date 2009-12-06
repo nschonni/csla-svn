@@ -515,7 +515,6 @@ namespace Csla.Wpf
         {
           Error = ex;
         }
-        SetProperties();
         OnRefreshed();
       }
     }
@@ -583,7 +582,6 @@ namespace Csla.Wpf
         Model = (T)eventArgs.Object;
       else
         Error = eventArgs.Error;
-      SetProperties();
       OnRefreshed();
     }
 
@@ -623,7 +621,6 @@ namespace Csla.Wpf
         result = (T)savable.Save();
 
         Model = result;
-        SetProperties();
         OnSaved();
       }
       catch (Exception ex)
@@ -669,7 +666,6 @@ namespace Csla.Wpf
           {
             Error = e.Error;
           }
-          SetProperties();
           OnSaved();
         };
         Error = null;
@@ -813,6 +809,8 @@ namespace Csla.Wpf
         if (nb != null)
           nb.BusyChanged += Model_BusyChanged;
       }
+
+      SetProperties();
     }
 
 
