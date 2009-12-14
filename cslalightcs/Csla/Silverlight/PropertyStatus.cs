@@ -119,7 +119,7 @@ namespace Csla.Silverlight
 
     private object GetRealSource(object source, string bindingPath)
     {
-      if (source != null & bindingPath.IndexOf('.') > 0)
+      if (source != null && bindingPath.IndexOf('.') > 0)
       {
         var firstProperty = bindingPath.Substring(0, bindingPath.IndexOf('.'));
         var p = MethodCaller.GetProperty(source.GetType(), firstProperty);
@@ -199,7 +199,7 @@ namespace Csla.Silverlight
       "TargetControl",
       typeof(object),
       typeof(PropertyStatus),
-      null);
+      new PropertyMetadata(null, (o, e) => { ((PropertyStatus)o).HandleTarget(); }));
 
     /// <summary>
     /// Gets or sets the target control to which this control is bound.
