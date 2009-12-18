@@ -172,6 +172,14 @@ namespace Csla.Data
       }
     }
 
+    private bool _commit = false;
+
+    public void Commit()
+    {
+      if (RefCount == 1)
+        _commit = true;
+    }
+
     #region  Reference counting
 
     private int _refCount;
@@ -192,12 +200,16 @@ namespace Csla.Data
 
     private void DeRef()
     {
-
       lock (_lock)
       {
         _refCount -= 1;
         if (_refCount == 0)
         {
+          if (_commit)
+            _transaction.Commit();
+          else
+            _transaction.Rollback();
+
           _transaction.Dispose();
           _connection.Dispose();
           ApplicationContext.LocalContext.Remove(GetContextName(_connectionString, _label));
