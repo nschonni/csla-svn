@@ -83,12 +83,13 @@ namespace Csla
     {
       get
       {
-        if (Application.Current != null && Application.Current.RootVisual != null)
-        {
-          return DesignerProperties.GetIsInDesignMode(Application.Current.RootVisual);
-        }
-        else
-          return false;
+        return false;
+        //if (Application.Current != null && Application.Current.RootVisual != null)
+        //{
+        //  return DesignerProperties.GetIsInDesignMode(Application.Current.RootVisual);
+        //}
+        //else
+        //  return false;
       }
     }
 
