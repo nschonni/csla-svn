@@ -641,6 +641,30 @@ namespace cslalighttest.CslaDataProvider
       var tmp = provider.Data;
       context.Complete();
     }
+
+    [TestMethod]
+    public void CanSaveRemoveDirectlyFromList()
+    {
+      var context = GetContext();
+
+      var provider = new Csla.Silverlight.CslaDataProvider();
+      provider.ManageObjectLifetime = true;
+      CustomerList.GetCustomerList((o1, e1) =>
+      {
+        Csla.ApplicationContext.GlobalContext.Clear();
+        var custs = e1.Object;
+        provider.ObjectInstance = custs;
+        context.Assert.IsFalse(provider.CanSave, "CanSave should be false");
+        custs.RemoveAt(0);
+        context.Assert.IsTrue(provider.CanSave, "CanSave should be true");
+        custs.RemoveAt(0);
+        context.Assert.IsTrue(provider.CanSave, "CanSave should be true after second remove");
+        context.Assert.Success();
+
+      });
+      var tmp = provider.Data;
+      context.Complete();
+    }
   }
 
 }
