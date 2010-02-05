@@ -469,6 +469,7 @@
     <Compile Include="Wpf\ErrorEventArgs.cs" />
     <Compile Include="Wpf\Execute.cs" />
     <Compile Include="Wpf\ExecuteEventArgs.cs" />
+    <Compile Include="Wpf\IErrorDialog.cs" />
     <Compile Include="Wpf\InvokeMethod.cs" />
     <Compile Include="Wpf\ObjectStatus.cs" />
     <Compile Include="Wpf\IdentityConverter.cs" />

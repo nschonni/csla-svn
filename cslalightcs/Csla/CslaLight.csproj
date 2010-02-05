@@ -1,4 +1,4 @@
-<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -373,6 +373,9 @@
     </Compile>
     <Compile Include="..\..\cslacs\Csla\Wpf\ErrorEventArgs.cs">
       <Link>Silverlight\ErrorEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\..\cslacs\Csla\Wpf\IErrorDialog.cs">
+      <Link>Silverlight\IErrorDialog.cs</Link>
     </Compile>
     <Compile Include="ApplicationContext.cs" />
     <Compile Include="BusinessBase.cs" />
