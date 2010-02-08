@@ -274,13 +274,13 @@ namespace Csla.Wpf
         if (worst != null)
           _worst = worst.Severity;
 
-        _isValid = BrokenRules.Count == 0;
+        IsValid = BrokenRules.Count == 0;
         GoToState(true);
       }
       else
       {
         BrokenRules.Clear();
-        _isValid = true;
+        IsValid = true;
         GoToState(true);
       }
     }
@@ -447,7 +447,7 @@ namespace Csla.Wpf
 
         if (root != null)
         {
-          if (_isValid)
+          if (IsValid)
           {
             Storyboard validStoryboard = (Storyboard)Template.Resources["Valid"];
             validStoryboard.Begin(root);
