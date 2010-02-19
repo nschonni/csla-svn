@@ -190,6 +190,9 @@ namespace Csla.Xaml
 
     private object GetRealSource(object source, string bindingPath)
     {
+      var icv = source as ICollectionView;
+      if (icv != null)
+        source = icv.CurrentItem;
       if (source != null && bindingPath.IndexOf('.') > 0)
       {
         var firstProperty = bindingPath.Substring(0, bindingPath.IndexOf('.'));
