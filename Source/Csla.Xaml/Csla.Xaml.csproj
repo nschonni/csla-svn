@@ -64,6 +64,7 @@
     <Compile Include="Execute.cs" />
     <Compile Include="ExecuteEventArgs.cs" />
     <Compile Include="IdentityConverter.cs" />
+    <Compile Include="IErrorDialog.cs" />
     <Compile Include="InvokeMethod.cs" />
     <Compile Include="IsNotConverter.cs" />
     <Compile Include="IViewModel.cs" />

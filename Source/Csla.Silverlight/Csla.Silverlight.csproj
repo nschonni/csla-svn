@@ -414,6 +414,9 @@
     <Compile Include="..\Csla.Xaml\ExecuteEventArgs.cs">
       <Link>Xaml\ExecuteEventArgs.cs</Link>
     </Compile>
+    <Compile Include="..\Csla.Xaml\IErrorDialog.cs">
+      <Link>Xaml\IErrorDialog.cs</Link>
+    </Compile>
     <Compile Include="..\Csla.Xaml\InvokeMethod.cs">
       <Link>Xaml\InvokeMethod.cs</Link>
     </Compile>
