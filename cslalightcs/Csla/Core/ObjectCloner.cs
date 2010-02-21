@@ -27,15 +27,7 @@ namespace Csla.Core
     /// </remarks>
     public static object Clone(object obj)
     {
-      using (MemoryStream buffer = new MemoryStream())
-      {
-        ISerializationFormatter formatter =
-          SerializationFormatterFactory.GetFormatter();
-        formatter.Serialize(buffer, obj);
-        buffer.Position = 0;
-        object temp = formatter.Deserialize(buffer);
-        return temp;
-      }
+      return MobileFormatter.DeserializeFromDTO(MobileFormatter.SerializeToDTO(obj));
     }
   }
 }

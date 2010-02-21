@@ -337,6 +337,7 @@
     <Compile Include="..\..\..\cslatest\Csla.Test\ValidationRules\ValidationTests.cs">
       <Link>Validation\ValidationTests.cs</Link>
     </Compile>
+    <Compile Include="Clone\CloneTests.cs" />
     <Compile Include="CslaDataProvider\CslaDataProviderTest.cs" />
     <Compile Include="CslaDataProvider\InheritedProvider.cs" />
     <Compile Include="DataPortal\ChildParentDataPortalTests.cs" />

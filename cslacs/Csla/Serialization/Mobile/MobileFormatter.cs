@@ -398,6 +398,17 @@ namespace Csla.Serialization.Mobile
     }
 
     /// <summary>
+    /// Serilizes an object from a DTO graph
+    /// </summary>
+    /// <param name="serialized">DTO Graph to deserialize</param>
+    /// <returns>Deserialized object</returns>
+    public static object DeserializeFromDTO(List<SerializationInfo> serialized)
+    {
+      var formatter = new MobileFormatter();
+      return formatter.DeserializeAsDTO(serialized);
+    }
+
+    /// <summary>
     /// Deserializes a byte stream into an object.
     /// </summary>
     /// <param name="data">
