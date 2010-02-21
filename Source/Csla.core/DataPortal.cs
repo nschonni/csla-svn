@@ -124,7 +124,7 @@ namespace Csla
         var method = Server.DataPortalMethodCache.GetCreateMethod(objectType, criteria);
 
         DataPortalClient.IDataPortalProxy proxy;
-        proxy = GetDataPortalProxy(method.RunLocal);
+        proxy = GetDataPortalProxy(objectType, method.RunLocal);
 
         dpContext =
           new Csla.Server.DataPortalContext(GetPrincipal(), proxy.IsServerRemote);
@@ -219,7 +219,7 @@ namespace Csla
         var method = Server.DataPortalMethodCache.GetFetchMethod(objectType, criteria);
 
         DataPortalClient.IDataPortalProxy proxy;
-        proxy = GetDataPortalProxy(method.RunLocal);
+        proxy = GetDataPortalProxy(objectType, method.RunLocal);
 
         dpContext =
           new Server.DataPortalContext(GetPrincipal(),
@@ -445,7 +445,7 @@ namespace Csla
         }
 
         DataPortalClient.IDataPortalProxy proxy;
-        proxy = GetDataPortalProxy(method.RunLocal);
+        proxy = GetDataPortalProxy(objectType, method.RunLocal);
 
         dpContext =
           new Server.DataPortalContext(GetPrincipal(), proxy.IsServerRemote);
@@ -534,7 +534,7 @@ namespace Csla
           objectType, "DataPortal_Delete", criteria);
 
         DataPortalClient.IDataPortalProxy proxy;
-        proxy = GetDataPortalProxy(method.RunLocal);
+        proxy = GetDataPortalProxy(objectType, method.RunLocal);
 
         dpContext = new Server.DataPortalContext(GetPrincipal(), proxy.IsServerRemote);
 
@@ -949,31 +949,44 @@ namespace Csla
 
     #region DataPortal Proxy
 
-    private static Type _proxyType;
+    private static DataPortalClient.IDataPortalProxyFactory _dataProxyFactory;
 
-    private static DataPortalClient.IDataPortalProxy GetDataPortalProxy(bool forceLocal)
+    private static DataPortalClient.IDataPortalProxy GetDataPortalProxy(Type objectType, bool forceLocal)
     {
       if (DataPortal.IsInDesignMode)
       {
         return new DataPortalClient.DesignTimeProxy();
       }
       else
+      if (forceLocal)
       {
-        if (forceLocal)
+        return new DataPortalClient.LocalProxy();
+      }
+      else
+      {
+        // load dataportal factory if loaded 
+        if (_dataProxyFactory == null) 
+          LoadDataPortalProxyFactory();
+
+        return _dataProxyFactory.Create(objectType);
+      }
+    }
+
+    /// <summary>
+    /// Loads the data portal factory.
+    /// </summary>
+    private static void LoadDataPortalProxyFactory()
+    {
+      if (_dataProxyFactory == null)
+      {
+        if (String.IsNullOrEmpty(ApplicationContext.DataPortalProxyFactory) || ApplicationContext.DataPortalProxyFactory == "Default")
         {
-          return new DataPortalClient.LocalProxy();
+          _dataProxyFactory = new DataPortalClient.DefaultPortalProxyFactory();
         }
         else
         {
-          if (_proxyType == null)
-          {
-            string proxyTypeName = ApplicationContext.DataPortalProxy;
-            if (proxyTypeName == "Local")
-              _proxyType = typeof(DataPortalClient.LocalProxy);
-            else
-              _proxyType = Type.GetType(proxyTypeName, true, true);
-          }
-          return (DataPortalClient.IDataPortalProxy)Activator.CreateInstance(_proxyType);
+          var proxyFactoryType = Type.GetType(ApplicationContext.DataPortalProxyFactory, true, true);
+          _dataProxyFactory = (DataPortalClient.IDataPortalProxyFactory) MethodCaller.CreateInstance(proxyFactoryType);
         }
       }
     }
@@ -983,9 +996,22 @@ namespace Csla
     /// next data portal call will reload the proxy
     /// type based on current configuration values.
     /// </summary>
+    public static void ResetProxyFactory()
+    {
+      _dataProxyFactory = null;
+    }
+
+    /// <summary>
+    /// Resets the data portal proxy type, so the
+    /// next data portal call will reload the proxy
+    /// type based on current configuration values.
+    /// </summary>
     public static void ResetProxyType()
     {
-      _proxyType = null;
+      if (_dataProxyFactory != null)
+      {
+        _dataProxyFactory.ResetProxyType();
+      }
     }
 
     /// <summary>
