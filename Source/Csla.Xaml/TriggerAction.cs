@@ -87,6 +87,9 @@ namespace Csla.Xaml
     private void CallMethod(object sender, EventArgs e)
     {
       object target = this.DataContext;
+      var icv = target as ICollectionView;
+      if (icv != null)
+        target = icv.CurrentItem;
       var targetMethod = target.GetType().GetMethod(MethodName);
       if (targetMethod == null)
         throw new MissingMethodException(MethodName);
