@@ -106,7 +106,9 @@ namespace Csla.Xaml
 
     private void SetupRunningState(object isRunning)
     {
-      bool val = (bool)Convert.ChangeType(isRunning, typeof(bool), CultureInfo.InvariantCulture);
+      bool val = false;
+      if (isRunning != null)
+        val = (bool)Convert.ChangeType(isRunning, typeof(bool), CultureInfo.InvariantCulture);
       if (val)
         StartTimer();
       else
