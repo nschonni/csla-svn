@@ -119,6 +119,8 @@ namespace Csla.Xaml
       }
     }
 
+    #region Properties
+
     /// <summary>
     /// Gets or sets the target UI control.
     /// </summary>
@@ -192,6 +194,54 @@ namespace Csla.Xaml
       get { return (object)GetValue(MethodParameterProperty); }
       set { SetValue(MethodParameterProperty, value); }
     }
+
+    #endregion
+
+    #region GetMethodParameter
+
+    /// <summary>
+    /// Gets the parameter value to be passed to invoked method.
+    /// </summary>
+    /// <param name="ctrl">Attached control</param>
+    public static object GetMethodParameter(UIElement ctrl)
+    {
+#if SILVERLIGHT
+      var fe = ctrl as FrameworkElement;
+      if (fe != null)
+      {
+        var be = fe.GetBindingExpression(MethodParameterProperty);
+        if (be != null && be.ParentBinding != null)
+        {
+          var newBinding = CopyBinding(be.ParentBinding);
+          fe.SetBinding(MethodParameterProperty, newBinding);
+        }
+      }
+#endif
+      return ctrl.GetValue(MethodParameterProperty);
+    }
+
+    private static System.Windows.Data.Binding CopyBinding(System.Windows.Data.Binding oldBinding)
+    {
+      var result = new System.Windows.Data.Binding();
+      result.BindsDirectlyToSource = oldBinding.BindsDirectlyToSource;
+      result.Converter = oldBinding.Converter;
+      result.ConverterCulture = oldBinding.ConverterCulture;
+      result.ConverterParameter = oldBinding.ConverterParameter;
+      result.Mode = oldBinding.Mode;
+      result.NotifyOnValidationError = oldBinding.NotifyOnValidationError;
+      result.Path = oldBinding.Path;
+      if (oldBinding.ElementName != null)
+        result.ElementName = oldBinding.ElementName;
+      else if (oldBinding.RelativeSource != null)
+        result.RelativeSource = oldBinding.RelativeSource;
+      else
+        result.Source = oldBinding.Source;
+      result.UpdateSourceTrigger = oldBinding.UpdateSourceTrigger;
+      result.ValidatesOnExceptions = oldBinding.ValidatesOnExceptions;
+      return result;
+    }
+
+    #endregion
 
     private void Invoke(object parameter)
     {

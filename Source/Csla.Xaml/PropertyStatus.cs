@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Csla.Reflection;
 using System.Windows;
 using Csla.Core;
-using System.Windows.Media;
 using System.Windows.Controls.Primitives;
 using Csla.Validation;
 using System.Windows.Controls;
@@ -115,6 +112,7 @@ namespace Csla.Xaml
     /// Gets or sets the name of the business object
     /// property to be monitored.
     /// </summary>
+    [Category("Common")]
     public object Property
     {
       get { return GetValue(PropertyProperty); }

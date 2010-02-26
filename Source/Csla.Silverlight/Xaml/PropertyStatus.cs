@@ -78,6 +78,7 @@ namespace Csla.Xaml
     /// Gets or sets the source business
     /// property to which this control is bound.
     /// </summary>
+    [Category("Common")]
     public object Property
     {
       get { return GetValue(PropertyProperty); }
@@ -197,6 +198,7 @@ namespace Csla.Xaml
 
     /// <summary>
     /// Gets or sets the target control to which this control is bound.
+    /// THIS FEATURE IS OBSOLETE AND SHOULD NOT BE USED.
     /// </summary>
     public static readonly DependencyProperty TargetControlProperty = DependencyProperty.Register(
       "TargetControl",
@@ -206,6 +208,7 @@ namespace Csla.Xaml
 
     /// <summary>
     /// Gets or sets the target control to which this control is bound.
+    /// THIS FEATURE IS OBSOLETE AND SHOULD NOT BE USED.
     /// </summary>
     public object TargetControl
     {
