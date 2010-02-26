@@ -313,9 +313,9 @@ namespace Csla
     /// <returns>A reference to the updated Command object.</returns>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods")]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:DoNotPassLiteralsAsLocalizedParameters", MessageId = "Csla.DataPortalException.#ctor(System.String,System.Exception,System.Object)")]
-    public static CommandBase Execute(CommandBase obj)
+    public static Core.ICommandObject Execute(Core.ICommandObject obj)
     {
-      return (CommandBase)Update(obj);
+      return (Core.ICommandObject)Update(obj);
     }
 
     /// <summary>
@@ -381,7 +381,7 @@ namespace Csla
                 "save",
                 objectType.Name));
             if (factoryType != null)
-              if (obj is CommandBase)
+              if (obj is Core.ICommandObject)
                 method = Server.DataPortalMethodCache.GetMethodInfo(factoryType, factoryInfo.ExecuteMethodName, new object[] { obj });
               else
                 method = Server.DataPortalMethodCache.GetMethodInfo(factoryType, factoryInfo.UpdateMethodName, new object[] { obj });
@@ -392,7 +392,7 @@ namespace Csla
         else
         {
           string methodName;
-          if (obj is CommandBase)
+          if (obj is Core.ICommandObject)
           {
             methodName = "DataPortal_Execute";
             operation = DataPortalOperations.Execute;

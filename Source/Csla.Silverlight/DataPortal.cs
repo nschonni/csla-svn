@@ -343,7 +343,7 @@ namespace Csla
     /// when the async operation is complete.
     /// </param>
     public static void BeginExecute<T>(T command, EventHandler<DataPortalResult<T>> callback)
-      where T : CommandBase
+      where T : Core.ICommandObject
     {
       BeginExecute<T>(command, callback, null);
     }
@@ -361,7 +361,7 @@ namespace Csla
     /// </param>
     /// <param name="userState">User state object.</param>
     public static void BeginExecute<T>(T command, EventHandler<DataPortalResult<T>> callback, object userState)
-      where T : CommandBase
+      where T : Core.ICommandObject
     {
       var dp = new DataPortal<T>();
       dp.ExecuteCompleted += callback;

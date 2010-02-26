@@ -195,7 +195,7 @@ namespace Csla.Server.Hosts.Silverlight
         else
         {
           string methodName;
-          if (obj is CommandBase)
+          if (obj is Core.ICommandObject)
             methodName = factoryInfo.ExecuteMethodName;
           else
           {
