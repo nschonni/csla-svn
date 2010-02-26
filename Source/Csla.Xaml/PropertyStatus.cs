@@ -445,7 +445,7 @@ namespace Csla.Xaml
     {
       if (Template == null)
         return;
-      if (IsLoaded && !DataPortal.IsInDesignMode)
+      if (IsLoaded && !System.ComponentModel.DesignerProperties.GetIsInDesignMode(this))
       {
         DisablePopup(_lastImage);
         HandleTarget();

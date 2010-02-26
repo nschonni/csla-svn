@@ -117,7 +117,6 @@
     <Compile Include="Core\ReadOnlyObservableBindingList.cs" />
     <Compile Include="Core\UndoableHandler.cs" />
     <Compile Include="DataPortalClient\DefaultPortalProxyFactory.cs" />
-    <Compile Include="DataPortalClient\DesignTimeProxy.cs" />
     <Compile Include="DataPortalClient\IDataPortalProxyFactory.cs" />
     <Compile Include="DataPortalResult.cs" />
     <Compile Include="DataPortalT.cs" />

@@ -74,24 +74,6 @@ namespace Csla
       }
     }
 
-    /// <summary>
-    /// Gets a value indicating whether the code is currently
-    /// executing in a design time mode (such as in Visual Studio
-    /// or Expression Blend).
-    /// </summary>
-    public static bool IsInDesignMode
-    {
-      get
-      {
-        if (Application.Current != null && Application.Current.RootVisual != null)
-        {
-          return DesignerProperties.GetIsInDesignMode(Application.Current.RootVisual);
-        }
-        else
-          return false;
-      }
-    }
-
     #endregion
 
     #region Static Helpers

@@ -267,9 +267,6 @@
     <Compile Include="..\Csla.core\DataPortalClient\DefaultPortalProxyFactory.cs">
       <Link>DataPortalClient\DefaultPortalProxyFactory.cs</Link>
     </Compile>
-    <Compile Include="..\Csla.core\DataPortalClient\DesignTimeProxy.cs">
-      <Link>DataPortalClient\DesignTimeProxy.cs</Link>
-    </Compile>
     <Compile Include="..\Csla.core\DataPortalClient\IDataPortalProxy.cs">
       <Link>DataPortalClient\IDataPortalProxy.cs</Link>
     </Compile>
