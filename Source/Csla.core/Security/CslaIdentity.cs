@@ -30,6 +30,26 @@ namespace Csla.Security
     ReadOnlyBase<T>, IIdentity, ICheckRoles
     where T : CslaIdentityBase<T>
   {
+#if SILVERLIGHT
+    private static bool _forceInit;
+
+    /// <summary>
+    /// Create an instance of the object.
+    /// </summary>
+    public CslaIdentityBase()
+    {
+      _forceInit = !_forceInit;
+    }
+
+    /// <summary>
+    /// Invoked when the object is deserialized.
+    /// </summary>
+    protected override void OnDeserialized()
+    {
+      _forceInit = _forceInit && false;
+      base.OnDeserialized();
+    }
+#endif
 
     #region UnauthenticatedIdentity
 
