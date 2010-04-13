@@ -2529,7 +2529,7 @@ namespace Csla.Core
         IBusinessObject old = oldValue as IBusinessObject;
         if (old != null)
           RemoveEventHooks(old);
-        IBusinessObject @new = newValue as IBusinessObject;
+        IBusinessObject @new = newValue as IBusinessObject;  
         if (@new != null)
           AddEventHooks(@new);
 
