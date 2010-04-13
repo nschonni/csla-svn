@@ -1779,7 +1779,17 @@ namespace Csla.Core
       if (oldValue == null)
         valuesDiffer = newValue != null;
       else
-        valuesDiffer = !(oldValue.Equals(newValue));
+      {
+        // use reference equals for objects that inherit from CSLA base class
+        if (typeof(IBusinessObject).IsAssignableFrom(propertyInfo.Type))
+        {
+          valuesDiffer = !(ReferenceEquals(oldValue, newValue));
+        }
+        else
+        {
+          valuesDiffer = !(oldValue.Equals(newValue));
+        }
+      }
 
       if (valuesDiffer)
       {
