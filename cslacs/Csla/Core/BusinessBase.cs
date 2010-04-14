@@ -990,7 +990,6 @@ namespace Csla.Core
     {
       _neverCommitted = false;
       AcceptChanges(this.EditLevel - 1);
-      BindingEdit = false;
     }
 
     /// <summary>
@@ -999,9 +998,12 @@ namespace Csla.Core
     /// </summary>
     protected override void AcceptChangesComplete()
     {
-      if (Parent != null)
-        Parent.ApplyEditChild(this);
+      BindingEdit = false;
       base.AcceptChangesComplete();
+
+      // !!!! Will trigger Save here when using DynamicListBase template
+      if (Parent != null)
+        Parent.ApplyEditChild(this);    
     }
 
     #endregion
