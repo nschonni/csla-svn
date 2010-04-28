@@ -6,7 +6,11 @@ using System.Windows.Controls;
 using System.Windows;
 using System.ComponentModel;
 
-namespace Csla.Xaml
+#if SILVERLIGHT
+namespace Csla.Silverlight
+#else
+namespace Csla.Wpf
+#endif
 {
   /// <summary>
   /// Control used to invoke a method on the DataContext

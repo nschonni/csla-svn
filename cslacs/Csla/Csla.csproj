@@ -479,6 +479,7 @@
     <Compile Include="Wpf\ObjectStatus.cs" />
     <Compile Include="Wpf\IdentityConverter.cs" />
     <Compile Include="Wpf\PropertyStatus.cs" />
+    <Compile Include="Wpf\TriggerAction.cs" />
     <Compile Include="Wpf\ViewModel.cs" />
     <Compile Include="Wpf\ViewModelBase.cs" />
     <Compile Include="Wpf\VisibilityMode.cs" />

@@ -377,6 +377,9 @@
     <Compile Include="..\..\cslacs\Csla\Wpf\IErrorDialog.cs">
       <Link>Silverlight\IErrorDialog.cs</Link>
     </Compile>
+    <Compile Include="..\..\cslacs\Csla\Wpf\TriggerAction.cs">
+      <Link>Silverlight\TriggerAction.cs</Link>
+    </Compile>
     <Compile Include="ApplicationContext.cs" />
     <Compile Include="BusinessBase.cs" />
     <Compile Include="BusinessListBase.cs" />
