@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -34,9 +34,17 @@ namespace Csla.Wpf
     private void CallMethod(object sender, EventArgs e)
     {
       object target = this.DataContext;
-      var icv = target as ICollectionView;
-      if (icv != null)
-        target = icv.CurrentItem;
+      var cvs = target as System.Windows.Data.CollectionViewSource;
+      if (cvs != null && cvs.View != null)
+      {
+        target = cvs.View.CurrentItem;
+      }
+      else
+      {
+        var icv = target as ICollectionView;
+        if (icv != null)
+          target = icv.CurrentItem;
+      }
       if (target == null) return; // can be null at design time - so just exit
 
       var targetMethod = target.GetType().GetMethod(MethodName);
@@ -77,13 +85,13 @@ namespace Csla.Wpf
       }
     }
 
-    private void HookEvent(FrameworkElement oldTarget, FrameworkElement newTarget)
+    private void HookEvent(FrameworkElement oldTarget, string oldEvent, FrameworkElement newTarget, string newEvent)
     {
-      if (!string.IsNullOrEmpty(TriggerEvent) && !ReferenceEquals(oldTarget, newTarget))
+      if (!ReferenceEquals(oldTarget, newTarget) || oldEvent != newEvent)
       {
-        if (oldTarget != null)
+        if (oldTarget != null && !string.IsNullOrEmpty(oldEvent))
         {
-          var eventRef = oldTarget.GetType().GetEvent(TriggerEvent);
+          var eventRef = oldTarget.GetType().GetEvent(oldEvent);
           if (eventRef != null)
           {
             var invoke = eventRef.EventHandlerType.GetMethod("Invoke");
@@ -108,9 +116,9 @@ namespace Csla.Wpf
           }
         }
 
-        if (newTarget != null)
+        if (newTarget != null && !string.IsNullOrEmpty(newEvent))
         {
-          var eventRef = newTarget.GetType().GetEvent(TriggerEvent);
+          var eventRef = newTarget.GetType().GetEvent(newEvent);
           if (eventRef != null)
           {
             var invoke = eventRef.EventHandlerType.GetMethod("Invoke");
@@ -146,8 +154,9 @@ namespace Csla.Wpf
       DependencyProperty.Register("TargetControl", typeof(FrameworkElement),
       typeof(TriggerAction), new PropertyMetadata((o, e) =>
         {
-          ((TriggerAction)o).HookEvent(
-            (FrameworkElement)e.OldValue, (FrameworkElement)e.NewValue);
+          var ta = (TriggerAction)o;
+          ta.HookEvent(
+            (FrameworkElement)e.OldValue, ta.TriggerEvent, (FrameworkElement)e.NewValue, ta.TriggerEvent);
         }));
     /// <summary>
     /// Gets or sets the target UI control.
@@ -165,7 +174,11 @@ namespace Csla.Wpf
     /// </summary>
     public static readonly DependencyProperty TriggerEventProperty =
       DependencyProperty.Register("TriggerEvent", typeof(string),
-      typeof(TriggerAction), new PropertyMetadata("Click"));
+      typeof(TriggerAction), new PropertyMetadata("Click", (o, e) => 
+      {
+        var ta = (TriggerAction)o;
+        ta.HookEvent(ta.TargetControl, (string)e.OldValue, ta.TargetControl, (string)e.NewValue);
+      }));
     /// <summary>
     /// Gets or sets the name of the event
     /// that will trigger the action.
