@@ -975,6 +975,11 @@ namespace Csla
 
     #region Data Access
 
+    object ISavable.Save(bool forceUpdate)
+    {
+      return Save();
+    }
+
     /// <summary>
     /// Saves the object to the database.
     /// </summary>
