@@ -1,14 +1,12 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Reflection;
 using Csla.Reflection;
-using Csla.Security;
 using Csla.Core;
 using System.Collections;
+using System.Collections.Specialized;
 
 #if SILVERLIGHT
 namespace Csla.Silverlight
@@ -48,7 +46,7 @@ namespace Csla.Wpf
     /// </summary>
     public static readonly DependencyProperty ModelProperty =
         DependencyProperty.Register("Model", typeof(T), typeof(ViewModelBase<T>),
-        new PropertyMetadata((o, e) => 
+        new PropertyMetadata((o, e) =>
         {
           var viewmodel = (ViewModelBase<T>)o;
           viewmodel.OnModelChanged((T)e.OldValue, (T)e.NewValue);
@@ -794,6 +792,9 @@ namespace Csla.Wpf
         var nb = oldValue as INotifyBusy;
         if (nb != null)
           nb.BusyChanged -= Model_BusyChanged;
+        var cc = oldValue as INotifyCollectionChanged;
+        if (cc != null)
+          cc.CollectionChanged -= Model_CollectionChanged;
       }
 
       // hook events on new value
@@ -808,6 +809,9 @@ namespace Csla.Wpf
         var nb = newValue as INotifyBusy;
         if (nb != null)
           nb.BusyChanged += Model_BusyChanged;
+        var cc = newValue as INotifyCollectionChanged;
+        if (cc != null)
+          cc.CollectionChanged += Model_CollectionChanged;
       }
 
       SetProperties();
@@ -831,6 +835,11 @@ namespace Csla.Wpf
     }
 
     private void Model_ChildChanged(object sender, ChildChangedEventArgs e)
+    {
+      SetProperties();
+    }
+
+    private void Model_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
     {
       SetProperties();
     }
