@@ -362,6 +362,9 @@
     <Compile Include="..\..\cslacs\Csla\Validation\SharedValidationRules.cs">
       <Link>Validation\SharedValidationRules.cs</Link>
     </Compile>
+    <Compile Include="..\..\cslacs\Csla\Validation\UriUtilities.cs">
+      <Link>Validation\UriUtilities.cs</Link>
+    </Compile>
     <Compile Include="..\..\cslacs\Csla\Validation\ValidationException.cs">
       <Link>Validation\ValidationException.cs</Link>
     </Compile>

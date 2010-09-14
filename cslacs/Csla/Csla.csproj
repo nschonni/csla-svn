@@ -410,6 +410,7 @@
     <Compile Include="Validation\RuleSeverity.cs" />
     <Compile Include="Validation\RulesList.cs" />
     <Compile Include="Validation\SharedValidationRules.cs" />
+    <Compile Include="Validation\UriUtilities.cs" />
     <Compile Include="Validation\ValidationException.cs" />
     <Compile Include="Validation\ValidationRules.cs" />
     <Compile Include="Validation\ValidationRules.partial.cs" />
