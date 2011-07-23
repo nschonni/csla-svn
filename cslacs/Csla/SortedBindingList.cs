@@ -61,8 +61,11 @@ namespace Csla
           }
           else if (Key.Equals(target))
             return 0;
-          else
-            return Key.ToString().CompareTo(target.ToString());
+          
+          else if (target == null)
+            return 1;
+          
+          return Key.ToString().CompareTo(target.ToString());
         }
       }
 
