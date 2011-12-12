@@ -4,6 +4,14 @@
         <name>Csla.Xaml</name>
     </assembly>
     <members>
+        <member name="T:Csla.Xaml.ViewModel`1">
+            <summary>
+            Base class used to create ViewModel objects,
+            with pre-existing verbs for use by
+            InvokeMethod or Invoke.
+            </summary>
+            <typeparam name="T">Type of the Model object.</typeparam>
+        </member>
         <member name="T:Csla.Xaml.ViewModelBase`1">
             <summary>
             Base class used to create ViewModel objects that
@@ -262,14 +270,6 @@
             Event raised when a property changes.
             </summary>
         </member>
-        <member name="T:Csla.Xaml.ViewModel`1">
-            <summary>
-            Base class used to create ViewModel objects,
-            with pre-existing verbs for use by
-            InvokeMethod or Invoke.
-            </summary>
-            <typeparam name="T">Type of the Model object.</typeparam>
-        </member>
         <member name="M:Csla.Xaml.ViewModel`1.Save(System.Object,Csla.Xaml.ExecuteEventArgs)">
             <summary>
             Saves the Model, first committing changes
@@ -386,6 +386,30 @@
             Gets or sets a value indicating whether the
             MethodParameter value should be dynamically rebound
             before invoking the target method.
+            </summary>
+        </member>
+        <member name="T:Csla.Xaml.ExecuteEventArgs">
+            <summary>
+            Arguments passed to a method invoked
+            by the Execute trigger action.
+            </summary>
+        </member>
+        <member name="P:Csla.Xaml.ExecuteEventArgs.TriggerSource">
+            <summary>
+            The control that raised the event that
+            triggered invocation of this method.
+            </summary>
+        </member>
+        <member name="P:Csla.Xaml.ExecuteEventArgs.MethodParameter">
+            <summary>
+            The MethodParameter value provided by
+            the designer.
+            </summary>
+        </member>
+        <member name="P:Csla.Xaml.ExecuteEventArgs.TriggerParameter">
+            <summary>
+            The EventArgs parameter from the event
+            that triggered invocation of this method.
             </summary>
         </member>
         <member name="T:Csla.Xaml.PropertyInfo">
@@ -537,30 +561,6 @@
         <member name="E:Csla.Xaml.PropertyInfo.PropertyChanged">
             <summary>
             Event raised when a property has changed.
-            </summary>
-        </member>
-        <member name="T:Csla.Xaml.ExecuteEventArgs">
-            <summary>
-            Arguments passed to a method invoked
-            by the Execute trigger action.
-            </summary>
-        </member>
-        <member name="P:Csla.Xaml.ExecuteEventArgs.TriggerSource">
-            <summary>
-            The control that raised the event that
-            triggered invocation of this method.
-            </summary>
-        </member>
-        <member name="P:Csla.Xaml.ExecuteEventArgs.MethodParameter">
-            <summary>
-            The MethodParameter value provided by
-            the designer.
-            </summary>
-        </member>
-        <member name="P:Csla.Xaml.ExecuteEventArgs.TriggerParameter">
-            <summary>
-            The EventArgs parameter from the event
-            that triggered invocation of this method.
             </summary>
         </member>
     </members>

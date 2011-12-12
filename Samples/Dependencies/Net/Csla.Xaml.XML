@@ -4,30 +4,94 @@
         <name>Csla.Xaml</name>
     </assembly>
     <members>
-        <member name="T:Csla.Xaml.IdentityConverter">
+        <member name="T:Csla.Xaml.ErrorDialog">
             <summary>
-            Provides the functionality of a WPF
-            value converter without affecting the
-            value as it flows to and from the UI.
+            Displays an error dialog for any exceptions
+            that occur in a CslaDataProvider.
             </summary>
         </member>
-        <member name="M:Csla.Xaml.IdentityConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+        <member name="T:Csla.Xaml.IErrorDialog">
             <summary>
-            Returns the unchanged value.
+            Interface defining the interaction between
+            a CslaDataSource and an error dialog control.
             </summary>
-            <param name="value">Value to be converted.</param>
-            <param name="targetType">Desired value type.</param>
-            <param name="parameter">Conversion parameter.</param>
-            <param name="culture">Conversion culture.</param>
         </member>
-        <member name="M:Csla.Xaml.IdentityConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+        <member name="M:Csla.Xaml.IErrorDialog.Register(System.Object)">
             <summary>
-            Returns the unchanged value.
+            Method called by the CslaDataProvider when the
+            error dialog should register any events it
+            wishes to handle from the CslaDataProvider.
             </summary>
-            <param name="value">Value to be converted.</param>
-            <param name="targetType">Desired value type.</param>
-            <param name="parameter">Conversion parameter.</param>
-            <param name="culture">Conversion culture.</param>
+            <param name="source">Data provider control.</param>
+        </member>
+        <member name="M:Csla.Xaml.ErrorDialog.#ctor">
+            <summary>
+            Creates a new instance of the control.
+            </summary>
+        </member>
+        <member name="F:Csla.Xaml.ErrorDialog.DialogTitleProperty">
+            <summary>
+            Gets or sets the title of the error
+            dialog.
+            </summary>
+        </member>
+        <member name="F:Csla.Xaml.ErrorDialog.DialogFirstLineProperty">
+            <summary>
+            Gets or sets the first line of text displayed
+            within the error dialog (before the
+            exception message).
+            </summary>
+        </member>
+        <member name="F:Csla.Xaml.ErrorDialog.ShowExceptionDetailProperty">
+            <summary>
+            Gets or sets a value indicating whether
+            the dialog should include exception details
+            or just the exception summary message.
+            </summary>
+        </member>
+        <member name="F:Csla.Xaml.ErrorDialog.DialogIconProperty">
+            <summary>
+            Gets or sets a value indicating whether
+            the dialog should include exception details
+            or just the exception summary message.
+            </summary>
+        </member>
+        <member name="P:Csla.Xaml.ErrorDialog.DialogTitle">
+            <summary>
+            Gets or sets the title of the error
+            dialog.
+            </summary>
+        </member>
+        <member name="P:Csla.Xaml.ErrorDialog.DialogFirstLine">
+            <summary>
+            Gets or sets the first line of text displayed
+            within the error dialog (before the
+            exception message).
+            </summary>
+        </member>
+        <member name="P:Csla.Xaml.ErrorDialog.ShowExceptionDetail">
+            <summary>
+            Gets or sets the first line of text displayed
+            within the error dialog (before the
+            exception message).
+            </summary>
+        </member>
+        <member name="P:Csla.Xaml.ErrorDialog.DialogIcon">
+            <summary>
+            Gets or sets the icon displayed in
+            the dialog.
+            </summary>
+        </member>
+        <member name="T:Csla.Xaml.CslaDataProviderCommandManager">
+            <summary>
+            Implements support for RoutedCommands that can
+            be executed by the CslaDataProvider control.
+            </summary>
+            <remarks>
+            Use this object as the CommandTarget for command
+            source objects when you want the CslaDataProvider
+            to execute the command.
+            </remarks>
         </member>
         <member name="T:Csla.Xaml.BusyAnimation">
             <summary>
@@ -61,6 +125,14 @@
             Gets or sets a property controlling
             whether the animation is running.
             </summary>
+        </member>
+        <member name="T:Csla.Xaml.ViewModel`1">
+            <summary>
+            Base class used to create ViewModel objects,
+            with pre-existing verbs for use by
+            InvokeMethod or Invoke.
+            </summary>
+            <typeparam name="T">Type of the Model object.</typeparam>
         </member>
         <member name="T:Csla.Xaml.ViewModelBase`1">
             <summary>
@@ -351,6 +423,538 @@
             Event raised when a property changes.
             </summary>
         </member>
+        <member name="M:Csla.Xaml.ViewModel`1.Save(System.Object,Csla.Xaml.ExecuteEventArgs)">
+            <summary>
+            Saves the Model, first committing changes
+            if ManagedObjectLifetime is true.
+            </summary>
+        </member>
+        <member name="M:Csla.Xaml.ViewModel`1.Cancel(System.Object,Csla.Xaml.ExecuteEventArgs)">
+            <summary>
+            Cancels changes made to the model 
+            if ManagedObjectLifetime is true.
+            </summary>
+        </member>
+        <member name="M:Csla.Xaml.ViewModel`1.AddNew(System.Object,Csla.Xaml.ExecuteEventArgs)">
+            <summary>
+            Adds a new item to the Model (if it
+            is a collection).
+            </summary>
+        </member>
+        <member name="M:Csla.Xaml.ViewModel`1.Remove(System.Object,Csla.Xaml.ExecuteEventArgs)">
+            <summary>
+            Removes an item from the Model (if it
+            is a collection).
+            </summary>
+        </member>
+        <member name="M:Csla.Xaml.ViewModel`1.Delete(System.Object,Csla.Xaml.ExecuteEventArgs)">
+            <summary>
+            Marks the Model for deletion (if it is an
+            editable root object).
+            </summary>
+        </member>
+        <member name="T:Csla.Xaml.ErrorEventArgs">
+            <summary>
+            Contains information about the error that
+            has occurred.
+            </summary>
+        </member>
+        <member name="P:Csla.Xaml.ErrorEventArgs.Error">
+            <summary>
+            Gets the Exception object for the error
+            that occurred.
+            </summary>
+        </member>
+        <member name="T:Csla.Xaml.CslaDataProvider">
+            <summary>
+            Wraps and creates a CSLA .NET-style object 
+            that you can use as a binding source.
+            </summary>
+        </member>
+        <member name="M:Csla.Xaml.CslaDataProvider.#ctor">
+            <summary>
+            Creates an instance of the object.
+            </summary>
+        </member>
+        <member name="M:Csla.Xaml.CslaDataProvider.OnSaved(System.Object,System.Exception,System.Object)">
+            <summary>
+            Raise the Saved event when the object has been saved.
+            </summary>
+            <param name="newObject">New object reference as a result
+            of the save operation.</param>
+            <param name="error">Reference to an exception object if
+            an error occurred.</param>
+            <param name="userState">Reference to a userstate object.</param>
+        </member>
+        <member name="M:Csla.Xaml.CslaDataProvider.Rebind">
+            <summary>
+            Triggers WPF data binding to rebind to the
+            data object.
+            </summary>
+        </member>
+        <member name="M:Csla.Xaml.CslaDataProvider.BeginInit">
+            <summary>
+            Indicates that the control is about to initialize.
+            </summary>
+        </member>
+        <member name="M:Csla.Xaml.CslaDataProvider.EndInit">
+            <summary>
+            Indicates that the control has initialized.
+            </summary>
+        </member>
+        <member name="M:Csla.Xaml.CslaDataProvider.BeginQuery">
+            <summary>
+            Overridden. Starts to create the requested object, 
+            either immediately or on a background thread, 
+            based on the value of the IsAsynchronous property.
+            </summary>
+        </member>
+        <member name="M:Csla.Xaml.CslaDataProvider.Cancel">
+            <summary>
+            Cancels changes to the business object, returning
+            it to its previous state.
+            </summary>
+            <remarks>
+            This metod does nothing unless ManageLifetime is
+            set to true and the object supports n-level undo.
+            </remarks>
+        </member>
+        <member name="M:Csla.Xaml.CslaDataProvider.Save">
+            <summary>
+            Accepts changes to the business object, and
+            commits them by calling the object's Save()
+            method.
+            </summary>
+            <remarks>
+            <para>
+            This method does nothing unless the object
+            implements Csla.Core.ISavable.
+            </para><para>
+            If the object implements IClonable, it
+            will be cloned, and the clone will be
+            saved.
+            </para><para>
+            If the object supports n-level undo and
+            ManageLifetime is true, then this method
+            will automatically call ApplyEdit() and
+            BeginEdit() appropriately.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Csla.Xaml.CslaDataProvider.AddNew">
+            <summary>
+            Adds a new item to the object if the object
+            implements IBindingList and AllowNew is true.
+            </summary>
+        </member>
+        <member name="M:Csla.Xaml.CslaDataProvider.RemoveItem(System.Object,Csla.Xaml.ExecuteEventArgs)">
+            <summary>
+            Removes an item from the list if the object
+            implements IBindingList and AllowRemove is true.
+            </summary>
+            <param name="sender">Object invoking this method.</param>
+            <param name="e">
+            ExecuteEventArgs, where MethodParameter contains 
+            the item to be removed from the list.
+            </param>
+        </member>
+        <member name="E:Csla.Xaml.CslaDataProvider.Saved">
+            <summary>
+            Event raised when the object has been saved.
+            </summary>
+        </member>
+        <member name="P:Csla.Xaml.CslaDataProvider.CommandManager">
+            <summary>
+            Gets an object that can be used to execute
+            Save and Undo commands on this CslaDataProvider 
+            through XAML command bindings.
+            </summary>
+        </member>
+        <member name="P:Csla.Xaml.CslaDataProvider.ObjectType">
+            <summary>
+            Gets or sets the type of object 
+            to create an instance of.
+            </summary>
+        </member>
+        <member name="P:Csla.Xaml.CslaDataProvider.ManageObjectLifetime">
+            <summary>
+            Gets or sets a value indicating whether the
+            data control should manage the lifetime of
+            the business object, including using n-level
+            undo.
+            </summary>
+        </member>
+        <member name="P:Csla.Xaml.CslaDataProvider.DataChangedHandler">
+            <summary>
+            Gets or sets a reference to an object that
+            will handle the DataChanged event raised
+            by this data provider.
+            </summary>
+            <remarks>
+            This property is designed to 
+            reference an IErrorDialog control.
+            </remarks>
+        </member>
+        <member name="P:Csla.Xaml.CslaDataProvider.FactoryMethod">
+            <summary>
+            Gets or sets the name of the static
+            (Shared in Visual Basic) factory method
+            that should be called to create the
+            object instance.
+            </summary>
+        </member>
+        <member name="P:Csla.Xaml.CslaDataProvider.FactoryParameters">
+            <summary>
+            Get the list of parameters to pass
+            to the factory method.
+            </summary>
+        </member>
+        <member name="P:Csla.Xaml.CslaDataProvider.IsAsynchronous">
+            <summary>
+            Gets or sets a value that indicates 
+            whether to perform object creation in 
+            a worker thread or in the active context.
+            </summary>
+        </member>
+        <member name="P:Csla.Xaml.CslaDataProvider.ObjectInstance">
+            <summary>
+            Gets or sets a reference to the data
+            object.
+            </summary>
+        </member>
+        <member name="P:Csla.Xaml.CslaDataProvider.IsBusy">
+            <summary>
+            Gets a value indicating if this object is busy.
+            </summary>
+        </member>
+        <member name="T:Csla.Xaml.DataDecoratorBase">
+            <summary>
+            Base class for creating WPF panel
+            controls that react when the DataContext,
+            data object and data property values
+            are changed.
+            </summary>
+        </member>
+        <member name="M:Csla.Xaml.DataDecoratorBase.#ctor">
+            <summary>
+            Creates an instance of the object.
+            </summary>
+        </member>
+        <member name="M:Csla.Xaml.DataDecoratorBase.Panel_DataContextChanged(System.Object,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Handle case where the DataContext for the
+            control has changed.
+            </summary>
+        </member>
+        <member name="M:Csla.Xaml.DataDecoratorBase.DataProvider_DataChanged(System.Object,System.EventArgs)">
+            <summary>
+            Handle case where the Data property of the
+            DataContext (a DataSourceProvider) has changed.
+            </summary>
+        </member>
+        <member name="M:Csla.Xaml.DataDecoratorBase.DataPropertyChanged(System.ComponentModel.PropertyChangedEventArgs)">
+            <summary>
+            This method is called when a property
+            of the data object to which the 
+            control is bound has changed.
+            </summary>
+        </member>
+        <member name="M:Csla.Xaml.DataDecoratorBase.DataBindingListChanged(System.ComponentModel.ListChangedEventArgs)">
+            <summary>
+            This method is called if the data
+            object is an IBindingList, and the 
+            ListChanged event was raised by
+            the data object.
+            </summary>
+        </member>
+        <member name="M:Csla.Xaml.DataDecoratorBase.DataObservableCollectionChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs)">
+            <summary>
+            This method is called if the data
+            object is an INotifyCollectionChanged, 
+            and the CollectionChanged event was 
+            raised by the data object.
+            </summary>
+        </member>
+        <member name="M:Csla.Xaml.DataDecoratorBase.DataObjectChanged">
+            <summary>
+            This method is called when the data
+            object to which the control is bound
+            has changed.
+            </summary>
+        </member>
+        <member name="M:Csla.Xaml.DataDecoratorBase.FindChildBindings">
+            <summary>
+            Scans all child controls of this panel
+            for object bindings, and calls
+            <see cref="M:Csla.Xaml.DataDecoratorBase.FoundBinding(System.Windows.Data.Binding,System.Windows.FrameworkElement,System.Windows.DependencyProperty)"/> for each
+            binding found.
+            </summary>
+        </member>
+        <member name="M:Csla.Xaml.DataDecoratorBase.FoundBinding(System.Windows.Data.Binding,System.Windows.FrameworkElement,System.Windows.DependencyProperty)">
+            <summary>
+            Called by
+            <see cref="M:Csla.Xaml.DataDecoratorBase.FindChildBindings"/> each
+            time an object binding is found.
+            </summary>
+            <param name="bnd">The Binding object.</param>
+            <param name="control">The control containing the binding.</param>
+            <param name="prop">The data bound DependencyProperty.</param>
+        </member>
+        <member name="P:Csla.Xaml.DataDecoratorBase.DataObject">
+            <summary>
+            Gets a reference to the current
+            data object.
+            </summary>
+            <remarks>
+            The DataContext may not be the data object. The
+            DataContext may be a DataSourceProvider control.
+            This property returns a reference to the actual
+            <b>data object</b>, not necessarily the DataContext
+            itself.
+            </remarks>
+        </member>
+        <member name="T:Csla.Xaml.ObjectStatus">
+            <summary>
+            Container for other UI controls that exposes
+            various status values from the CSLA .NET
+            business object acting as DataContext.
+            </summary>
+            <remarks>
+            This control provides access to the IsDirty,
+            IsNew, IsDeleted, IsValid and IsSavable properties
+            of a business object. The purpose behind this
+            control is to expose those properties in a way
+            that supports WFP data binding against those
+            values.
+            </remarks>
+        </member>
+        <member name="M:Csla.Xaml.ObjectStatus.DataObjectChanged">
+            <summary>
+            This method is called when the data
+            object to which the control is bound
+            has changed.
+            </summary>
+        </member>
+        <member name="M:Csla.Xaml.ObjectStatus.DataPropertyChanged(System.ComponentModel.PropertyChangedEventArgs)">
+            <summary>
+            This method is called when a property
+            of the data object to which the 
+            control is bound has changed.
+            </summary>
+        </member>
+        <member name="M:Csla.Xaml.ObjectStatus.DataBindingListChanged(System.ComponentModel.ListChangedEventArgs)">
+            <summary>
+            This method is called if the data
+            object is an IBindingList, and the 
+            ListChanged event was raised by
+            the data object.
+            </summary>
+        </member>
+        <member name="M:Csla.Xaml.ObjectStatus.DataObservableCollectionChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs)">
+            <summary>
+            This method is called if the data
+            object is an INotifyCollectionChanged, 
+            and the CollectionChanged event was 
+            raised by the data object.
+            </summary>
+        </member>
+        <member name="M:Csla.Xaml.ObjectStatus.Refresh">
+            <summary>
+            Refreshes the control's property
+            values to reflect the values of
+            the underlying business object.
+            </summary>
+        </member>
+        <member name="P:Csla.Xaml.ObjectStatus.CanCreateObject">
+            <summary>
+            Exposes the CanCreateObject property of the
+            DataContext business object.
+            </summary>
+        </member>
+        <member name="P:Csla.Xaml.ObjectStatus.CanGetObject">
+            <summary>
+            Exposes the CanGetObject property of the
+            DataContext business object.
+            </summary>
+        </member>
+        <member name="P:Csla.Xaml.ObjectStatus.CanEditObject">
+            <summary>
+            Exposes the CanEditObject property of the
+            DataContext business object.
+            </summary>
+        </member>
+        <member name="P:Csla.Xaml.ObjectStatus.CanDeleteObject">
+            <summary>
+            Exposes the CanDeleteObject property of the
+            DataContext business object.
+            </summary>
+        </member>
+        <member name="P:Csla.Xaml.ObjectStatus.IsDeleted">
+            <summary>
+            Exposes the IsDeleted property of the
+            DataContext business object.
+            </summary>
+        </member>
+        <member name="P:Csla.Xaml.ObjectStatus.IsDirty">
+            <summary>
+            Exposes the IsDirty property of the
+            DataContext business object.
+            </summary>
+        </member>
+        <member name="P:Csla.Xaml.ObjectStatus.IsNew">
+            <summary>
+            Exposes the IsNew property of the
+            DataContext business object.
+            </summary>
+        </member>
+        <member name="P:Csla.Xaml.ObjectStatus.IsSavable">
+            <summary>
+            Exposes the IsSavable property of the
+            DataContext business object.
+            </summary>
+        </member>
+        <member name="P:Csla.Xaml.ObjectStatus.IsValid">
+            <summary>
+            Exposes the IsValid property of the
+            DataContext business object.
+            </summary>
+        </member>
+        <member name="T:Csla.Xaml.ApplicationContextManager">
+            <summary>
+            ApplicationContextManager for WPF applications
+            </summary>
+        </member>
+        <member name="M:Csla.Xaml.ApplicationContextManager.GetUser">
+            <summary>
+            Gets the current principal.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Csla.Xaml.ApplicationContextManager.SetUser(System.Security.Principal.IPrincipal)">
+            <summary>
+            Sets the current principal.
+            </summary>
+            <param name="principal">Principal object.</param>
+        </member>
+        <member name="M:Csla.Xaml.ApplicationContextManager.GetLocalContext">
+            <summary>
+            Gets the local context.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Csla.Xaml.ApplicationContextManager.SetLocalContext(Csla.Core.ContextDictionary)">
+            <summary>
+            Sets the local context.
+            </summary>
+            <param name="localContext">Local context.</param>
+        </member>
+        <member name="M:Csla.Xaml.ApplicationContextManager.GetClientContext">
+            <summary>
+            Gets the client context.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Csla.Xaml.ApplicationContextManager.SetClientContext(Csla.Core.ContextDictionary)">
+            <summary>
+            Sets the client context.
+            </summary>
+            <param name="clientContext">Client context.</param>
+        </member>
+        <member name="M:Csla.Xaml.ApplicationContextManager.GetGlobalContext">
+            <summary>
+            Gets the global context.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Csla.Xaml.ApplicationContextManager.SetGlobalContext(Csla.Core.ContextDictionary)">
+            <summary>
+            Sets the global context.
+            </summary>
+            <param name="globalContext">Global context.</param>
+        </member>
+        <member name="P:Csla.Xaml.ApplicationContextManager.IsValid">
+            <summary>
+            Gets a value indicating whether this
+            context manager is valid for use in
+            the current environment.
+            </summary>
+        </member>
+        <member name="T:Csla.Xaml.TriggerAction">
+            <summary>
+            Control used to invoke a method on the DataContext
+            based on an event being raised by a UI control.
+            </summary>
+        </member>
+        <member name="M:Csla.Xaml.TriggerAction.#ctor">
+            <summary>
+            Creates an instance of the object.
+            </summary>
+        </member>
+        <member name="M:Csla.Xaml.TriggerAction.CallMethod(System.Object,System.EventArgs)">
+            <summary>
+            Invokes target method.
+            </summary>
+        </member>
+        <member name="F:Csla.Xaml.TriggerAction.TargetControlProperty">
+            <summary>
+            Gets or sets the target UI control.
+            </summary>
+        </member>
+        <member name="F:Csla.Xaml.TriggerAction.TriggerEventProperty">
+            <summary>
+            Gets or sets the name of the event
+            that will trigger the action.
+            </summary>
+        </member>
+        <member name="F:Csla.Xaml.TriggerAction.MethodNameProperty">
+            <summary>
+            Gets or sets the name of the method
+            to be invoked.
+            </summary>
+        </member>
+        <member name="F:Csla.Xaml.TriggerAction.MethodParameterProperty">
+            <summary>
+            Gets or sets the value of a parameter to
+            be passed to the invoked method.
+            </summary>
+        </member>
+        <member name="F:Csla.Xaml.TriggerAction.RebindParameterDynamicallyProperty">
+            <summary>
+            Gets or sets a value indicating whether the
+            MethodParameter value should be dynamically rebound
+            before invoking the target method.
+            </summary>
+        </member>
+        <member name="P:Csla.Xaml.TriggerAction.TargetControl">
+            <summary>
+            Gets or sets the target UI control.
+            </summary>
+        </member>
+        <member name="P:Csla.Xaml.TriggerAction.TriggerEvent">
+            <summary>
+            Gets or sets the name of the event
+            that will trigger the action.
+            </summary>
+        </member>
+        <member name="P:Csla.Xaml.TriggerAction.MethodName">
+            <summary>
+            Gets or sets the name of the method
+            to be invoked.
+            </summary>
+        </member>
+        <member name="P:Csla.Xaml.TriggerAction.MethodParameter">
+            <summary>
+            Gets or sets the value of a parameter to
+            be passed to the invoked method.
+            </summary>
+        </member>
+        <member name="P:Csla.Xaml.TriggerAction.RebindParameterDynamically">
+            <summary>
+            Gets or sets a value indicating whether the
+            MethodParameter value should be dynamically rebound
+            before invoking the target method.
+            </summary>
+        </member>
         <member name="T:Csla.Xaml.PropertyStatus">
             <summary>
             Displays validation information for a business
@@ -546,167 +1150,30 @@
             <param name="parameter">Extra parameter (ignored).</param>
             <param name="culture">Desired culture (ignored).</param>
         </member>
-        <member name="T:Csla.Xaml.CslaDataProvider">
+        <member name="T:Csla.Xaml.IdentityConverter">
             <summary>
-            Wraps and creates a CSLA .NET-style object 
-            that you can use as a binding source.
+            Provides the functionality of a WPF
+            value converter without affecting the
+            value as it flows to and from the UI.
             </summary>
         </member>
-        <member name="M:Csla.Xaml.CslaDataProvider.#ctor">
+        <member name="M:Csla.Xaml.IdentityConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
             <summary>
-            Creates an instance of the object.
+            Returns the unchanged value.
             </summary>
+            <param name="value">Value to be converted.</param>
+            <param name="targetType">Desired value type.</param>
+            <param name="parameter">Conversion parameter.</param>
+            <param name="culture">Conversion culture.</param>
         </member>
-        <member name="M:Csla.Xaml.CslaDataProvider.OnSaved(System.Object,System.Exception,System.Object)">
+        <member name="M:Csla.Xaml.IdentityConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
             <summary>
-            Raise the Saved event when the object has been saved.
+            Returns the unchanged value.
             </summary>
-            <param name="newObject">New object reference as a result
-            of the save operation.</param>
-            <param name="error">Reference to an exception object if
-            an error occurred.</param>
-            <param name="userState">Reference to a userstate object.</param>
-        </member>
-        <member name="M:Csla.Xaml.CslaDataProvider.Rebind">
-            <summary>
-            Triggers WPF data binding to rebind to the
-            data object.
-            </summary>
-        </member>
-        <member name="M:Csla.Xaml.CslaDataProvider.BeginInit">
-            <summary>
-            Indicates that the control is about to initialize.
-            </summary>
-        </member>
-        <member name="M:Csla.Xaml.CslaDataProvider.EndInit">
-            <summary>
-            Indicates that the control has initialized.
-            </summary>
-        </member>
-        <member name="M:Csla.Xaml.CslaDataProvider.BeginQuery">
-            <summary>
-            Overridden. Starts to create the requested object, 
-            either immediately or on a background thread, 
-            based on the value of the IsAsynchronous property.
-            </summary>
-        </member>
-        <member name="M:Csla.Xaml.CslaDataProvider.Cancel">
-            <summary>
-            Cancels changes to the business object, returning
-            it to its previous state.
-            </summary>
-            <remarks>
-            This metod does nothing unless ManageLifetime is
-            set to true and the object supports n-level undo.
-            </remarks>
-        </member>
-        <member name="M:Csla.Xaml.CslaDataProvider.Save">
-            <summary>
-            Accepts changes to the business object, and
-            commits them by calling the object's Save()
-            method.
-            </summary>
-            <remarks>
-            <para>
-            This method does nothing unless the object
-            implements Csla.Core.ISavable.
-            </para><para>
-            If the object implements IClonable, it
-            will be cloned, and the clone will be
-            saved.
-            </para><para>
-            If the object supports n-level undo and
-            ManageLifetime is true, then this method
-            will automatically call ApplyEdit() and
-            BeginEdit() appropriately.
-            </para>
-            </remarks>
-        </member>
-        <member name="M:Csla.Xaml.CslaDataProvider.AddNew">
-            <summary>
-            Adds a new item to the object if the object
-            implements IBindingList and AllowNew is true.
-            </summary>
-        </member>
-        <member name="M:Csla.Xaml.CslaDataProvider.RemoveItem(System.Object,Csla.Xaml.ExecuteEventArgs)">
-            <summary>
-            Removes an item from the list if the object
-            implements IBindingList and AllowRemove is true.
-            </summary>
-            <param name="sender">Object invoking this method.</param>
-            <param name="e">
-            ExecuteEventArgs, where MethodParameter contains 
-            the item to be removed from the list.
-            </param>
-        </member>
-        <member name="E:Csla.Xaml.CslaDataProvider.Saved">
-            <summary>
-            Event raised when the object has been saved.
-            </summary>
-        </member>
-        <member name="P:Csla.Xaml.CslaDataProvider.CommandManager">
-            <summary>
-            Gets an object that can be used to execute
-            Save and Undo commands on this CslaDataProvider 
-            through XAML command bindings.
-            </summary>
-        </member>
-        <member name="P:Csla.Xaml.CslaDataProvider.ObjectType">
-            <summary>
-            Gets or sets the type of object 
-            to create an instance of.
-            </summary>
-        </member>
-        <member name="P:Csla.Xaml.CslaDataProvider.ManageObjectLifetime">
-            <summary>
-            Gets or sets a value indicating whether the
-            data control should manage the lifetime of
-            the business object, including using n-level
-            undo.
-            </summary>
-        </member>
-        <member name="P:Csla.Xaml.CslaDataProvider.DataChangedHandler">
-            <summary>
-            Gets or sets a reference to an object that
-            will handle the DataChanged event raised
-            by this data provider.
-            </summary>
-            <remarks>
-            This property is designed to 
-            reference an IErrorDialog control.
-            </remarks>
-        </member>
-        <member name="P:Csla.Xaml.CslaDataProvider.FactoryMethod">
-            <summary>
-            Gets or sets the name of the static
-            (Shared in Visual Basic) factory method
-            that should be called to create the
-            object instance.
-            </summary>
-        </member>
-        <member name="P:Csla.Xaml.CslaDataProvider.FactoryParameters">
-            <summary>
-            Get the list of parameters to pass
-            to the factory method.
-            </summary>
-        </member>
-        <member name="P:Csla.Xaml.CslaDataProvider.IsAsynchronous">
-            <summary>
-            Gets or sets a value that indicates 
-            whether to perform object creation in 
-            a worker thread or in the active context.
-            </summary>
-        </member>
-        <member name="P:Csla.Xaml.CslaDataProvider.ObjectInstance">
-            <summary>
-            Gets or sets a reference to the data
-            object.
-            </summary>
-        </member>
-        <member name="P:Csla.Xaml.CslaDataProvider.IsBusy">
-            <summary>
-            Gets a value indicating if this object is busy.
-            </summary>
+            <param name="value">Value to be converted.</param>
+            <param name="targetType">Desired value type.</param>
+            <param name="parameter">Conversion parameter.</param>
+            <param name="culture">Conversion culture.</param>
         </member>
         <member name="T:Csla.Xaml.VisibilityMode">
             <summary>
@@ -732,287 +1199,6 @@
             Specifies that the visibility of the 
             non-readable control should not be
             altered by the Authorizer control.
-            </summary>
-        </member>
-        <member name="T:Csla.Xaml.ObjectStatus">
-            <summary>
-            Container for other UI controls that exposes
-            various status values from the CSLA .NET
-            business object acting as DataContext.
-            </summary>
-            <remarks>
-            This control provides access to the IsDirty,
-            IsNew, IsDeleted, IsValid and IsSavable properties
-            of a business object. The purpose behind this
-            control is to expose those properties in a way
-            that supports WFP data binding against those
-            values.
-            </remarks>
-        </member>
-        <member name="T:Csla.Xaml.DataDecoratorBase">
-            <summary>
-            Base class for creating WPF panel
-            controls that react when the DataContext,
-            data object and data property values
-            are changed.
-            </summary>
-        </member>
-        <member name="M:Csla.Xaml.DataDecoratorBase.#ctor">
-            <summary>
-            Creates an instance of the object.
-            </summary>
-        </member>
-        <member name="M:Csla.Xaml.DataDecoratorBase.Panel_DataContextChanged(System.Object,System.Windows.DependencyPropertyChangedEventArgs)">
-            <summary>
-            Handle case where the DataContext for the
-            control has changed.
-            </summary>
-        </member>
-        <member name="M:Csla.Xaml.DataDecoratorBase.DataProvider_DataChanged(System.Object,System.EventArgs)">
-            <summary>
-            Handle case where the Data property of the
-            DataContext (a DataSourceProvider) has changed.
-            </summary>
-        </member>
-        <member name="M:Csla.Xaml.DataDecoratorBase.DataPropertyChanged(System.ComponentModel.PropertyChangedEventArgs)">
-            <summary>
-            This method is called when a property
-            of the data object to which the 
-            control is bound has changed.
-            </summary>
-        </member>
-        <member name="M:Csla.Xaml.DataDecoratorBase.DataBindingListChanged(System.ComponentModel.ListChangedEventArgs)">
-            <summary>
-            This method is called if the data
-            object is an IBindingList, and the 
-            ListChanged event was raised by
-            the data object.
-            </summary>
-        </member>
-        <member name="M:Csla.Xaml.DataDecoratorBase.DataObservableCollectionChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs)">
-            <summary>
-            This method is called if the data
-            object is an INotifyCollectionChanged, 
-            and the CollectionChanged event was 
-            raised by the data object.
-            </summary>
-        </member>
-        <member name="M:Csla.Xaml.DataDecoratorBase.DataObjectChanged">
-            <summary>
-            This method is called when the data
-            object to which the control is bound
-            has changed.
-            </summary>
-        </member>
-        <member name="M:Csla.Xaml.DataDecoratorBase.FindChildBindings">
-            <summary>
-            Scans all child controls of this panel
-            for object bindings, and calls
-            <see cref="M:Csla.Xaml.DataDecoratorBase.FoundBinding(System.Windows.Data.Binding,System.Windows.FrameworkElement,System.Windows.DependencyProperty)"/> for each
-            binding found.
-            </summary>
-        </member>
-        <member name="M:Csla.Xaml.DataDecoratorBase.FoundBinding(System.Windows.Data.Binding,System.Windows.FrameworkElement,System.Windows.DependencyProperty)">
-            <summary>
-            Called by
-            <see cref="M:Csla.Xaml.DataDecoratorBase.FindChildBindings"/> each
-            time an object binding is found.
-            </summary>
-            <param name="bnd">The Binding object.</param>
-            <param name="control">The control containing the binding.</param>
-            <param name="prop">The data bound DependencyProperty.</param>
-        </member>
-        <member name="P:Csla.Xaml.DataDecoratorBase.DataObject">
-            <summary>
-            Gets a reference to the current
-            data object.
-            </summary>
-            <remarks>
-            The DataContext may not be the data object. The
-            DataContext may be a DataSourceProvider control.
-            This property returns a reference to the actual
-            <b>data object</b>, not necessarily the DataContext
-            itself.
-            </remarks>
-        </member>
-        <member name="M:Csla.Xaml.ObjectStatus.DataObjectChanged">
-            <summary>
-            This method is called when the data
-            object to which the control is bound
-            has changed.
-            </summary>
-        </member>
-        <member name="M:Csla.Xaml.ObjectStatus.DataPropertyChanged(System.ComponentModel.PropertyChangedEventArgs)">
-            <summary>
-            This method is called when a property
-            of the data object to which the 
-            control is bound has changed.
-            </summary>
-        </member>
-        <member name="M:Csla.Xaml.ObjectStatus.DataBindingListChanged(System.ComponentModel.ListChangedEventArgs)">
-            <summary>
-            This method is called if the data
-            object is an IBindingList, and the 
-            ListChanged event was raised by
-            the data object.
-            </summary>
-        </member>
-        <member name="M:Csla.Xaml.ObjectStatus.DataObservableCollectionChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs)">
-            <summary>
-            This method is called if the data
-            object is an INotifyCollectionChanged, 
-            and the CollectionChanged event was 
-            raised by the data object.
-            </summary>
-        </member>
-        <member name="M:Csla.Xaml.ObjectStatus.Refresh">
-            <summary>
-            Refreshes the control's property
-            values to reflect the values of
-            the underlying business object.
-            </summary>
-        </member>
-        <member name="P:Csla.Xaml.ObjectStatus.CanCreateObject">
-            <summary>
-            Exposes the CanCreateObject property of the
-            DataContext business object.
-            </summary>
-        </member>
-        <member name="P:Csla.Xaml.ObjectStatus.CanGetObject">
-            <summary>
-            Exposes the CanGetObject property of the
-            DataContext business object.
-            </summary>
-        </member>
-        <member name="P:Csla.Xaml.ObjectStatus.CanEditObject">
-            <summary>
-            Exposes the CanEditObject property of the
-            DataContext business object.
-            </summary>
-        </member>
-        <member name="P:Csla.Xaml.ObjectStatus.CanDeleteObject">
-            <summary>
-            Exposes the CanDeleteObject property of the
-            DataContext business object.
-            </summary>
-        </member>
-        <member name="P:Csla.Xaml.ObjectStatus.IsDeleted">
-            <summary>
-            Exposes the IsDeleted property of the
-            DataContext business object.
-            </summary>
-        </member>
-        <member name="P:Csla.Xaml.ObjectStatus.IsDirty">
-            <summary>
-            Exposes the IsDirty property of the
-            DataContext business object.
-            </summary>
-        </member>
-        <member name="P:Csla.Xaml.ObjectStatus.IsNew">
-            <summary>
-            Exposes the IsNew property of the
-            DataContext business object.
-            </summary>
-        </member>
-        <member name="P:Csla.Xaml.ObjectStatus.IsSavable">
-            <summary>
-            Exposes the IsSavable property of the
-            DataContext business object.
-            </summary>
-        </member>
-        <member name="P:Csla.Xaml.ObjectStatus.IsValid">
-            <summary>
-            Exposes the IsValid property of the
-            DataContext business object.
-            </summary>
-        </member>
-        <member name="T:Csla.Xaml.IErrorDialog">
-            <summary>
-            Interface defining the interaction between
-            a CslaDataSource and an error dialog control.
-            </summary>
-        </member>
-        <member name="M:Csla.Xaml.IErrorDialog.Register(System.Object)">
-            <summary>
-            Method called by the CslaDataProvider when the
-            error dialog should register any events it
-            wishes to handle from the CslaDataProvider.
-            </summary>
-            <param name="source">Data provider control.</param>
-        </member>
-        <member name="T:Csla.Xaml.BrokenRuleSeverityConverter">
-            <summary>
-            Converts validation severity values into corresponding
-            images.
-            </summary>
-        </member>
-        <member name="M:Csla.Xaml.BrokenRuleSeverityConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
-            <summary>
-            Converts validation severity values into corresponding
-            images.
-            </summary>
-            <param name="value">Original value.</param>
-            <param name="targetType">Desired output type (ignored).</param>
-            <param name="parameter">Extra parameter (ignored).</param>
-            <param name="culture">Desired culture (ignored).</param>
-            <returns></returns>
-        </member>
-        <member name="M:Csla.Xaml.BrokenRuleSeverityConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
-            <summary>
-            Returns the original value.
-            </summary>
-            <param name="value">Original value.</param>
-            <param name="targetType">Desired output type (ignored).</param>
-            <param name="parameter">Extra parameter (ignored).</param>
-            <param name="culture">Desired culture (ignored).</param>
-        </member>
-        <member name="T:Csla.Xaml.CslaDataProviderCommandManager">
-            <summary>
-            Implements support for RoutedCommands that can
-            be executed by the CslaDataProvider control.
-            </summary>
-            <remarks>
-            Use this object as the CommandTarget for command
-            source objects when you want the CslaDataProvider
-            to execute the command.
-            </remarks>
-        </member>
-        <member name="T:Csla.Xaml.ViewModel`1">
-            <summary>
-            Base class used to create ViewModel objects,
-            with pre-existing verbs for use by
-            InvokeMethod or Invoke.
-            </summary>
-            <typeparam name="T">Type of the Model object.</typeparam>
-        </member>
-        <member name="M:Csla.Xaml.ViewModel`1.Save(System.Object,Csla.Xaml.ExecuteEventArgs)">
-            <summary>
-            Saves the Model, first committing changes
-            if ManagedObjectLifetime is true.
-            </summary>
-        </member>
-        <member name="M:Csla.Xaml.ViewModel`1.Cancel(System.Object,Csla.Xaml.ExecuteEventArgs)">
-            <summary>
-            Cancels changes made to the model 
-            if ManagedObjectLifetime is true.
-            </summary>
-        </member>
-        <member name="M:Csla.Xaml.ViewModel`1.AddNew(System.Object,Csla.Xaml.ExecuteEventArgs)">
-            <summary>
-            Adds a new item to the Model (if it
-            is a collection).
-            </summary>
-        </member>
-        <member name="M:Csla.Xaml.ViewModel`1.Remove(System.Object,Csla.Xaml.ExecuteEventArgs)">
-            <summary>
-            Removes an item from the Model (if it
-            is a collection).
-            </summary>
-        </member>
-        <member name="M:Csla.Xaml.ViewModel`1.Delete(System.Object,Csla.Xaml.ExecuteEventArgs)">
-            <summary>
-            Marks the Model for deletion (if it is an
-            editable root object).
             </summary>
         </member>
         <member name="T:Csla.Xaml.InvokeMethod">
@@ -1104,157 +1290,55 @@
             </summary>
             <param name="ctrl">Attached UI control</param>
         </member>
-        <member name="T:Csla.Xaml.ErrorEventArgs">
+        <member name="T:Csla.Xaml.ExecuteEventArgs">
             <summary>
-            Contains information about the error that
-            has occurred.
+            Arguments passed to a method invoked
+            by the Execute trigger action.
             </summary>
         </member>
-        <member name="P:Csla.Xaml.ErrorEventArgs.Error">
+        <member name="P:Csla.Xaml.ExecuteEventArgs.TriggerSource">
             <summary>
-            Gets the Exception object for the error
-            that occurred.
+            The control that raised the event that
+            triggered invocation of this method.
             </summary>
         </member>
-        <member name="T:Csla.Xaml.ErrorDialog">
+        <member name="P:Csla.Xaml.ExecuteEventArgs.MethodParameter">
             <summary>
-            Displays an error dialog for any exceptions
-            that occur in a CslaDataProvider.
+            The MethodParameter value provided by
+            the designer.
             </summary>
         </member>
-        <member name="M:Csla.Xaml.ErrorDialog.#ctor">
+        <member name="P:Csla.Xaml.ExecuteEventArgs.TriggerParameter">
             <summary>
-            Creates a new instance of the control.
+            The EventArgs parameter from the event
+            that triggered invocation of this method.
             </summary>
         </member>
-        <member name="F:Csla.Xaml.ErrorDialog.DialogTitleProperty">
+        <member name="T:Csla.Xaml.BrokenRuleSeverityConverter">
             <summary>
-            Gets or sets the title of the error
-            dialog.
+            Converts validation severity values into corresponding
+            images.
             </summary>
         </member>
-        <member name="F:Csla.Xaml.ErrorDialog.DialogFirstLineProperty">
+        <member name="M:Csla.Xaml.BrokenRuleSeverityConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
             <summary>
-            Gets or sets the first line of text displayed
-            within the error dialog (before the
-            exception message).
+            Converts validation severity values into corresponding
+            images.
             </summary>
+            <param name="value">Original value.</param>
+            <param name="targetType">Desired output type (ignored).</param>
+            <param name="parameter">Extra parameter (ignored).</param>
+            <param name="culture">Desired culture (ignored).</param>
+            <returns></returns>
         </member>
-        <member name="F:Csla.Xaml.ErrorDialog.ShowExceptionDetailProperty">
+        <member name="M:Csla.Xaml.BrokenRuleSeverityConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
             <summary>
-            Gets or sets a value indicating whether
-            the dialog should include exception details
-            or just the exception summary message.
+            Returns the original value.
             </summary>
-        </member>
-        <member name="F:Csla.Xaml.ErrorDialog.DialogIconProperty">
-            <summary>
-            Gets or sets a value indicating whether
-            the dialog should include exception details
-            or just the exception summary message.
-            </summary>
-        </member>
-        <member name="P:Csla.Xaml.ErrorDialog.DialogTitle">
-            <summary>
-            Gets or sets the title of the error
-            dialog.
-            </summary>
-        </member>
-        <member name="P:Csla.Xaml.ErrorDialog.DialogFirstLine">
-            <summary>
-            Gets or sets the first line of text displayed
-            within the error dialog (before the
-            exception message).
-            </summary>
-        </member>
-        <member name="P:Csla.Xaml.ErrorDialog.ShowExceptionDetail">
-            <summary>
-            Gets or sets the first line of text displayed
-            within the error dialog (before the
-            exception message).
-            </summary>
-        </member>
-        <member name="P:Csla.Xaml.ErrorDialog.DialogIcon">
-            <summary>
-            Gets or sets the icon displayed in
-            the dialog.
-            </summary>
-        </member>
-        <member name="T:Csla.Xaml.TriggerAction">
-            <summary>
-            Control used to invoke a method on the DataContext
-            based on an event being raised by a UI control.
-            </summary>
-        </member>
-        <member name="M:Csla.Xaml.TriggerAction.#ctor">
-            <summary>
-            Creates an instance of the object.
-            </summary>
-        </member>
-        <member name="M:Csla.Xaml.TriggerAction.CallMethod(System.Object,System.EventArgs)">
-            <summary>
-            Invokes target method.
-            </summary>
-        </member>
-        <member name="F:Csla.Xaml.TriggerAction.TargetControlProperty">
-            <summary>
-            Gets or sets the target UI control.
-            </summary>
-        </member>
-        <member name="F:Csla.Xaml.TriggerAction.TriggerEventProperty">
-            <summary>
-            Gets or sets the name of the event
-            that will trigger the action.
-            </summary>
-        </member>
-        <member name="F:Csla.Xaml.TriggerAction.MethodNameProperty">
-            <summary>
-            Gets or sets the name of the method
-            to be invoked.
-            </summary>
-        </member>
-        <member name="F:Csla.Xaml.TriggerAction.MethodParameterProperty">
-            <summary>
-            Gets or sets the value of a parameter to
-            be passed to the invoked method.
-            </summary>
-        </member>
-        <member name="F:Csla.Xaml.TriggerAction.RebindParameterDynamicallyProperty">
-            <summary>
-            Gets or sets a value indicating whether the
-            MethodParameter value should be dynamically rebound
-            before invoking the target method.
-            </summary>
-        </member>
-        <member name="P:Csla.Xaml.TriggerAction.TargetControl">
-            <summary>
-            Gets or sets the target UI control.
-            </summary>
-        </member>
-        <member name="P:Csla.Xaml.TriggerAction.TriggerEvent">
-            <summary>
-            Gets or sets the name of the event
-            that will trigger the action.
-            </summary>
-        </member>
-        <member name="P:Csla.Xaml.TriggerAction.MethodName">
-            <summary>
-            Gets or sets the name of the method
-            to be invoked.
-            </summary>
-        </member>
-        <member name="P:Csla.Xaml.TriggerAction.MethodParameter">
-            <summary>
-            Gets or sets the value of a parameter to
-            be passed to the invoked method.
-            </summary>
-        </member>
-        <member name="P:Csla.Xaml.TriggerAction.RebindParameterDynamically">
-            <summary>
-            Gets or sets a value indicating whether the
-            MethodParameter value should be dynamically rebound
-            before invoking the target method.
-            </summary>
+            <param name="value">Original value.</param>
+            <param name="targetType">Desired output type (ignored).</param>
+            <param name="parameter">Extra parameter (ignored).</param>
+            <param name="culture">Desired culture (ignored).</param>
         </member>
         <member name="T:Csla.Xaml.PropertyInfo">
             <summary>
@@ -1405,90 +1489,6 @@
         <member name="E:Csla.Xaml.PropertyInfo.PropertyChanged">
             <summary>
             Event raised when a property has changed.
-            </summary>
-        </member>
-        <member name="T:Csla.Xaml.ExecuteEventArgs">
-            <summary>
-            Arguments passed to a method invoked
-            by the Execute trigger action.
-            </summary>
-        </member>
-        <member name="P:Csla.Xaml.ExecuteEventArgs.TriggerSource">
-            <summary>
-            The control that raised the event that
-            triggered invocation of this method.
-            </summary>
-        </member>
-        <member name="P:Csla.Xaml.ExecuteEventArgs.MethodParameter">
-            <summary>
-            The MethodParameter value provided by
-            the designer.
-            </summary>
-        </member>
-        <member name="P:Csla.Xaml.ExecuteEventArgs.TriggerParameter">
-            <summary>
-            The EventArgs parameter from the event
-            that triggered invocation of this method.
-            </summary>
-        </member>
-        <member name="T:Csla.Xaml.ApplicationContextManager">
-            <summary>
-            ApplicationContextManager for WPF applications
-            </summary>
-        </member>
-        <member name="M:Csla.Xaml.ApplicationContextManager.GetUser">
-            <summary>
-            Gets the current principal.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Csla.Xaml.ApplicationContextManager.SetUser(System.Security.Principal.IPrincipal)">
-            <summary>
-            Sets the current principal.
-            </summary>
-            <param name="principal">Principal object.</param>
-        </member>
-        <member name="M:Csla.Xaml.ApplicationContextManager.GetLocalContext">
-            <summary>
-            Gets the local context.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Csla.Xaml.ApplicationContextManager.SetLocalContext(Csla.Core.ContextDictionary)">
-            <summary>
-            Sets the local context.
-            </summary>
-            <param name="localContext">Local context.</param>
-        </member>
-        <member name="M:Csla.Xaml.ApplicationContextManager.GetClientContext">
-            <summary>
-            Gets the client context.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Csla.Xaml.ApplicationContextManager.SetClientContext(Csla.Core.ContextDictionary)">
-            <summary>
-            Sets the client context.
-            </summary>
-            <param name="clientContext">Client context.</param>
-        </member>
-        <member name="M:Csla.Xaml.ApplicationContextManager.GetGlobalContext">
-            <summary>
-            Gets the global context.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Csla.Xaml.ApplicationContextManager.SetGlobalContext(Csla.Core.ContextDictionary)">
-            <summary>
-            Sets the global context.
-            </summary>
-            <param name="globalContext">Global context.</param>
-        </member>
-        <member name="P:Csla.Xaml.ApplicationContextManager.IsValid">
-            <summary>
-            Gets a value indicating whether this
-            context manager is valid for use in
-            the current environment.
             </summary>
         </member>
     </members>
