@@ -3503,6 +3503,13 @@ namespace Csla.Core
       BusinessRules.CheckRules();
     }
 
+    /// <summary>
+    /// Gets the broken rules for this object
+    /// </summary>
+    public BrokenRulesCollection GetBrokenRules()
+    {
+      return BrokenRulesCollection;
+    }
     #endregion
   }
 }
