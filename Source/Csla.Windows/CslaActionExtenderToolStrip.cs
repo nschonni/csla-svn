@@ -21,17 +21,17 @@ using Csla.Properties;
 namespace Csla.Windows
 {
   /// <summary>
-  /// Extender control providing automation around
+  /// Extender control (for ToolStripButton only) providing automation around
   /// data binding to CSLA .NET business objects.
   /// </summary>
   [ToolboxItem(true)]
-  [ProvideProperty("ActionType", typeof(Control))]
-  [ProvideProperty("PostSaveAction", typeof(Control))]
-  [ProvideProperty("RebindAfterSave", typeof(Control))]
-  [ProvideProperty("DisableWhenClean", typeof(Control))]
-  [ProvideProperty("DisableWhenUseless", typeof(Control))]
-  [ProvideProperty("CommandName", typeof(Control))]
-  public class CslaActionExtender : System.ComponentModel.Component, IExtenderProvider
+  [ProvideProperty("ActionType", typeof(ToolStripButton))]
+  [ProvideProperty("PostSaveAction", typeof(ToolStripButton))]
+  [ProvideProperty("RebindAfterSave", typeof(ToolStripButton))]
+  [ProvideProperty("DisableWhenClean", typeof(ToolStripButton))]
+  [ProvideProperty("DisableWhenUseless", typeof(ToolStripButton))]
+  [ProvideProperty("CommandName", typeof(ToolStripButton))]
+  public class CslaActionExtenderToolStrip : System.ComponentModel.Component, IExtenderProvider
   {
     #region Constructors
 
@@ -39,7 +39,7 @@ namespace Csla.Windows
     /// Creates an instance of the type.
     /// </summary>
     /// <param name="container">Container for the component.</param>
-    public CslaActionExtender(IContainer container)
+    public CslaActionExtenderToolStrip(IContainer container)
       : base()
     {
       _container = container;
@@ -50,8 +50,8 @@ namespace Csla.Windows
 
     #region Member variables
 
-    private Dictionary<Control, CslaActionExtenderProperties> _sources =
-      new Dictionary<Control, CslaActionExtenderProperties>();
+    private Dictionary<ToolStripButton, CslaActionExtenderProperties> _sources =
+      new Dictionary<ToolStripButton, CslaActionExtenderProperties>();
 
     private object _dataSource = null;
     private bool _autoShowBrokenRules = true;
@@ -59,7 +59,7 @@ namespace Csla.Windows
     private string _dirtyWarningMessage = Resources.ActionExtenderDirtyWarningMessagePropertyDefault;
     private bool _warnOnCancel = false;
     private string _warnOnCancelMessage = Resources.ActionExtenderWarnOnCancelMessagePropertyDefault;
-    private string _objectIsValidMessage = Resources.ActionExtenderObjectIsValidMessagePropertyDefault;
+    private string _objectIsValidMessage = Resources.ActionExtenderObjectIsValidMessagePropertyDefault; 
     private IContainer _container = null;
     private BindingSourceNode _bindingSourceTree = null;
     private bool _closeForm = false;
@@ -70,7 +70,7 @@ namespace Csla.Windows
 
     bool IExtenderProvider.CanExtend(object extendee)
     {
-      return extendee is IButtonControl;
+      return true;
     }
 
     #endregion
@@ -186,7 +186,7 @@ namespace Csla.Windows
     }
 
     #endregion
-
+    //
     #region Property accessor methods
 
     #region ActionType
@@ -194,13 +194,13 @@ namespace Csla.Windows
     /// <summary>
     /// Gets the action type.
     /// </summary>
-    /// <param name="ctl">Reference to control.</param>
+    /// <param name="ctl">Reference to ToolStripButton.</param>
     /// <returns></returns>
     [Category("Csla")]
     [Description("Gets or sets the action type for this button.")]
     [Bindable(true)]
     [DefaultValue(CslaFormAction.None)]
-    public CslaFormAction GetActionType(Control ctl)
+    public CslaFormAction GetActionType(ToolStripButton ctl)
     {
       if (_sources.ContainsKey(ctl))
         return ((CslaActionExtenderProperties)_sources[ctl]).ActionType;
@@ -211,13 +211,13 @@ namespace Csla.Windows
     /// <summary>
     /// Sets the action type.
     /// </summary>
-    /// <param name="ctl">Reference to control.</param>
+    /// <param name="ctl">Reference to ToolStripButton.</param>
     /// <param name="value">Value for property.</param>
     [Category("Csla")]
     [Description("Gets or sets the action type for this button.")]
     [Bindable(true)]
     [DefaultValue(CslaFormAction.None)]
-    public void SetActionType(Control ctl, CslaFormAction value)
+    public void SetActionType(ToolStripButton ctl, CslaFormAction value)
     {
       if (_sources.ContainsKey(ctl))
         _sources[ctl].ActionType = value;
@@ -236,13 +236,13 @@ namespace Csla.Windows
     /// <summary>
     /// Gets the post save action.
     /// </summary>
-    /// <param name="ctl">Reference to control.</param>
+    /// <param name="ctl">Reference to ToolStripButton.</param>
     /// <returns></returns>
     [Category("Csla")]
     [Description("Gets or sets the action performed after a save (if ActionType is set to Save).")]
     [Bindable(true)]
     [DefaultValue(PostSaveActionType.None)]
-    public PostSaveActionType GetPostSaveAction(Control ctl)
+    public PostSaveActionType GetPostSaveAction(ToolStripButton ctl)
     {
       if (_sources.ContainsKey(ctl))
         return ((CslaActionExtenderProperties)_sources[ctl]).PostSaveAction;
@@ -253,13 +253,13 @@ namespace Csla.Windows
     /// <summary>
     /// Sets the post save action.
     /// </summary>
-    /// <param name="ctl">Reference to control.</param>
+    /// <param name="ctl">Reference to ToolStripButton.</param>
     /// <param name="value">Value for property.</param>
     [Category("Csla")]
     [Description("Gets or sets the action performed after a save (if ActionType is set to Save).")]
     [Bindable(true)]
     [DefaultValue(PostSaveActionType.None)]
-    public void SetPostSaveAction(Control ctl, PostSaveActionType value)
+    public void SetPostSaveAction(ToolStripButton ctl, PostSaveActionType value)
     {
       if (_sources.ContainsKey(ctl))
         _sources[ctl].PostSaveAction = value;
@@ -278,12 +278,12 @@ namespace Csla.Windows
     /// <summary>
     /// Gets the rebind after save value.
     /// </summary>
-    /// <param name="ctl">Reference to control.</param>
+    /// <param name="ctl">Reference to ToolStripButton.</param>
     [Category("Csla")]
     [Description("Determines if the binding source will rebind after business object saves.")]
     [Bindable(true)]
     [DefaultValue(true)]
-    public bool GetRebindAfterSave(Control ctl)
+    public bool GetRebindAfterSave(ToolStripButton ctl)
     {
       if (_sources.ContainsKey(ctl))
         return ((CslaActionExtenderProperties)_sources[ctl]).RebindAfterSave;
@@ -294,13 +294,13 @@ namespace Csla.Windows
     /// <summary>
     /// Sets the rebind after save value.
     /// </summary>
-    /// <param name="ctl">Reference to control.</param>
+    /// <param name="ctl">Reference to ToolStripButton.</param>
     /// <param name="value">Value for property.</param>
     [Category("Csla")]
     [Description("Determines if the binding source will rebind after business object saves.")]
     [Bindable(true)]
     [DefaultValue(true)]
-    public void SetRebindAfterSave(Control ctl, bool value)
+    public void SetRebindAfterSave(ToolStripButton ctl, bool value)
     {
       if (_sources.ContainsKey(ctl))
         _sources[ctl].RebindAfterSave = value;
@@ -319,14 +319,14 @@ namespace Csla.Windows
     /// <summary>
     /// Gets the disable when clean value.
     /// </summary>
-    /// <param name="ctl">Reference to control.</param>
+    /// <param name="ctl">Reference to ToolStripButton.</param>
     [Category("Csla")]
     [Description("If True, then the dirtiness of the underlying business object will cause this button to be enabled or disabled.")]
     [Bindable(true)]
     [DefaultValue(false)]
     [Obsolete("Use instead DisableWhenUseless")]
     [Browsable(false)]
-    public bool GetDisableWhenClean(Control ctl)
+    public bool GetDisableWhenClean(ToolStripButton ctl)
     {
       if (_sources.ContainsKey(ctl))
         return ((CslaActionExtenderProperties)_sources[ctl]).DisableWhenClean;
@@ -337,7 +337,7 @@ namespace Csla.Windows
     /// <summary>
     /// Sets the disable when clean value.
     /// </summary>
-    /// <param name="ctl">Reference to control.</param>
+    /// <param name="ctl">Reference to ToolStripButton.</param>
     /// <param name="value">Value for property.</param>
     [Category("Csla")]
     [Description("If True, then the dirtiness of the underlying business object will cause this button to be enabled or disabled.")]
@@ -345,7 +345,7 @@ namespace Csla.Windows
     [DefaultValue(true)]
     [Obsolete("Use instead DisableWhenUseless")]
     [Browsable(false)]
-    public void SetDisableWhenClean(Control ctl, bool value)
+    public void SetDisableWhenClean(ToolStripButton ctl, bool value)
     {
       if (_sources.ContainsKey(ctl))
         _sources[ctl].DisableWhenClean = value;
@@ -362,14 +362,14 @@ namespace Csla.Windows
     #region DisableWhenUseless
 
     /// <summary>
-    /// Gets the disable when useless value.
+    /// Gets the disable when clean value.
     /// </summary>
-    /// <param name="ctl">Reference to control.</param>
+    /// <param name="ctl">Reference to ToolStripButton.</param>
     [Category("Csla")]
-    [Description("If True, then the savable status of the underlying business object will cause this button to be enabled or disabled.")]
+    [Description("If True, then the status of the underlying business object will cause this button to be enabled or disabled.")]
     [Bindable(true)]
     [DefaultValue(false)]
-    public bool GetDisableWhenUseless(Control ctl)
+    public bool GetDisableWhenUseless(ToolStripButton ctl)
     {
       if (_sources.ContainsKey(ctl))
         return ((CslaActionExtenderProperties)_sources[ctl]).DisableWhenUseless;
@@ -378,15 +378,15 @@ namespace Csla.Windows
     }
 
     /// <summary>
-    /// Sets the disable when useless value.
+    /// Sets the disable when clean value.
     /// </summary>
-    /// <param name="ctl">Reference to control.</param>
+    /// <param name="ctl">Reference to ToolStripButton.</param>
     /// <param name="value">Value for property.</param>
     [Category("Csla")]
-    [Description("If True, then the savable status of the underlying business object will cause this button to be enabled or disabled.")]
+    [Description("If True, then the status of the underlying business object will cause this button to be enabled or disabled.")]
     [Bindable(true)]
     [DefaultValue(true)]
-    public void SetDisableWhenUseless(Control ctl, bool value)
+    public void SetDisableWhenUseless(ToolStripButton ctl, bool value)
     {
       if (_sources.ContainsKey(ctl))
         _sources[ctl].DisableWhenUseless = value;
@@ -405,12 +405,12 @@ namespace Csla.Windows
     /// <summary>
     /// Gets the command name value.
     /// </summary>
-    /// <param name="ctl">Reference to control.</param>
+    /// <param name="ctl">Reference to ToolStripButton.</param>
     [Category("Csla")]
     [Description("Gets or sets the name of this command control for unique identification purposes.")]
     [Bindable(true)]
     [DefaultValue("")]
-    public string GetCommandName(Control ctl)
+    public string GetCommandName(ToolStripButton ctl)
     {
       if (_sources.ContainsKey(ctl))
         return ((CslaActionExtenderProperties)_sources[ctl]).CommandName;
@@ -421,13 +421,13 @@ namespace Csla.Windows
     /// <summary>
     /// Sets the command name value.
     /// </summary>
-    /// <param name="ctl">Reference to control.</param>
+    /// <param name="ctl">Reference to ToolStripButton.</param>
     /// <param name="value">Value for property.</param>
     [Category("Csla")]
     [Description("Gets or sets the name of this command control for unique identification purposes.")]
     [Bindable(true)]
     [DefaultValue("")]
-    public void SetCommandName(Control ctl, string value)
+    public void SetCommandName(ToolStripButton ctl, string value)
     {
       if (_sources.ContainsKey(ctl))
         _sources[ctl].CommandName = value;
@@ -446,14 +446,14 @@ namespace Csla.Windows
     #region Event declarations
 
     /// <summary>
-    /// Event indicating the user is clicking on the control.
+    /// Event indicating the user is clicking on the ToolStripButton.
     /// </summary>
     [Category("Csla")]
     [Description("Event fires just before the attempted action.")]
     public event EventHandler<CslaActionCancelEventArgs> Clicking;
 
     /// <summary>
-    /// Event indicating the user clicked on the control.
+    /// Event indicating the user clicked on the ToolStripButton.
     /// </summary>
     [Category("Csla")]
     [Description("Event fires after a successful action.  When button is set to Save, this event will only fire upon a successful save.  If button is set to Close, this event will never fire.")]
@@ -606,7 +606,6 @@ namespace Csla.Windows
 
       _bindingSourceTree = BindingSourceHelper.InitializeBindingSourceTree(_container, rootSource);
       _bindingSourceTree.Bind(objectToBind);
-
     }
 
     private void AddEventHooks(ISavable objectToBind)
@@ -663,7 +662,7 @@ namespace Csla.Windows
     /// <param name="e">Arguments.</param>
     protected void OnClick(object sender, System.EventArgs e)
     {
-      Control ctl = (Control)sender;
+      ToolStripButton ctl = (ToolStripButton) sender;
       CslaActionExtenderProperties props = _sources[ctl] as CslaActionExtenderProperties;
       if (props.ActionType != CslaFormAction.None)
       {
@@ -690,7 +689,7 @@ namespace Csla.Windows
               }
               else
                 OnErrorEncountered(new ErrorEncounteredEventArgs(
-                  props.CommandName, new InvalidCastException(Resources.ActionExtenderInvalidBindingSourceCast)));
+                                  props.CommandName, new InvalidCastException(Resources.ActionExtenderInvalidBindingSourceCast)));
 
               if (savableObject == null || trackableObject == null)
                 OnErrorEncountered(new ErrorEncounteredEventArgs(
@@ -745,7 +744,8 @@ namespace Csla.Windows
 
                   if (objectValid)
                   {
-                    CslaActionCancelEventArgs savingArgs = new CslaActionCancelEventArgs(false, props.CommandName);
+                    CslaActionCancelEventArgs savingArgs = new CslaActionCancelEventArgs(
+                      false, props.CommandName);
                     OnObjectSaving(savingArgs);
 
                     if (!savingArgs.Cancel)
@@ -756,7 +756,7 @@ namespace Csla.Windows
                       Csla.Core.ISavable objectToSave = savableObject;
 
                       if (Csla.ApplicationContext.AutoCloneOnUpdate)
-                        objectToSave = ((ICloneable)savableObject).Clone() as Csla.Core.ISavable;
+                        objectToSave = ((ICloneable) savableObject).Clone() as Csla.Core.ISavable;
 
                       if (objectToSave != null)
                       {
@@ -843,7 +843,7 @@ namespace Csla.Windows
                 {
                   if (_warnIfCloseOnDirty)
                     diagResult = MessageBox.Show(
-                      _dirtyWarningMessage + Environment.NewLine + Resources.ActionExtenderCloseConfirmation, Resources.Warning,
+                                          _dirtyWarningMessage + Environment.NewLine + Resources.ActionExtenderCloseConfirmation, Resources.Warning,
                       MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 }
 
@@ -926,12 +926,12 @@ namespace Csla.Windows
     private void InitializeControls(bool initialEnabling)
     {
       // controls will not be enabled until the BusinessObjectPropertyChanged event fires or if it's in an appropriate state now
-      List<Control> extendedControls = new List<Control>();
-      foreach (KeyValuePair<Control, CslaActionExtenderProperties> pair in _sources)
+      List<ToolStripButton> extendedControls = new List<ToolStripButton>();
+      foreach (KeyValuePair<ToolStripButton, CslaActionExtenderProperties> pair in _sources)
       {
         if (pair.Value.ActionType != CslaFormAction.None)
         {
-          Control ctl = pair.Key;
+          ToolStripButton ctl = pair.Key;
           if (initialEnabling)
           {
             if (pair.Value.DisableWhenUseless || pair.Value.DisableWhenClean)
@@ -945,7 +945,7 @@ namespace Csla.Windows
       }
     }
 
-    private void InitializeControl(Control ctl, KeyValuePair<Control, CslaActionExtenderProperties> pair)
+    private void InitializeControl(ToolStripButton ctl, KeyValuePair<ToolStripButton, CslaActionExtenderProperties> pair)
     {
       if (pair.Value.DisableWhenUseless || (pair.Value.DisableWhenClean && !ctl.Enabled))
       {
@@ -958,14 +958,14 @@ namespace Csla.Windows
             if (pair.Value.ActionType == CslaFormAction.Cancel || pair.Value.DisableWhenClean)
               ChangeEnabled(ctl, trackableObject.IsNew || trackableObject.IsDirty || trackableObject.IsDeleted);
             if (pair.Value.ActionType == CslaFormAction.Save)
-              ChangeEnabled(ctl, (trackableObject.IsNew || trackableObject.IsDirty || trackableObject.IsDeleted) 
-                && trackableObject.IsValid);
+              ChangeEnabled(ctl, (trackableObject.IsNew || trackableObject.IsDirty || trackableObject.IsDeleted)
+                                 && trackableObject.IsValid);
           }
         }
       }
     }
 
-    private void ChangeEnabled(Control ctl, bool newEnabled)
+    private void ChangeEnabled(ToolStripButton ctl, bool newEnabled)
     {
       // only do this if it's changed to avoid flicker
       if (ctl.Enabled != newEnabled)
@@ -976,10 +976,10 @@ namespace Csla.Windows
     {
       if (_sources.Count > 0)
       {
-        Dictionary<Control, CslaActionExtenderProperties>.Enumerator enumerator = _sources.GetEnumerator();
+        Dictionary<ToolStripButton, CslaActionExtenderProperties>.Enumerator enumerator = _sources.GetEnumerator();
         if (enumerator.MoveNext())
         {
-          Control ctl = enumerator.Current.Key;
+          ToolStripButton ctl = enumerator.Current.Key;
           Form frm = GetParentForm(ctl);
           if (frm != null)
             frm.Close();
@@ -987,12 +987,17 @@ namespace Csla.Windows
       }
     }
 
+    private Form GetParentForm(ToolStripButton thisToolStripButton)
+    {
+      return GetParentForm(thisToolStripButton.GetCurrentParent());
+    }
+
     private Form GetParentForm(Control thisControl)
     {
       Form frm = null;
 
       if (thisControl.Parent is Form)
-        frm = (Form)thisControl.Parent;
+        frm = (Form) thisControl.Parent;
       else
         frm = GetParentForm(thisControl.Parent);
 
