@@ -17,6 +17,7 @@ using Csla;
 using Csla.Core;
 using Csla.Rules;
 using Csla.Properties;
+using Csla.Core.FieldManager;
 
 namespace Csla.Windows
 {
@@ -735,7 +736,10 @@ namespace Csla.Windows
                       string brokenRules = string.Empty;
                       foreach (var brokenRule in businessObject.GetBrokenRules())
                       {
-                        brokenRules += string.Format("{0}: {1}{2}", brokenRule.OriginProperty, brokenRule, Environment.NewLine);
+                        var lambdaBrokenRule = brokenRule;
+                        var friendlyName = PropertyInfoManager.GetRegisteredProperties(businessObject.GetType()).Find(c => c.Name == lambdaBrokenRule.Property).FriendlyName;
+                        brokenRules += string.Format("{0}: {1}{2}", friendlyName, brokenRule, Environment.NewLine); 
+                        
                       }
                       MessageBox.Show(brokenRules, Resources.ActionExtenderErrorCaption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
@@ -865,7 +869,9 @@ namespace Csla.Windows
                     string brokenRules = string.Empty;
                     foreach (var brokenRule in businessObject.GetBrokenRules())
                     {
-                      brokenRules += string.Format("{0}: {1}{2}", brokenRule.OriginProperty, brokenRule, Environment.NewLine);
+                      var lambdaBrokenRule = brokenRule;
+                      var friendlyName = PropertyInfoManager.GetRegisteredProperties(businessObject.GetType()).Find(c => c.Name == lambdaBrokenRule.Property).FriendlyName;
+                      brokenRules += string.Format("{0}: {1}{2}", friendlyName, brokenRule, Environment.NewLine); 
                     }
                     MessageBox.Show(brokenRules, Resources.ActionExtenderErrorCaption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                   }
