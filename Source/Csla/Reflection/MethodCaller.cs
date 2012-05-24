@@ -557,7 +557,7 @@ namespace Csla.Reflection
           inner = e;
         else
           inner = e.InnerException;
-        throw new CallMethodException(info.Name + " " + Resources.MethodCallFailed, inner);
+        throw new CallMethodException(obj.GetType().Name + "." + info.Name + " " + Resources.MethodCallFailed, inner);
       }
       return result;
 #else
@@ -621,7 +621,7 @@ namespace Csla.Reflection
       }
       catch (Exception ex)
       {
-        throw new CallMethodException(methodHandle.MethodName + " " + Resources.MethodCallFailed, ex);
+        throw new CallMethodException(obj.GetType().Name + "." + methodHandle.MethodName + " " + Resources.MethodCallFailed, ex);
       }
       return result;
     }
@@ -978,7 +978,7 @@ namespace Csla.Reflection
           inner = e;
         else
           inner = e.InnerException;
-        throw new CallMethodException(info.Name + " " + Resources.MethodCallFailed, inner);
+        throw new CallMethodException(obj.GetType().Name + "." + info.Name + " " + Resources.MethodCallFailed, inner);
       }
       return result;
     }
@@ -1003,7 +1003,7 @@ namespace Csla.Reflection
           inner = e;
         else
           inner = e.InnerException;
-        throw new CallMethodException(info.Name + " " + Resources.MethodCallFailed, inner);
+        throw new CallMethodException(obj.GetType().Name + "." + info.Name + " " + Resources.MethodCallFailed, inner);
       }
       return result;
     }
@@ -1054,7 +1054,7 @@ namespace Csla.Reflection
           inner = ex;
         else
           inner = ex.InnerException;
-        throw new CallMethodException(factory.Name + " " + Resources.MethodCallFailed, inner);
+        throw new CallMethodException(objectType.Name + "." + factory.Name + " " + Resources.MethodCallFailed, inner);
       }
       return returnValue;
     }
