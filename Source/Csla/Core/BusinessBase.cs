@@ -353,7 +353,7 @@ namespace Csla.Core
 
     private void PropertyHasChanged(string propertyName)
     {
-      PropertyHasChanged(FieldManager.GetRegisteredProperties().Where(c => c.Name == propertyName).First());
+      PropertyHasChanged(FieldManager.GetRegisteredProperty(propertyName));
     }
 
     /// <summary>
@@ -472,9 +472,7 @@ namespace Csla.Core
     [EditorBrowsable(EditorBrowsableState.Advanced)]
     public bool CanReadProperty(string propertyName)
     {
-      var prop = FieldManager.GetRegisteredProperties().Where(c => c.Name == propertyName).FirstOrDefault();
-      if (prop == null)
-        throw new ArgumentOutOfRangeException("propertyName");
+      var prop = FieldManager.GetRegisteredProperty(propertyName);
       return CanReadProperty(prop);
     }
 
@@ -487,9 +485,7 @@ namespace Csla.Core
     /// result should cause an exception.</param>
     private bool CanReadProperty(string propertyName, bool throwOnFalse)
     {
-      var prop = FieldManager.GetRegisteredProperties().Where(c => c.Name == propertyName).FirstOrDefault();
-      if (prop == null)
-        throw new ArgumentOutOfRangeException("propertyName");
+      var prop = FieldManager.GetRegisteredProperty(propertyName);
       return CanReadProperty(prop, throwOnFalse);
     }
 
@@ -546,9 +542,7 @@ namespace Csla.Core
     [EditorBrowsable(EditorBrowsableState.Advanced)]
     public bool CanWriteProperty(string propertyName)
     {
-      var propertyInfo = FieldManager.GetRegisteredProperties().Where(c => c.Name == propertyName).FirstOrDefault();
-      if (propertyInfo == null)
-        throw new ArgumentOutOfRangeException("propertyName");
+      var propertyInfo = FieldManager.GetRegisteredProperty(propertyName);
       return CanWriteProperty(propertyInfo);
     }
 
@@ -561,9 +555,7 @@ namespace Csla.Core
     /// result should cause an exception.</param>
     private bool CanWriteProperty(string propertyName, bool throwOnFalse)
     {
-      var propertyInfo = FieldManager.GetRegisteredProperties().Where(c => c.Name == propertyName).FirstOrDefault();
-      if (propertyInfo == null)
-        throw new ArgumentOutOfRangeException("propertyName");
+      var propertyInfo = FieldManager.GetRegisteredProperty(propertyName);
       return CanWriteProperty(propertyInfo, throwOnFalse);
     }
 
@@ -1596,9 +1588,7 @@ namespace Csla.Core
     {
       #region Check to see if the property is marked with RelationshipTypes.PrivateField
 
-      var propertyInfo = FieldManager.GetRegisteredProperties().Where(c => c.Name == propertyName).FirstOrDefault();
-      if (propertyInfo == null)
-        throw new ArgumentOutOfRangeException("propertyName");
+      var propertyInfo = FieldManager.GetRegisteredProperty(propertyName);
 
       if ((propertyInfo.RelationshipType & RelationshipTypes.PrivateField) != RelationshipTypes.PrivateField)
         throw new InvalidOperationException(Resources.PrivateFieldException);
@@ -2047,9 +2037,7 @@ namespace Csla.Core
       {
         #region Check to see if the property is marked with RelationshipTypes.PrivateField
 
-        var propertyInfo = FieldManager.GetRegisteredProperties().Where(c => c.Name == propertyName).FirstOrDefault();
-        if (propertyInfo == null)
-          throw new ArgumentOutOfRangeException("propertyName");
+        var propertyInfo = FieldManager.GetRegisteredProperty(propertyName);
 
         if ((propertyInfo.RelationshipType & RelationshipTypes.PrivateField) != RelationshipTypes.PrivateField)
           throw new InvalidOperationException(Resources.PrivateFieldException);
@@ -2120,9 +2108,7 @@ namespace Csla.Core
       {
         #region Check to see if the property is marked with RelationshipTypes.PrivateField
 
-        var propertyInfo = FieldManager.GetRegisteredProperties().Where(c => c.Name == propertyName).FirstOrDefault();
-        if (propertyInfo == null)
-          throw new ArgumentOutOfRangeException("propertyName");
+        var propertyInfo = FieldManager.GetRegisteredProperty(propertyName);
 
         if ((propertyInfo.RelationshipType & RelationshipTypes.PrivateField) != RelationshipTypes.PrivateField)
           throw new InvalidOperationException(Resources.PrivateFieldException);
@@ -2808,7 +2794,7 @@ namespace Csla.Core
     /// </param>
     public bool IsPropertyBusy(string propertyName)
     {
-      return IsPropertyBusy(FieldManager.GetRegisteredProperties().Where(c => c.Name == propertyName).First());
+      return IsPropertyBusy(FieldManager.GetRegisteredProperty(propertyName));
     }
 
     #endregion
