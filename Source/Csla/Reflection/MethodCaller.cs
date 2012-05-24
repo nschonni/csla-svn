@@ -229,7 +229,7 @@ namespace Csla.Reflection
 #else
       var ctor = GetCachedConstructor(objectType);
       if (ctor == null)
-        throw new NotImplementedException(Resources.DefaultConstructor + Resources.MethodNotImplemented);
+        throw new NotImplementedException(objectType.Name + " " + Resources.DefaultConstructor + Resources.MethodNotImplemented);
       return ctor.Invoke();
 #endif
     }
@@ -487,13 +487,13 @@ namespace Csla.Reflection
 #if WINDOWS_PHONE
       System.Reflection.MethodInfo info = GetMethod(obj.GetType(), method, hasParameters, parameters);
       if (info == null)
-        throw new NotImplementedException(method + " " + Resources.MethodNotImplemented);
+        throw new NotImplementedException(obj.GetType().Name + "." + method + " " + Resources.MethodNotImplemented);
 
       return CallMethod(obj, info, hasParameters, parameters);
 #else
       var mh = GetCachedMethod(obj, method, hasParameters, parameters);
       if (mh == null || mh.DynamicMethod == null)
-        throw new NotImplementedException(method + " " + Resources.MethodNotImplemented);
+        throw new NotImplementedException(obj.GetType().Name + "." + method + " " + Resources.MethodNotImplemented);
       return CallMethod(obj, mh, hasParameters, parameters);
 #endif
     }
@@ -563,7 +563,7 @@ namespace Csla.Reflection
 #else
       var mh = GetCachedMethod(obj, info, parameters);
       if (mh == null || mh.DynamicMethod == null)
-        throw new NotImplementedException(info.Name + " " + Resources.MethodNotImplemented);
+        throw new NotImplementedException(obj.GetType().Name + "." + info.Name + " " + Resources.MethodNotImplemented);
       return CallMethod(obj, mh, hasParameters, parameters);
 #endif
     }
