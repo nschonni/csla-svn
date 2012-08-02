@@ -278,6 +278,7 @@
     <Compile Include="Silverlight\Serialization\CustomerContact.cs" />
     <Compile Include="Silverlight\Serialization\CustomerWithEnum.cs" />
     <Compile Include="Silverlight\Serialization\CustomMobileList.cs" />
+    <Compile Include="Silverlight\Serialization\MockMobileList.cs" />
     <Compile Include="Silverlight\Serialization\MockNonBusinessObject.cs" />
     <Compile Include="Silverlight\Serialization\MockReadOnly.cs" />
     <Compile Include="Silverlight\Serialization\MockReadOnlyList.cs" />
